@@ -4,6 +4,14 @@ import pl.pw.laa.domain.Form
 import pl.pw.laa.domain.Letter
 
 object Alphabet {
+    val forms: List<String> = listOf(
+        "name",
+        "isolated",
+        "initial",
+        "medial",
+        "final"
+    )
+
     val letters: List<Letter> = listOf(
         // isolated initial medial final
         Letter(
