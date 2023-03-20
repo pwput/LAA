@@ -10,11 +10,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import pl.pw.laa.data.Alphabet
 import pl.pw.laa.ui.theme.MyApplicationTheme
-
+@Destination
 @Composable
-fun AlphabetTable(modifier: Modifier = Modifier) {
+fun AlphabetTable(navigator: DestinationsNavigator) {
     LazyColumn(Modifier.fillMaxSize()) {
         item {
             TopRow()
@@ -37,7 +39,7 @@ fun RowDivider() {
 fun AlphabetTablePreview() {
     MyApplicationTheme() {
         Surface(modifier = Modifier.fillMaxSize()) {
-            AlphabetTable()
+           // AlphabetTable(1)
         }
     }
 }
