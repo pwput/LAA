@@ -1,10 +1,10 @@
 package pl.pw.laa.domain
 
 class Letter(
-    val isolated: Form,
-    val initial: Form,
-    val medial: Form,
-    val final: Form,
+    val isolated: LetterForm,
+    val initial: LetterForm,
+    val medial: LetterForm,
+    val final: LetterForm,
     val name: String,
     val vocalization: String = ""
 )

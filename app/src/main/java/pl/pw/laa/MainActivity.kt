@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import pl.pw.laa.data.Alphabet
+import pl.pw.laa.ui.alphabet.TopRow
 import pl.pw.laa.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -24,9 +25,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Column() {
+                    Column {
+                        TopRow()
                         for (letter in Alphabet.letters) {
-                            Text(text = letter.final!!.uniC.toString())
+                            Text(text = letter.final.uniC.toString())
                         }
                     }
                 }
