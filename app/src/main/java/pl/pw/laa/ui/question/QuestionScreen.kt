@@ -10,10 +10,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import pl.pw.laa.ui.theme.MyApplicationTheme
 
+@Destination
 @Composable
-fun QuestionScreen() {
+fun QuestionScreen(navigator: DestinationsNavigator) {
     Column(
         modifier = Modifier.padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -29,7 +32,7 @@ fun QuestionScreen() {
 fun QuestionScreenPreview() {
     MyApplicationTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
-            QuestionScreen()
+           // QuestionScreen()
         }
     }
 }
