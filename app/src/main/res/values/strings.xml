@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="alphabet_table_top_row_name">name</string>
+    <string name="alphabet_table_top_row_isolated">isolated</string>
+    <string name="alphabet_table_top_row_initial">initial</string>
+    <string name="alphabet_table_top_row_medial">medial</string>
+    <string name="alphabet_table_top_row_final">final</string>
 </resources>
