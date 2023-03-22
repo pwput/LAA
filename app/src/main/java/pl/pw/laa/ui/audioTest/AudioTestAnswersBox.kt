@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pl.pw.laa.domain.Letter
-import pl.pw.laa.ui.theme.MyApplicationTheme
+import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Composable
 fun AnswersBox(
@@ -44,7 +44,7 @@ fun AnswersBox(
 @Preview
 @Composable
 fun AnswersBoxPreview() {
-    MyApplicationTheme() {
+    LearnArabicAlphabetTheme() {
         Surface() {
             AnswersBox(audioTestState = AudioTestState(), onAnswer = {})
         }

@@ -3,6 +3,8 @@ package pl.pw.laa.ui.menu
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import pl.pw.laa.ui.destinations.AlphabetTableDestination
 import pl.pw.laa.ui.destinations.QuestionScreenDestination
+import pl.pw.laa.ui.destinations.SettingsScreenDestination
+import pl.pw.laa.ui.destinations.VocalizationScreenDestination
 
 sealed class MenuItem(val name: String) {
     abstract fun navigateToDestination(navigator: DestinationsNavigator)
@@ -20,8 +22,14 @@ class Test : MenuItem("Test") {
     }
 }
 
-class Vocalization : MenuItem("Vocalization"){
+class Settings : MenuItem("Settings") {
     override fun navigateToDestination(navigator: DestinationsNavigator) {
-        //navigator.navigate(VocalizationS)
+        navigator.navigate(SettingsScreenDestination())
+    }
+}
+
+class Vocalization : MenuItem("Vocalization") {
+    override fun navigateToDestination(navigator: DestinationsNavigator) {
+        navigator.navigate(VocalizationScreenDestination())
     }
 }

@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import pl.pw.laa.ui.theme.MyApplicationTheme
+import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 private val cornerSize = 16.dp
 private val textPadding = 16.dp
@@ -50,7 +50,7 @@ fun MenuButton(
 @Preview
 @Composable
 fun MenuButtonPreview() {
-    MyApplicationTheme() {
+    LearnArabicAlphabetTheme() {
         MenuButton(onClick = { /*TODO*/ }, content = "papaj")
     }
 }

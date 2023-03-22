@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import pl.pw.laa.data.Alphabet
 import pl.pw.laa.domain.Form
-import pl.pw.laa.ui.theme.MyApplicationTheme
+import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Composable
 fun AnswerButton(
@@ -45,7 +45,7 @@ fun AnswerButton(
 @Preview()
 @Composable
 fun AnswerButtonPreview() {
-    MyApplicationTheme() {
+    LearnArabicAlphabetTheme() {
         AnswerButton(
             form = Alphabet.letters[0].final,
             modifier = Modifier.background(Color.Green).size(100.dp),

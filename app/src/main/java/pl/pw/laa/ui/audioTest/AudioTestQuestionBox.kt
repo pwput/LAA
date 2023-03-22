@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.sp
 import pl.pw.laa.data.Alphabet
 import pl.pw.laa.domain.Letter
 import pl.pw.laa.ui.common.AudioIcon
-import pl.pw.laa.ui.theme.MyApplicationTheme
+import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Composable
 fun QuestionBox(
@@ -42,7 +42,7 @@ fun QuestionBox(
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxWidth(0.8f)
             .aspectRatio(1f)
             .border(2.dp, Color.Red, shape = RoundedCornerShape(5))
             .clip(RoundedCornerShape(25))
@@ -73,7 +73,7 @@ fun QuestionBox(
 @Preview()
 @Composable
 fun QuestionBoxPreview() {
-    MyApplicationTheme() {
+    LearnArabicAlphabetTheme() {
         QuestionBox(
             letter = Alphabet.letters[0],
             modifier = Modifier

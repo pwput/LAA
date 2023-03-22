@@ -15,7 +15,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 import pl.pw.laa.data.Alphabet
-import pl.pw.laa.ui.theme.MyApplicationTheme
+import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Destination
 @Composable
@@ -43,7 +43,7 @@ fun RowDivider() {
 @Preview
 @Composable
 fun AlphabetTablePreview() {
-    MyApplicationTheme() {
+    LearnArabicAlphabetTheme() {
         Surface(modifier = Modifier.fillMaxSize()) {
             AlphabetTable(navigator = EmptyDestinationsNavigator)
         }

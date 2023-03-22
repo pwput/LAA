@@ -9,7 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
-import pl.pw.laa.ui.theme.MyApplicationTheme
+import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Destination
 @Composable
@@ -19,8 +19,8 @@ fun VocalizationScreen(navigator: DestinationsNavigator) {
 
 @Preview
 @Composable
-fun AlphabetTablePreview() {
-    MyApplicationTheme() {
+fun VocalizationScreenPreview() {
+    LearnArabicAlphabetTheme(dynamicColor = false) {
         Surface(modifier = Modifier.fillMaxSize()) {
             VocalizationScreen(navigator = EmptyDestinationsNavigator)
         }

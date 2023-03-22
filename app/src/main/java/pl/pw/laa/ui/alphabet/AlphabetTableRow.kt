@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import pl.pw.laa.R
 import pl.pw.laa.data.Alphabet
 import pl.pw.laa.domain.Letter
-import pl.pw.laa.ui.theme.MyApplicationTheme
+import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Composable
 fun AlphabetTableRow(
@@ -84,7 +84,7 @@ fun AlphabetTableColumNamesRow(modifier: Modifier = Modifier, tagsModifier: Modi
 @Preview(showBackground = true)
 @Composable
 fun RowFormPreview() {
-    MyApplicationTheme {
+    LearnArabicAlphabetTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
         ) {
