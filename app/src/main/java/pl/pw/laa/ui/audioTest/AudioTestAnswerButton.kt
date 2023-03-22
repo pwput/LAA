@@ -1,4 +1,4 @@
-package pl.pw.laa.ui.question
+package pl.pw.laa.ui.audioTest
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -14,11 +14,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import pl.pw.laa.data.Alphabet
+import pl.pw.laa.domain.Form
 import pl.pw.laa.ui.theme.MyApplicationTheme
 
 @Composable
 fun AnswerButton(
-    content: String,
+    form: Form,
     modifier: Modifier = Modifier,
     textColor: Color = Color.Black,
     onClick: () -> Unit,
@@ -32,10 +34,10 @@ fun AnswerButton(
             .then(modifier),
     ) {
         Text(
-            text = content,
+            text = form.toString(),
             fontSize = 36.sp,
             color = textColor,
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier.padding(8.dp),
         )
     }
 }
@@ -45,7 +47,7 @@ fun AnswerButton(
 fun AnswerButtonPreview() {
     MyApplicationTheme() {
         AnswerButton(
-            content = "tak",
+            form = Alphabet.letters[0].final,
             modifier = Modifier.background(Color.Green).size(100.dp),
             onClick = {},
         )

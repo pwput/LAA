@@ -1,4 +1,4 @@
-package pl.pw.laa.ui.question
+package pl.pw.laa.ui.audioTest
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,20 +10,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 import pl.pw.laa.ui.theme.MyApplicationTheme
 
 @Destination
 @Composable
 fun QuestionScreen(navigator: DestinationsNavigator) {
+    val viewModel = viewModel<AudioTestViewModel>()
     Column(
-        modifier = Modifier.padding(16.dp),
+        modifier = Modifier.padding(16.dp).fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly,
     ) {
-        QuestionBox("pytanie")
-        AnswersBox()
+        QuestionBox(viewModel.state.rightAnswer!!)
+        AnswersBox(audioTestState = viewModel.state, onAnswer = viewModel::onAnswer)
     }
 }
 
@@ -31,8 +34,8 @@ fun QuestionScreen(navigator: DestinationsNavigator) {
 @Composable
 fun QuestionScreenPreview() {
     MyApplicationTheme {
-        Surface(modifier = Modifier.fillMaxSize()) {
-           // QuestionScreen()
+        Surface() {
+            QuestionScreen(navigator = EmptyDestinationsNavigator)
         }
     }
 }

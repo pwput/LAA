@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import pl.pw.laa.ui.destinations.AlphabetTableDestination
+import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 import pl.pw.laa.ui.theme.MyApplicationTheme
 
 @RootNavGraph(start = true)
@@ -18,7 +18,7 @@ import pl.pw.laa.ui.theme.MyApplicationTheme
 fun MenuScreen(
     navigator: DestinationsNavigator,
     modifier: Modifier = Modifier,
-    list: List<String> = listOf<String>("jeden", "dwa", "trzy"),
+    list: List<MenuItem> = listOf(Test(), AlphabetTable()),
 ) {
     Column(
         modifier = Modifier.fillMaxSize().padding(64.dp),
@@ -27,8 +27,8 @@ fun MenuScreen(
     ) {
         list.forEach {
             MenuButton(
-                onClick = { navigator.navigate(AlphabetTableDestination()) },
-                content = it,
+                onClick = { it.navigateToDestination(navigator) },
+                content = it.name,
                 modifier = Modifier.fillMaxWidth(),
             )
         }
@@ -39,7 +39,7 @@ fun MenuScreen(
 @Composable
 fun MenuScreenPreview() {
     MyApplicationTheme() {
-        val list = listOf<String>("jeden", "dwa", "trzy")
-        // MenuScreen(list = list)
+        val list = listOf(Test(), AlphabetTable())
+        MenuScreen(list = list, navigator = EmptyDestinationsNavigator)
     }
 }

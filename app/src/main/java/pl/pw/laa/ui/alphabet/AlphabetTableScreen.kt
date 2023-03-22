@@ -1,5 +1,6 @@
 package pl.pw.laa.ui.alphabet
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -12,19 +13,24 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 import pl.pw.laa.data.Alphabet
 import pl.pw.laa.ui.theme.MyApplicationTheme
+
 @Destination
 @Composable
 fun AlphabetTable(navigator: DestinationsNavigator) {
-    LazyColumn(Modifier.fillMaxSize()) {
-        item {
-            TopRow()
-            RowDivider()
-        }
-        items(items = Alphabet.letters) {
-            RowForm(letter = it)
-            RowDivider()
+    Column(Modifier.fillMaxSize()) {
+        AlphabetTableColumNamesRow()
+        RowDivider()
+        LazyColumn(Modifier.fillMaxSize()) {
+            item {
+                RowDivider()
+            }
+            items(items = Alphabet.letters) {
+                AlphabetTableRow(letter = it)
+                RowDivider()
+            }
         }
     }
 }
@@ -39,7 +45,7 @@ fun RowDivider() {
 fun AlphabetTablePreview() {
     MyApplicationTheme() {
         Surface(modifier = Modifier.fillMaxSize()) {
-           // AlphabetTable(1)
+            AlphabetTable(navigator = EmptyDestinationsNavigator)
         }
     }
 }
