@@ -14,7 +14,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
-import pl.pw.laa.ui.theme.MyApplicationTheme
+import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Destination
 @Composable
@@ -33,7 +33,7 @@ fun QuestionScreen(navigator: DestinationsNavigator) {
 @Preview
 @Composable
 fun QuestionScreenPreview() {
-    MyApplicationTheme {
+    LearnArabicAlphabetTheme {
         Surface() {
             QuestionScreen(navigator = EmptyDestinationsNavigator)
         }

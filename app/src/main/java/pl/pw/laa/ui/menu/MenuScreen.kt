@@ -10,15 +10,14 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
-import pl.pw.laa.ui.theme.MyApplicationTheme
+import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @RootNavGraph(start = true)
 @Destination
 @Composable
 fun MenuScreen(
     navigator: DestinationsNavigator,
-    modifier: Modifier = Modifier,
-    list: List<MenuItem> = listOf(Test(), AlphabetTable()),
+    list: List<MenuItem> = listOf(Test(), AlphabetTable(), Vocalization(), Settings()),
 ) {
     Column(
         modifier = Modifier.fillMaxSize().padding(64.dp),
@@ -38,7 +37,7 @@ fun MenuScreen(
 @Preview
 @Composable
 fun MenuScreenPreview() {
-    MyApplicationTheme() {
+    LearnArabicAlphabetTheme() {
         val list = listOf(Test(), AlphabetTable())
         MenuScreen(list = list, navigator = EmptyDestinationsNavigator)
     }
