@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -19,7 +20,7 @@ import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 @Destination
 @Composable
 fun QuestionScreen(navigator: DestinationsNavigator) {
-    val viewModel = viewModel<AudioTestViewModel>()
+    val viewModel = hiltViewModel<AudioTestViewModel>()
     Column(
         modifier = Modifier.padding(16.dp).fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,

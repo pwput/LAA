@@ -3,18 +3,18 @@ package pl.pw.laa.ui.audioTest
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
-import org.slf4j.LoggerFactory
+import dagger.hilt.android.lifecycle.HiltViewModel
 import pl.pw.laa.data.Alphabet
 import pl.pw.laa.domain.Letter
+import pl.pw.laa.presistence.AppSettingsDao
+import pl.pw.laa.repository.AppSettingsRepository
+import pl.pw.laa.ui.common.BaseViewModel
+import timber.log.Timber
+import javax.inject.Inject
 import kotlin.random.Random
 import kotlin.random.nextInt
-
-class AudioTestViewModel : ViewModel() {
-
-    companion object {
-        private val LOG = LoggerFactory.getLogger(AudioTestViewModel::class.java.simpleName)
-    }
+@HiltViewModel
+class AudioTestViewModel @Inject constructor(private val appSettingsRepository: AppSettingsRepository) : BaseViewModel() {
 
     var state by mutableStateOf(AudioTestState())
         private set
@@ -24,10 +24,10 @@ class AudioTestViewModel : ViewModel() {
     }
 
     fun onAnswer(letter: Letter) {
-        LOG.debug("Answer: $letter")
-        LOG.debug("RightAnswer: ${state.rightAnswer}")
+        Timber.d("Answer: $letter")
+        Timber.d("RightAnswer: ${state.rightAnswer}")
         if (letter == state.rightAnswer) {
-            LOG.debug("Win!!!!")
+            Timber.d("Win!!!!")
             getNewState(8)
         }
     }

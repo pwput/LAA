@@ -7,9 +7,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
+import pl.pw.laa.ui.audioTest.AudioTestViewModel
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -24,7 +26,7 @@ fun SettingsScreen(navigator: DestinationsNavigator) {
     var expanded by remember {
         mutableStateOf(false)
     }
-
+    val viewModel = viewModel<SettingsViewModel>()
     Column(
         modifier = Modifier.fillMaxSize().padding(32.dp),
         verticalArrangement = Arrangement.Center,
