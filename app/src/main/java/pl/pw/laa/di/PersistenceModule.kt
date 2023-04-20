@@ -8,8 +8,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import pl.pw.laa.R
+import pl.pw.laa.data.dao.AppConfigKeyDao
+import pl.pw.laa.data.repository.AppConfigKeyRepositoryImpl
 import pl.pw.laa.presistence.AppDatabase
-import pl.pw.laa.presistence.AppSettingsDao
+import pl.pw.laa.presistence.AppConfigKeyRepository
 import javax.inject.Singleton
 
 @Module
@@ -31,7 +33,13 @@ object PersistenceModule {
 
     @Provides
     @Singleton
-    fun provideApplicationSettingsDao(appDatabase: AppDatabase): AppSettingsDao {
+    fun provideApplicationSettingsDao(appDatabase: AppDatabase): AppConfigKeyDao {
         return appDatabase.applicationSettingsDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideAppConfigKeyRepository(appConfigKeyDao: AppConfigKeyDao): AppConfigKeyRepository {
+        return AppConfigKeyRepositoryImpl(appConfigKeyDao)
     }
 }
