@@ -1,6 +1,5 @@
 package pl.pw.laa.presentation.alphabet
 
-import android.media.MediaPlayer
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
@@ -11,33 +10,32 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import pl.pw.laa.R
-import pl.pw.laa.data.Alphabet
 import pl.pw.laa.domain.Letter
+import pl.pw.laa.presentation.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Composable
 fun AlphabetTableRow(
     letter: Letter,
+    onRowClick: (AlphabetTableEvent) -> MediaPlayerResponse,
+    showIncon: Boolean,
     modifier: Modifier = Modifier,
     formsModifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
 
     var visible by remember { mutableStateOf(false) }
-    val mediaPlayer = MediaPlayer.create(context, letter.vocalizationRaw)
-    val onCompletionListener = MediaPlayer.OnCompletionListener {
-        mediaPlayer.release()
-        visible = false
-    }
+
+    if (!showIncon) visible = false
 
     Row(
         modifier = modifier.fillMaxWidth().height(IntrinsicSize.Max).clickable(
             interactionSource = MutableInteractionSource(),
             indication = null,
         ) {
-            visible = true
-            mediaPlayer.start()
-            mediaPlayer.setOnCompletionListener(onCompletionListener)
+            val resp = onRowClick(AlphabetTableEvent.PlayAudioForLetter(context, letter))
+            visible =
+                resp is MediaPlayerResponse.Success || resp is MediaPlayerResponse.AlreadyPlayingRequestedAudio
         },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly,
@@ -88,7 +86,7 @@ fun RowFormPreview() {
         Surface(
             modifier = Modifier.fillMaxSize(),
         ) {
-            AlphabetTableRow(letter = Alphabet.letters[1])
+            // AlphabetTableRow(letter = Alphabet.letters[1])
         }
     }
 }
