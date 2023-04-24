@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.sp
 import pl.pw.laa.data.Alphabet
 import pl.pw.laa.domain.Form
 import pl.pw.laa.presentation.common.AudioIcon
+import pl.pw.laa.ui.theme.Lateef
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 val padding = 8.dp
@@ -25,8 +26,9 @@ fun AlphabetTableCellLetterForm(form: Form, modifier: Modifier) {
     Box(
         modifier = modifier,
     ) {
-        Text(
+        androidx.compose.material.Text(
             text = form.char.toString(),
+            fontFamily = Lateef,
             fontSize = fontSizeArabic,
             modifier = Modifier.align(Alignment.BottomCenter),
         )
@@ -34,7 +36,11 @@ fun AlphabetTableCellLetterForm(form: Form, modifier: Modifier) {
 }
 
 @Composable
-fun AlphabetTableCellRowName(name: String, modifier: Modifier, isAudioIconVisible: Boolean = false) {
+fun AlphabetTableCellRowName(
+    name: String,
+    modifier: Modifier,
+    isAudioIconVisible: Boolean = false,
+) {
     Box(
         modifier = modifier,
     ) {

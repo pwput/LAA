@@ -48,7 +48,7 @@ fun QuestionBox(
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
-            .fillMaxWidth(0.6f)
+            .fillMaxWidth(0.8f)
             .aspectRatio(1f)
             .border(2.dp, Color.Red, shape = RoundedCornerShape(5))
             .clip(RoundedCornerShape(25))
