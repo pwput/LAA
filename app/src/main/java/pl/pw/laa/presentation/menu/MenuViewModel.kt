@@ -1,17 +1,18 @@
 package pl.pw.laa.presentation.menu
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import pl.pw.laa.presentation.mediaplayer.BaseAudioViewModel
 import pl.pw.laa.presistence.AppConfigKeyRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class MenuViewModel @Inject constructor(repository: AppConfigKeyRepository) :
-    ViewModel() {
+    BaseAudioViewModel(repository) {
 
-    init {
-    }
+    val list: List<MenuItem> = listOf(
+        Test,
+        AlphabetTable,
+        Vocalization,
+        Settings,
+    )
 }

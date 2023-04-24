@@ -20,9 +20,10 @@ import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Destination
 @Composable
-fun AlphabetTable(navigator: DestinationsNavigator) {
-    val viewModel = hiltViewModel<AlphabetTableViewModel>()
-
+fun AlphabetTable(
+    navigator: DestinationsNavigator,
+    viewModel: AlphabetTableViewModel = hiltViewModel(),
+) {
     Column(Modifier.fillMaxSize()) {
         AlphabetTableColumNamesRow()
         RowDivider()

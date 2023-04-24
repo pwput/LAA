@@ -18,15 +18,15 @@ import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 @Composable
 fun MenuScreen(
     navigator: DestinationsNavigator,
-    list: List<MenuItem> = listOf(Test(), AlphabetTable(), Vocalization(), Settings()),
+    viewModel: MenuViewModel = hiltViewModel()
+
 ) {
-    val viewModel = hiltViewModel<MenuViewModel>()
     Column(
         modifier = Modifier.fillMaxSize().padding(64.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        list.forEach {
+        viewModel.list.forEach {
             MenuButton(
                 onClick = { it.navigateToDestination(navigator) },
                 content = it.name,
@@ -40,7 +40,6 @@ fun MenuScreen(
 @Composable
 fun MenuScreenPreview() {
     LearnArabicAlphabetTheme() {
-        val list = listOf(Test(), AlphabetTable())
-        MenuScreen(list = list, navigator = EmptyDestinationsNavigator)
+        MenuScreen(navigator = EmptyDestinationsNavigator)
     }
 }

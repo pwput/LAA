@@ -10,25 +10,25 @@ sealed class MenuItem(val name: String) {
     abstract fun navigateToDestination(navigator: DestinationsNavigator)
 }
 
-class AlphabetTable : MenuItem("Alphabet") {
+object AlphabetTable : MenuItem("Alphabet") {
     override fun navigateToDestination(navigator: DestinationsNavigator) {
         navigator.navigate(AlphabetTableDestination())
     }
 }
 
-class Test : MenuItem("Test") {
+object Test : MenuItem("Test") {
     override fun navigateToDestination(navigator: DestinationsNavigator) {
         navigator.navigate(QuestionScreenDestination())
     }
 }
 
-class Settings : MenuItem("Settings") {
+object Settings : MenuItem("Settings") {
     override fun navigateToDestination(navigator: DestinationsNavigator) {
         navigator.navigate(SettingsScreenDestination())
     }
 }
 
-class Vocalization : MenuItem("Vocalization") {
+object Vocalization : MenuItem("Vocalization") {
     override fun navigateToDestination(navigator: DestinationsNavigator) {
         navigator.navigate(VocalizationScreenDestination())
     }

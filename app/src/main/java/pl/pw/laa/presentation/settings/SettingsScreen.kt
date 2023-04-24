@@ -20,11 +20,13 @@ import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Destination
 @Composable
-fun SettingsScreen(navigator: DestinationsNavigator) {
+fun SettingsScreen(
+    navigator: DestinationsNavigator,
+    viewModel: SettingsViewModel = hiltViewModel(),
+) {
     val expanded by remember {
         mutableStateOf(false)
     }
-    val viewModel = hiltViewModel<SettingsViewModel>()
 
     val numbers by viewModel.numbers.collectAsState(initial = AppConfigKey(appConfigAnswers, 2))
     val cheats by viewModel.cheats.collectAsState(initial = AppConfigKey(appConfigCheats, 1))

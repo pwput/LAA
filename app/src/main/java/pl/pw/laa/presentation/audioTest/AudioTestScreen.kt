@@ -18,8 +18,10 @@ import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Destination
 @Composable
-fun QuestionScreen(navigator: DestinationsNavigator) {
-    val viewModel = hiltViewModel<AudioTestViewModel>()
+fun QuestionScreen(
+    navigator: DestinationsNavigator,
+    viewModel: AudioTestViewModel = hiltViewModel(),
+) {
     Column(
         modifier = Modifier.padding(16.dp).fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
