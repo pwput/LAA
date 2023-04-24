@@ -14,6 +14,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
+import pl.pw.laa.presentation.audioTest.components.AnswersBox
+import pl.pw.laa.presentation.audioTest.components.AudioTestTopBar
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Destination
@@ -23,12 +25,18 @@ fun QuestionScreen(
     viewModel: AudioTestViewModel = hiltViewModel(),
 ) {
     Column(
-        modifier = Modifier.padding(16.dp).fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceEvenly,
+        modifier = Modifier.fillMaxSize(),
     ) {
-        QuestionBox(viewModel.state.rightAnswer)
-        AnswersBox(state = viewModel.state, onAnswer = viewModel::onAnswer)
+        AudioTestTopBar(viewModel.state)
+
+        Column(
+            modifier = Modifier.padding(16.dp).fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceEvenly,
+        ) {
+            QuestionBox(viewModel.state.rightAnswer, viewModel.showIcon, viewModel::onEvent)
+            AnswersBox(viewModel.state, viewModel::onAnswer)
+        }
     }
 }
 

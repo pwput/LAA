@@ -4,13 +4,13 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import pl.pw.laa.model.AppConfigKey
-import pl.pw.laa.model.appConfigAnswers
-import pl.pw.laa.model.appConfigCheats
-import pl.pw.laa.model.appConfigTips
+import pl.pw.laa.data.model.AppConfigKey
+import pl.pw.laa.data.model.appConfigAnswers
+import pl.pw.laa.data.model.appConfigCheats
+import pl.pw.laa.data.model.appConfigTips
 import pl.pw.laa.presentation.common.BaseViewModel
 import pl.pw.laa.presentation.common.toInt
-import pl.pw.laa.presistence.AppConfigKeyRepository
+import pl.pw.laa.data.presistence.AppConfigKeyRepository
 import timber.log.Timber
 import javax.inject.Inject
 

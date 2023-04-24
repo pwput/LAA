@@ -1,4 +1,4 @@
-package pl.pw.laa.model
+package pl.pw.laa.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

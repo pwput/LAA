@@ -10,8 +10,8 @@ import dagger.hilt.components.SingletonComponent
 import pl.pw.laa.R
 import pl.pw.laa.data.dao.AppConfigKeyDao
 import pl.pw.laa.data.repository.AppConfigKeyRepositoryImpl
-import pl.pw.laa.presistence.AppDatabase
-import pl.pw.laa.presistence.AppConfigKeyRepository
+import pl.pw.laa.data.presistence.AppDatabase
+import pl.pw.laa.data.presistence.AppConfigKeyRepository
 import javax.inject.Singleton
 
 @Module

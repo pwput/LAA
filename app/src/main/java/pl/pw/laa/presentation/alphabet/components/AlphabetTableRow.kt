@@ -33,7 +33,7 @@ fun AlphabetTableRow(
             interactionSource = MutableInteractionSource(),
             indication = null,
         ) {
-            val resp = onRowClick(AlphabetTableEvent.PlayAudioForLetter(context, letter))
+            val resp = onRowClick(AlphabetTableEvent.PlayLetterAudio(context, letter))
             visible =
                 resp is MediaPlayerResponse.Success || resp is MediaPlayerResponse.AlreadyPlayingRequestedAudio
         },

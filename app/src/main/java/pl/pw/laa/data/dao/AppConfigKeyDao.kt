@@ -5,8 +5,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
-import pl.pw.laa.model.AppConfigKey
-import pl.pw.laa.model.appConfigAnswers
+import pl.pw.laa.data.model.AppConfigKey
+import pl.pw.laa.data.model.appConfigAnswers
 
 @Dao
 interface AppConfigKeyDao {

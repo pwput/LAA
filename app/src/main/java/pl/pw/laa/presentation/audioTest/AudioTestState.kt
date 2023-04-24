@@ -2,8 +2,10 @@ package pl.pw.laa.presentation.audioTest
 
 import pl.pw.laa.domain.Letter
 
-class AudioTestState(
-    val lettersList: MutableList<Letter>? = mutableListOf(),
+data class AudioTestState(
+    val lettersList: List<Letter>? = mutableListOf(),
+    val score: Int,
+    val mistakes: Int,
     var rightAnswer: Letter?,
     var areCheatsOn: Boolean = false,
 ) {

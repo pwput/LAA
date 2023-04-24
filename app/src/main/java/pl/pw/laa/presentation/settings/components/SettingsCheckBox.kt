@@ -8,8 +8,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import pl.pw.laa.model.AppConfigKey
-import pl.pw.laa.model.appConfigCheats
+import pl.pw.laa.data.model.AppConfigKey
+import pl.pw.laa.data.model.appConfigCheats
 import pl.pw.laa.presentation.common.toBoolean
 import pl.pw.laa.presentation.settings.SettingsEvent
 import timber.log.Timber

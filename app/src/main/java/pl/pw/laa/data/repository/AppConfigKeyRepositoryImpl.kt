@@ -2,11 +2,11 @@ package pl.pw.laa.data.repository
 
 import kotlinx.coroutines.flow.Flow
 import pl.pw.laa.data.dao.AppConfigKeyDao
-import pl.pw.laa.model.AppConfigKey
-import pl.pw.laa.model.appConfigAnswers
-import pl.pw.laa.model.appConfigCheats
-import pl.pw.laa.model.appConfigTips
-import pl.pw.laa.presistence.AppConfigKeyRepository
+import pl.pw.laa.data.model.AppConfigKey
+import pl.pw.laa.data.model.appConfigAnswers
+import pl.pw.laa.data.model.appConfigCheats
+import pl.pw.laa.data.model.appConfigTips
+import pl.pw.laa.data.presistence.AppConfigKeyRepository
 import timber.log.Timber
 
 class AppConfigKeyRepositoryImpl(

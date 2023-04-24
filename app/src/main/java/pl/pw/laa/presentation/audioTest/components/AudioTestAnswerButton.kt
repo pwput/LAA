@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.audioTest
+package pl.pw.laa.presentation.audioTest.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -11,7 +11,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.modifier.modifierLocalMapOf
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,7 +24,7 @@ fun AnswerButton(
     modifier: Modifier = Modifier,
     textColor: Color = Color.Black,
     onClick: () -> Unit,
-    cheats : Boolean = false
+    cheats: Boolean = false
 ) {
     val modifier = if (cheats) modifier.background(Color.Red) else modifier
     Box(

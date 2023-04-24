@@ -8,10 +8,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import pl.pw.laa.data.Alphabet
+import pl.pw.laa.data.presistence.AppConfigKeyRepository
 import pl.pw.laa.domain.Letter
-import pl.pw.laa.presentation.common.BaseViewModel
 import pl.pw.laa.presentation.common.toBoolean
-import pl.pw.laa.presistence.AppConfigKeyRepository
+import pl.pw.laa.presentation.mediaplayer.BaseAudioViewModel
+import pl.pw.laa.presentation.mediaplayer.MediaPlayerResponse
 import timber.log.Timber
 import javax.inject.Inject
 import kotlin.random.Random
@@ -19,46 +20,71 @@ import kotlin.random.nextInt
 
 @HiltViewModel
 class AudioTestViewModel @Inject constructor(repository: AppConfigKeyRepository) :
-    BaseViewModel(repository) {
+    BaseAudioViewModel(repository) {
 
-    var state by mutableStateOf(AudioTestState(null, null))
+    var state by mutableStateOf(AudioTestState(null, 0, 0,null))
         private set
 
-    private var num = 8
+    private var numberOfAnswers = 8
     private var cheat = false
+    private var tips = false
+
+    init {
+        fetchData()
+    }
+
+    private fun fetchData() {
+        viewModelScope.launch {
+            setupViewModel(
+                numberOfPossibleAnswers.first().value,
+                areCheatsOn.first().value.toBoolean(),
+                areTipsOn.first().value.toBoolean(),
+            )
+        }
+    }
+
+    private fun setupViewModel(num: Int, cheats: Boolean, tips: Boolean) {
+        numberOfAnswers = num
+        cheat = cheats
+        getNewState(numberOfAnswers, cheats)
+    }
+
+    fun onEvent(event: AudioTestEvent): MediaPlayerResponse? {
+        return when (event) {
+            is AudioTestEvent.ReplayAudio -> {
+                startMediaPlayer(event.context, event.letter.vocalizationRaw)
+            }
+
+            is AudioTestEvent.GotAnswer -> {
+                onAnswer(event.letter)
+                null
+            }
+        }
+    }
 
     fun onAnswer(letter: Letter) {
         Timber.d("Answer: $letter")
         Timber.d("RightAnswer: ${state.rightAnswer}")
         if (letter == state.rightAnswer) {
             Timber.d("Win!!!!")
-            getNewState(num, cheat)
+            getNewState(numberOfAnswers, cheat)
+        } else {
+            state = state.copy(mistakes = state.mistakes + 1)
         }
-    }
-
-    init {
-        fetchData()
-    }
-
-    fun fetchData() {
-        viewModelScope.launch {
-            setup(numbers.first().value, cheats.first().value.toBoolean())
-        }
-    }
-
-    fun setup(i: Int, cheats: Boolean) {
-        num = i
-        cheat = cheats
-        getNewState(num, cheats)
     }
 
     private fun getNewState(size: Int, cheats: Boolean) {
-        val tmpIs = generateSequence(0, Alphabet.letters.size - 1, size)
-        val tmpAudoList = mutableListOf<Letter>()
-        tmpAudoList.addAll(generateLetterList(tmpIs))
-        val tmpResoult = tmpAudoList[Random.nextInt(0 until tmpAudoList.size)]
-        state = AudioTestState(tmpAudoList, tmpResoult, cheats)
+        val tmpList = generateLetterList(generateSequence(0, Alphabet.letters.size - 1, size))
+
+        state = state.copy(
+            lettersList = tmpList,
+            score = state.score + 1,
+            rightAnswer = getRandomLetter(tmpList),
+            areCheatsOn = cheats,
+        )
     }
+
+    private fun getRandomLetter(list: List<Letter>) = list[Random.nextInt(list.indices)]
 
     private fun generateLetterList(set: Set<Int>): List<Letter> {
         val tmp = mutableListOf<Letter>()

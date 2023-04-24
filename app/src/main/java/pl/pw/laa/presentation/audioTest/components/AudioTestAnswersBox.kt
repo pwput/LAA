@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.audioTest
+package pl.pw.laa.presentation.audioTest.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Surface
@@ -7,13 +7,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pl.pw.laa.domain.Letter
+import pl.pw.laa.presentation.audioTest.AudioTestState
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Composable
 fun AnswersBox(
-    modifier: Modifier = Modifier,
     state: AudioTestState,
     onAnswer: (Letter) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     if (!state.lettersList.isNullOrEmpty() && state.rightAnswer != null) {
         Column(
@@ -50,7 +51,7 @@ fun AnswersBox(
 fun AnswersBoxPreview() {
     LearnArabicAlphabetTheme() {
         Surface() {
-            AnswersBox(state = AudioTestState(null, null), onAnswer = {})
+            AnswersBox(state = AudioTestState(null, 0, 0, null), onAnswer = {})
         }
     }
 }

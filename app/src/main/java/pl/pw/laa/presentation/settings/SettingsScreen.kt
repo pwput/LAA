@@ -11,10 +11,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
-import pl.pw.laa.model.AppConfigKey
-import pl.pw.laa.model.appConfigAnswers
-import pl.pw.laa.model.appConfigCheats
-import pl.pw.laa.model.appConfigTips
+import pl.pw.laa.data.model.AppConfigKey
+import pl.pw.laa.data.model.appConfigAnswers
+import pl.pw.laa.data.model.appConfigCheats
+import pl.pw.laa.data.model.appConfigTips
 import pl.pw.laa.presentation.settings.components.SettingsCheckBox
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
@@ -28,9 +28,9 @@ fun SettingsScreen(
         mutableStateOf(false)
     }
 
-    val numbers by viewModel.numbers.collectAsState(initial = AppConfigKey(appConfigAnswers, 2))
-    val cheats by viewModel.cheats.collectAsState(initial = AppConfigKey(appConfigCheats, 1))
-    val tips by viewModel.tips.collectAsState(initial = AppConfigKey(appConfigTips, 1))
+    val numbers by viewModel.numberOfPossibleAnswers.collectAsState(initial = AppConfigKey(appConfigAnswers, 2))
+    val cheats by viewModel.areCheatsOn.collectAsState(initial = AppConfigKey(appConfigCheats, 1))
+    val tips by viewModel.areTipsOn.collectAsState(initial = AppConfigKey(appConfigTips, 1))
 
     Column(
         modifier = Modifier
