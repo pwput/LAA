@@ -11,6 +11,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
+import pl.pw.laa.presentation.menu.components.MenuButton
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @RootNavGraph(start = true)

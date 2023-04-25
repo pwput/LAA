@@ -19,7 +19,7 @@ object Alphabet {
             Final('\uFE90'),
             Medial('\uFE92'),
             Initial('\uFE91'),
-            "bā'",
+            "ba'",
             R.raw.r02ba,
         ),
         Letter(

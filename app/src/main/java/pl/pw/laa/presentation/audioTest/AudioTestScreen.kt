@@ -2,6 +2,7 @@ package pl.pw.laa.presentation.audioTest
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
@@ -18,6 +19,8 @@ import pl.pw.laa.presentation.audioTest.components.AnswersBox
 import pl.pw.laa.presentation.audioTest.components.AudioTestTopBar
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
+val paddingValues = PaddingValues(16.dp, 0.dp, 16.dp, 16.dp)
+
 @Destination
 @Composable
 fun QuestionScreen(
@@ -27,10 +30,9 @@ fun QuestionScreen(
     Column(
         modifier = Modifier.fillMaxSize(),
     ) {
-        AudioTestTopBar(viewModel.state)
-
+        AudioTestTopBar(viewModel.state, modifier = Modifier.padding(0.dp))
         Column(
-            modifier = Modifier.padding(16.dp).fillMaxSize(),
+            modifier = Modifier.padding(paddingValues).fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly,
         ) {

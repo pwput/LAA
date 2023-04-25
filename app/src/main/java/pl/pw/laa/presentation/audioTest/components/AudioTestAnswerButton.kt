@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -37,8 +38,7 @@ fun AnswerButton(
     ) {
         Text(
             text = form.toString(),
-            fontSize = 36.sp,
-            color = textColor,
+            style = MaterialTheme.typography.displayLarge,
             modifier = Modifier.padding(8.dp),
         )
     }

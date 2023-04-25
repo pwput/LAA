@@ -1,8 +1,9 @@
-package pl.pw.laa.presentation.alphabet
+package pl.pw.laa.presentation.alphabet.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -19,17 +20,15 @@ import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 val padding = 8.dp
 val fontSizeArabic = 48.sp
-val fontSizeNormal = 16.sp
 
 @Composable
 fun AlphabetTableCellLetterForm(form: Form, modifier: Modifier) {
     Box(
         modifier = modifier,
     ) {
-        androidx.compose.material.Text(
+        Text(
             text = form.char.toString(),
-            fontFamily = Lateef,
-            fontSize = fontSizeArabic,
+            style = MaterialTheme.typography.bodyLarge,
             modifier = Modifier.align(Alignment.BottomCenter),
         )
     }
@@ -46,7 +45,7 @@ fun AlphabetTableCellRowName(
     ) {
         Text(
             text = name,
-            fontSize = fontSizeNormal,
+            style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.align(Alignment.Center),
         )
         AudioIcon(modifier = Modifier, visible = isAudioIconVisible)
@@ -60,7 +59,7 @@ fun ColumnName(resourceId: Int, modifier: Modifier) {
     ) {
         Text(
             stringResource(id = resourceId),
-            fontSize = fontSizeNormal,
+            style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.align(Alignment.BottomCenter),
         )
     }

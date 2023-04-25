@@ -10,6 +10,8 @@ import pl.pw.laa.domain.Letter
 import pl.pw.laa.presentation.audioTest.AudioTestState
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
+val paddingValues = PaddingValues(32.dp,0.dp)
+
 @Composable
 fun AnswersBox(
     state: AudioTestState,
@@ -25,8 +27,8 @@ fun AnswersBox(
         ) {
             for (i in 0 until state.lettersList.size - 1 step 2) {
                 Row(
-                    modifier = Modifier.weight(1f),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    modifier = Modifier.weight(1f).padding(paddingValues),
+                    horizontalArrangement = Arrangement.spacedBy(32.dp),
                 ) {
                     AnswerButton(
                         form = state.lettersList[i].final,
