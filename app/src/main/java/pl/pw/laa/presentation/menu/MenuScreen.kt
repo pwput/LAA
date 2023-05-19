@@ -1,6 +1,8 @@
 package pl.pw.laa.presentation.menu
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.* // ktlint-disable no-wildcard-imports
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,11 +21,11 @@ import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 @Composable
 fun MenuScreen(
     navigator: DestinationsNavigator,
-    viewModel: MenuViewModel = hiltViewModel()
-
+    viewModel: MenuViewModel = hiltViewModel(),
 ) {
     Column(
-        modifier = Modifier.fillMaxSize().padding(64.dp),
+        modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)
+            .padding(64.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {

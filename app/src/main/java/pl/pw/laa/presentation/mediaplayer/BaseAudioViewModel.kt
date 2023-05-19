@@ -7,13 +7,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import dagger.hilt.android.lifecycle.HiltViewModel
 import pl.pw.laa.presentation.common.BaseViewModel
-import pl.pw.laa.data.presistence.AppConfigKeyRepository
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-open class BaseAudioViewModel @Inject constructor(repository: AppConfigKeyRepository) :
-    BaseViewModel(repository) {
+open class BaseAudioViewModel @Inject constructor() :
+    BaseViewModel() {
 
     private var raw: Int = 0
     private var mediaPlayer: MediaPlayer = MediaPlayer()

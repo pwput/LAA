@@ -1,23 +1,25 @@
 package pl.pw.laa.presentation.common
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
-import pl.pw.laa.data.model.appConfigAnswers
-import pl.pw.laa.data.model.appConfigCheats
-import pl.pw.laa.data.model.appConfigTips
-import pl.pw.laa.data.presistence.AppConfigKeyRepository
 import timber.log.Timber
-import javax.inject.Inject
 
-@HiltViewModel
-open class BaseViewModel @Inject constructor(repository: AppConfigKeyRepository) : ViewModel() {
+abstract class BaseViewModel : ViewModel() {
     init {
         Timber.d("BaseViewModel init")
     }
 
-    val numberOfPossibleAnswers = repository.getAppConfigKey(appConfigAnswers)
+    var isLoading by mutableStateOf(false)
 
-    val areCheatsOn = repository.getAppConfigKey(appConfigCheats)
+    fun startLoading() {
+        Timber.d("BaseViewModel started loading")
+        isLoading = true
+    }
 
-    val areTipsOn = repository.getAppConfigKey(appConfigTips)
+    fun stopLoading() {
+        Timber.d("BaseViewModel stopped loading")
+        isLoading = false
+    }
 }

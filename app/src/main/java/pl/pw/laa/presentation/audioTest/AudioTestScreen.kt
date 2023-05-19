@@ -1,10 +1,12 @@
 package pl.pw.laa.presentation.audioTest
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,6 +19,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 import pl.pw.laa.presentation.audioTest.components.AnswersBox
 import pl.pw.laa.presentation.audioTest.components.AudioTestTopBar
+import pl.pw.laa.presentation.common.LoadingScreen
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 val paddingValues = PaddingValues(16.dp, 0.dp, 16.dp, 16.dp)
@@ -27,17 +30,21 @@ fun QuestionScreen(
     navigator: DestinationsNavigator,
     viewModel: AudioTestViewModel = hiltViewModel(),
 ) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-    ) {
-        AudioTestTopBar(viewModel.state, modifier = Modifier.padding(0.dp))
+    if (viewModel.isLoading) {
+        LoadingScreen()
+    } else {
         Column(
-            modifier = Modifier.padding(paddingValues).fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background),
         ) {
-            QuestionBox(viewModel.state.rightAnswer, viewModel.showIcon, viewModel::onEvent)
-            AnswersBox(viewModel.state, viewModel::onAnswer)
+            AudioTestTopBar(viewModel.state, modifier = Modifier.padding(0.dp))
+            Column(
+                modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).padding(paddingValues),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceEvenly,
+            ) {
+                QuestionBox(viewModel.state.rightAnswer, viewModel.showIcon, viewModel::onEvent)
+                AnswersBox(viewModel.state, viewModel::onAnswer)
+            }
         }
     }
 }

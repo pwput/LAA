@@ -5,7 +5,7 @@
     <string name="alphabet_table_top_row_initial">initial</string>
     <string name="alphabet_table_top_row_medial">medial</string>
     <string name="alphabet_table_top_row_final">final</string>
-    <string name="database">AppConfigData.db</string>
+    <string name="database">AppConfigData1.db</string>
 
     <string name="appConfigAnswers">numberOfAnswers</string>
     <string name="appConfigCheats">cheats</string>

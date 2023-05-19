@@ -1,8 +1,10 @@
 package pl.pw.laa.presentation.alphabet
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -32,18 +34,19 @@ fun AlphabetTableRow(
     if (!showIncon) visible = false
 
     Row(
-        modifier = modifier.fillMaxWidth().height(IntrinsicSize.Max).clickable(
-            interactionSource = MutableInteractionSource(),
-            indication = null,
-        ) {
-            val resp = onRowClick(AlphabetTableEvent.PlayLetterAudio(context, letter))
-            visible =
-                resp is MediaPlayerResponse.Success || resp is MediaPlayerResponse.AlreadyPlayingRequestedAudio
-        },
+        modifier = modifier.fillMaxWidth().height(IntrinsicSize.Max)
+            .background(MaterialTheme.colorScheme.background).clickable(
+                interactionSource = MutableInteractionSource(),
+                indication = null,
+            ) {
+                val resp = onRowClick(AlphabetTableEvent.PlayLetterAudio(context, letter))
+                visible =
+                    resp is MediaPlayerResponse.Success || resp is MediaPlayerResponse.AlreadyPlayingRequestedAudio
+            },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
-        val formModifier = formsModifier.weight(1f)
+        val formModifier = formsModifier.weight(1f).background(MaterialTheme.colorScheme.background)
         AlphabetTableCellRowName(name = letter.name, modifier = formModifier, visible)
         AlphabetTableCellLetterForm(form = letter.isolated, modifier = formModifier)
         AlphabetTableCellLetterForm(form = letter.final, modifier = formModifier)
@@ -61,23 +64,23 @@ fun AlphabetTableColumNamesRow(modifier: Modifier = Modifier, tagsModifier: Modi
     ) {
         ColumnName(
             resourceId = R.string.alphabet_table_top_row_name,
-            modifier = tagsModifier.weight(1f),
+            modifier = tagsModifier.weight(1f).background(MaterialTheme.colorScheme.background),
         )
         ColumnName(
             resourceId = R.string.alphabet_table_top_row_isolated,
-            modifier = tagsModifier.weight(1f),
+            modifier = tagsModifier.weight(1f).background(MaterialTheme.colorScheme.background),
         )
         ColumnName(
             resourceId = R.string.alphabet_table_top_row_final,
-            modifier = tagsModifier.weight(1f),
+            modifier = tagsModifier.weight(1f).background(MaterialTheme.colorScheme.background),
         )
         ColumnName(
             resourceId = R.string.alphabet_table_top_row_medial,
-            modifier = tagsModifier.weight(1f),
+            modifier = tagsModifier.weight(1f).background(MaterialTheme.colorScheme.background),
         )
         ColumnName(
             resourceId = R.string.alphabet_table_top_row_initial,
-            modifier = tagsModifier.weight(1f),
+            modifier = tagsModifier.weight(1f).background(MaterialTheme.colorScheme.background),
         )
     }
 }

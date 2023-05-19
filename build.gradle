@@ -1,5 +1,6 @@
 buildscript {
     ext {
+        accompanist_version ='0.30.1'
         compose_NavVersion = '2.5.0'
         activity_version = '1.4.0'
         constraint_version = '1.0.0'

@@ -26,15 +26,12 @@ fun MenuButton(
     onClick: () -> Unit,
     content: String,
     modifier: Modifier = Modifier,
-    textColor: Color = Color.Black,
-    buttonColor: Color = Color.Green,
-    buttonBorderColor: Color = Color.Red,
 ) {
     Box(
         modifier = modifier
-            .border(1.dp, buttonBorderColor, shape = RoundedCornerShape(cornerSize))
+            .border(1.dp, MaterialTheme.colorScheme.secondary, shape = RoundedCornerShape(cornerSize))
             .clip(RoundedCornerShape(cornerSize))
-            .background(buttonColor)
+            .background(MaterialTheme.colorScheme.primaryContainer)
             .clickable { onClick() },
         contentAlignment = Alignment.Center,
     ) {
@@ -42,7 +39,7 @@ fun MenuButton(
         Text(
             text = content,
             style = MaterialTheme.typography.titleMedium,
-            color = textColor,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
             modifier = Modifier.padding(textPadding),
         )
     }

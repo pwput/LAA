@@ -4,20 +4,26 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import pl.pw.laa.data.model.AppConfigKey
-import pl.pw.laa.data.model.appConfigAnswers
-import pl.pw.laa.data.model.appConfigCheats
-import pl.pw.laa.data.model.appConfigTips
+import pl.pw.laa.data.model.AppConfig
+import pl.pw.laa.data.model.AppConfigKeyNew
+import pl.pw.laa.data.model.KeyNames.appConfigAnswers
+import pl.pw.laa.data.model.KeyNames.appConfigCheats
+import pl.pw.laa.data.model.KeyNames.appConfigIsFinalTested
+import pl.pw.laa.data.model.KeyNames.appConfigIsInitialTested
+import pl.pw.laa.data.model.KeyNames.appConfigIsIsolatedTested
+import pl.pw.laa.data.model.KeyNames.appConfigIsMedialTested
+import pl.pw.laa.data.model.KeyNames.appConfigTips
+import pl.pw.laa.data.presistence.AppConfigKeyRepository
 import pl.pw.laa.presentation.common.BaseViewModel
 import pl.pw.laa.presentation.common.toInt
-import pl.pw.laa.data.presistence.AppConfigKeyRepository
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
+    val appConfig: AppConfig,
     private val repository: AppConfigKeyRepository,
-) : BaseViewModel(repository) {
+) : BaseViewModel() {
 
     fun onEvent(event: SettingsEvent) {
         when (event) {
@@ -26,7 +32,7 @@ class SettingsViewModel @Inject constructor(
                     Timber.d("Setting ac to ${event.answersCount}")
 
                     repository.addAppConfigKey(
-                        AppConfigKey(
+                        AppConfigKeyNew(
                             appConfigAnswers,
                             event.answersCount,
                         ),
@@ -38,26 +44,72 @@ class SettingsViewModel @Inject constructor(
                     Timber.d("Setting cheets to ${event.areCheatsOn}")
 
                     repository.addAppConfigKey(
-                        AppConfigKey(
+                        AppConfigKeyNew(
                             appConfigCheats,
                             event.areCheatsOn.toInt(),
                         ),
                     )
                 }
+
             is SettingsEvent.SetAreTipsOn ->
                 viewModelScope.launch(context = Dispatchers.IO) {
                     Timber.d("Setting tips to ${event.areTipsOn}")
 
                     repository.addAppConfigKey(
-                        AppConfigKey(
+                        AppConfigKeyNew(
                             appConfigTips,
                             event.areTipsOn.toInt(),
+                        ),
+                    )
+                }
+
+            is SettingsEvent.SetisFinalTested ->
+                viewModelScope.launch(context = Dispatchers.IO) {
+                    Timber.d("Setting tips to ${event.isForm}")
+
+                    repository.addAppConfigKey(
+                        AppConfigKeyNew(
+                            appConfigIsFinalTested,
+                            event.isForm.toInt(),
+                        ),
+                    )
+                }
+
+            is SettingsEvent.SetisInitialTested ->
+                viewModelScope.launch(context = Dispatchers.IO) {
+                    Timber.d("Setting tips to ${event.isForm}")
+
+                    repository.addAppConfigKey(
+                        AppConfigKeyNew(
+                            appConfigIsInitialTested,
+                            event.isForm.toInt(),
+                        ),
+                    )
+                }
+
+            is SettingsEvent.SetisIsolatedTested ->
+                viewModelScope.launch(context = Dispatchers.IO) {
+                    Timber.d("Setting tips to ${event.isForm}")
+
+                    repository.addAppConfigKey(
+                        AppConfigKeyNew(
+                            appConfigIsIsolatedTested,
+                            event.isForm.toInt(),
+                        ),
+                    )
+                }
+
+            is SettingsEvent.SetisMedialTested ->
+                viewModelScope.launch(context = Dispatchers.IO) {
+                    Timber.d("Setting tips to ${event.isForm}")
+
+                    repository.addAppConfigKey(
+                        AppConfigKeyNew(
+                            appConfigIsMedialTested,
+                            event.isForm.toInt(),
                         ),
                     )
                 }
         }
     }
 }
-
-
-

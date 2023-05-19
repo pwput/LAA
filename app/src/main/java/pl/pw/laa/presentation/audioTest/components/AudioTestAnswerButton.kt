@@ -23,23 +23,23 @@ import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 fun AnswerButton(
     form: Form,
     modifier: Modifier = Modifier,
-    textColor: Color = Color.Black,
     onClick: () -> Unit,
     cheats: Boolean = false
 ) {
-    val modifier = if (cheats) modifier.background(Color.Red) else modifier
+    val borderColor = if (cheats) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.secondary
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
-            .border(2.dp, Color.Red, shape = RoundedCornerShape(25))
+            .border(1.dp, borderColor, shape = RoundedCornerShape(25))
             .clip(RoundedCornerShape(25))
+            .background(MaterialTheme.colorScheme.primaryContainer)
             .clickable { onClick() }
             .then(modifier),
     ) {
         Text(
             text = form.toString(),
             style = MaterialTheme.typography.displayLarge,
-            modifier = Modifier.padding(8.dp),
+           //modifier = Modifier.padding(8.dp),
         )
     }
 }

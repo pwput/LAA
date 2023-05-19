@@ -7,6 +7,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -22,7 +23,7 @@ import timber.log.Timber
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsNumberList(
-    key: AppConfigKey,
+    key: AppConfigKey?,
     expanded: Boolean,
     onEvent: (SettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
@@ -36,16 +37,17 @@ fun SettingsNumberList(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(text = "answers", modifier = modifier)
+        Text(text = "answers", modifier = modifier, style = MaterialTheme.typography.bodyMedium)
         ExposedDropdownMenuBox(
             expanded = expanded,
             onExpandedChange = { expanded = !expanded },
             modifier = modifier,
         ) {
             TextField(
-                value = key.value.toString(),
+                value = key?.value.toString(),
+                textStyle = MaterialTheme.typography.bodyMedium,
                 onValueChange = {
-                    Timber.d("Clicked at Settings Number List for key: ${key.key}, current value:${key.value}, changing to: $it")
+                    Timber.d("Clicked at Settings Number List for key: ${key?.key}, current value:${key?.value}, changing to: $it")
                     onEvent(SettingsEvent.SetAnswersCount(it.toInt()))
                 },
                 readOnly = true,
@@ -65,7 +67,7 @@ fun SettingsNumberList(
                             )
                         },
                         onClick = {
-                            Timber.d("Clicked at Settings Number List Item for key: ${key.key}, clicked at: $item")
+                            Timber.d("Clicked at Settings Number List Item for key: ${key?.key}, clicked at: $item")
                             onEvent(SettingsEvent.SetAnswersCount(item))
                             expanded = false
                         },

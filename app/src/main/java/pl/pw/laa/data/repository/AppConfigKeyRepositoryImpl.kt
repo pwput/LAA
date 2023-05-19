@@ -3,9 +3,8 @@ package pl.pw.laa.data.repository
 import kotlinx.coroutines.flow.Flow
 import pl.pw.laa.data.dao.AppConfigKeyDao
 import pl.pw.laa.data.model.AppConfigKey
-import pl.pw.laa.data.model.appConfigAnswers
-import pl.pw.laa.data.model.appConfigCheats
-import pl.pw.laa.data.model.appConfigTips
+import pl.pw.laa.data.model.DefaultKeys
+
 import pl.pw.laa.data.presistence.AppConfigKeyRepository
 import timber.log.Timber
 
@@ -24,11 +23,7 @@ class AppConfigKeyRepositoryImpl(
     }
 
     override suspend fun initDb() {
-        val list = listOf(
-            AppConfigKey(appConfigAnswers, 8),
-            AppConfigKey(appConfigCheats, 1),
-            AppConfigKey(appConfigTips, 1),
-        )
+        val list = DefaultKeys.all
         for (i in list) {
             appConfigKeyDao.insertApplicationSettings(i)
         }

@@ -8,8 +8,13 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import pl.pw.laa.data.Alphabet
-import pl.pw.laa.data.presistence.AppConfigKeyRepository
+import pl.pw.laa.data.model.AppConfig
+import pl.pw.laa.domain.Final
+import pl.pw.laa.domain.Form
+import pl.pw.laa.domain.Initial
+import pl.pw.laa.domain.Isolated
 import pl.pw.laa.domain.Letter
+import pl.pw.laa.domain.Medial
 import pl.pw.laa.presentation.common.toBoolean
 import pl.pw.laa.presentation.mediaplayer.BaseAudioViewModel
 import pl.pw.laa.presentation.mediaplayer.MediaPlayerResponse
@@ -19,34 +24,88 @@ import kotlin.random.Random
 import kotlin.random.nextInt
 
 @HiltViewModel
-class AudioTestViewModel @Inject constructor(repository: AppConfigKeyRepository) :
-    BaseAudioViewModel(repository) {
+class AudioTestViewModel @Inject constructor(private val appConfig: AppConfig) :
+    BaseAudioViewModel() {
 
-    var state by mutableStateOf(AudioTestState(null, 0, 0,null))
+    var state by mutableStateOf(AudioTestState(null, 0, 0, null))
         private set
 
     private var numberOfAnswers = 8
     private var cheat = false
     private var tips = false
+    private var isInitialTested = true
+    private var isMedialTested = true
+    private var isFinalTested = true
+    private var isIsolated = true
 
     init {
+        startLoading()
         fetchData()
     }
+
+    private val availableForms = mutableListOf<Class<out Form>>()
 
     private fun fetchData() {
         viewModelScope.launch {
             setupViewModel(
-                numberOfPossibleAnswers.first().value,
-                areCheatsOn.first().value.toBoolean(),
-                areTipsOn.first().value.toBoolean(),
+                appConfig.answers.first().value,
+                appConfig.cheats.first().value.toBoolean(),
+                appConfig.tips.first().value.toBoolean(),
+                appConfig.initial.first().value.toBoolean(),
+                appConfig.medial.first().value.toBoolean(),
+                appConfig.final.first().value.toBoolean(),
+                appConfig.isolated.first().value.toBoolean(),
             )
+            stopLoading()
         }
     }
 
-    private fun setupViewModel(num: Int, cheats: Boolean, tips: Boolean) {
+    private fun setupViewModel(
+        num: Int,
+        cheats: Boolean,
+        tips: Boolean,
+        initial: Boolean,
+        medial: Boolean,
+        final: Boolean,
+        isolated: Boolean,
+    ) {
         numberOfAnswers = num
         cheat = cheats
+        isInitialTested = initial
+        isMedialTested = medial
+        isFinalTested = final
+        isIsolated = isolated
+        this.tips = tips
+        setupAvaliableForms()
         getNewState(numberOfAnswers, cheats)
+    }
+
+    private fun setupAvaliableForms() {
+        Timber.d("Settingup avaliable forms")
+        availableForms.clear()
+        if (isInitialTested) availableForms.add(Initial::class.java)
+        if (isMedialTested) availableForms.add(Medial::class.java)
+        if (isFinalTested) availableForms.add(Final::class.java)
+        if (isIsolated) availableForms.add(Isolated::class.java)
+
+        if (availableForms.size == 0) Timber.d("No avaliable forms, you have a big problem!!")
+    }
+
+    private fun getNewState(size: Int, cheats: Boolean) {
+        val tmpList = generateLetterList(generateSequence(0, Alphabet.letters.size - 1, size))
+
+        val tmpForms = mutableListOf<Form>()
+
+        for (letter in tmpList) {
+            tmpForms.add(letter.getForm(availableForms.random()))
+        }
+
+        state = state.copy(
+            formsList = tmpForms,
+            score = state.score + 1,
+            rightAnswer = getRandomLetter(tmpList),
+            areCheatsOn = cheats,
+        )
     }
 
     fun onEvent(event: AudioTestEvent): MediaPlayerResponse? {
@@ -56,32 +115,21 @@ class AudioTestViewModel @Inject constructor(repository: AppConfigKeyRepository)
             }
 
             is AudioTestEvent.GotAnswer -> {
-                onAnswer(event.letter)
+                onAnswer(event.form)
                 null
             }
         }
     }
 
-    fun onAnswer(letter: Letter) {
-        Timber.d("Answer: $letter")
+    fun onAnswer(form: Form) {
+        Timber.d("Answer: $form")
         Timber.d("RightAnswer: ${state.rightAnswer}")
-        if (letter == state.rightAnswer) {
+        if (state.rightAnswer!!.hasForm(form)) {
             Timber.d("Win!!!!")
             getNewState(numberOfAnswers, cheat)
         } else {
             state = state.copy(mistakes = state.mistakes + 1)
         }
-    }
-
-    private fun getNewState(size: Int, cheats: Boolean) {
-        val tmpList = generateLetterList(generateSequence(0, Alphabet.letters.size - 1, size))
-
-        state = state.copy(
-            lettersList = tmpList,
-            score = state.score + 1,
-            rightAnswer = getRandomLetter(tmpList),
-            areCheatsOn = cheats,
-        )
     }
 
     private fun getRandomLetter(list: List<Letter>) = list[Random.nextInt(list.indices)]

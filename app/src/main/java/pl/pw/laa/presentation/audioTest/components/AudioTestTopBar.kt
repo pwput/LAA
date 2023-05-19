@@ -1,5 +1,6 @@
 package pl.pw.laa.presentation.audioTest.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,12 +20,12 @@ fun AudioTestTopBar(
     modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = modifier.fillMaxWidth(1f).wrapContentHeight(),
+        modifier = modifier.fillMaxWidth(1f).background(MaterialTheme.colorScheme.background).wrapContentHeight(),
         contentAlignment = Alignment.CenterEnd,
     ) {
         Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = modifier.fillMaxWidth(1f)) {
-            Text(text = "Mistakes: ${state.mistakes}", style = MaterialTheme.typography.bodyMedium)
-            Text(text = "Score: ${state.score}", style = MaterialTheme.typography.bodyMedium)
+            Text(text = "Mistakes: ${state.mistakes}", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onBackground)
+            Text(text = "Score: ${state.score}", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onBackground)
         }
     }
 }
