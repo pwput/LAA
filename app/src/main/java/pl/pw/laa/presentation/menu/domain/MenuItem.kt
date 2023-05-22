@@ -1,7 +1,7 @@
 package pl.pw.laa.presentation.menu.domain
 
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import pl.pw.laa.presentation.destinations.AlphabetTableDestination
+import pl.pw.laa.presentation.destinations.AlphabetTableScreenDestination
 import pl.pw.laa.presentation.destinations.QuestionScreenDestination
 import pl.pw.laa.presentation.destinations.SettingsScreenDestination
 import pl.pw.laa.presentation.destinations.VocalizationScreenDestination
@@ -12,7 +12,7 @@ sealed class MenuItem(val name: String) {
 
 object AlphabetTable : MenuItem("Alphabet") {
     override fun navigateToDestination(navigator: DestinationsNavigator) {
-        navigator.navigate(AlphabetTableDestination())
+        navigator.navigate(AlphabetTableScreenDestination())
     }
 }
 

@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.alphabet
+package pl.pw.laa.presentation.alphabet.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -13,9 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import pl.pw.laa.R
 import pl.pw.laa.domain.Letter
-import pl.pw.laa.presentation.alphabet.components.AlphabetTableCellLetterForm
-import pl.pw.laa.presentation.alphabet.components.AlphabetTableCellRowName
-import pl.pw.laa.presentation.alphabet.components.ColumnName
+import pl.pw.laa.presentation.alphabet.AlphabetTableEvent
 import pl.pw.laa.presentation.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
@@ -47,7 +45,7 @@ fun AlphabetTableRow(
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
         val formModifier = formsModifier.weight(1f).background(MaterialTheme.colorScheme.background)
-        AlphabetTableCellRowName(name = letter.name, modifier = formModifier, visible)
+        AlphabetTableCellRowName(name = letter.name, visible, modifier = formModifier)
         AlphabetTableCellLetterForm(form = letter.isolated, modifier = formModifier)
         AlphabetTableCellLetterForm(form = letter.final, modifier = formModifier)
         AlphabetTableCellLetterForm(form = letter.medial, modifier = formModifier)
