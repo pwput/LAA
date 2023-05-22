@@ -47,7 +47,7 @@ fun AlphabetTableCellRowName(
             modifier = Modifier.align(Alignment.Center),
             color = MaterialTheme.colorScheme.onBackground,
         )
-        AudioIcon(modifier = Modifier, visible = isAudioIconVisible)
+        AudioIcon(visible = isAudioIconVisible)
     }
 }
 

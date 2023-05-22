@@ -1,6 +1,9 @@
 package pl.pw.laa.presentation.menu
 
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import pl.pw.laa.data.presistence.AppConfigKeyRepository
 import pl.pw.laa.presentation.mediaplayer.BaseAudioViewModel
 import pl.pw.laa.presentation.menu.domain.AlphabetTable
@@ -22,8 +25,8 @@ class MenuViewModel @Inject constructor(repository: AppConfigKeyRepository) :
     )
 
     init {
-/*        viewModelScope.launch(context = Dispatchers.IO) {
+      viewModelScope.launch(context = Dispatchers.IO) {
             repository.initDb()
-        }*/
+        }
     }
 }

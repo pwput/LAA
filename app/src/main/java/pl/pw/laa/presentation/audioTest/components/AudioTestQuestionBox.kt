@@ -1,5 +1,7 @@
 package pl.pw.laa.presentation.audioTest
 
+import DevicePreviewsDarkPortrait
+import DevicePreviewsLightPortrait
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -12,8 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import pl.pw.laa.data.Alphabet
 import pl.pw.laa.domain.Letter
 import pl.pw.laa.presentation.common.AudioIcon
 import pl.pw.laa.presentation.common.Text
@@ -46,11 +48,14 @@ fun QuestionBox(
 
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxWidth(1f).aspectRatio(1.4f, false)
+        modifier = Modifier
+            .fillMaxWidth(1f)
+            .aspectRatio(1.4f, false)
             .background(MaterialTheme.colorScheme.background)
             .padding(PaddingValues(16.dp, 0.dp))
             .border(2.dp, MaterialTheme.colorScheme.secondary, shape = RoundedCornerShape(5))
-            .clip(RoundedCornerShape(25))
+            .clip(RoundedCornerShape(5))
+            .background(MaterialTheme.colorScheme.secondaryContainer)
             .then(modifier)
             .clickable(
                 interactionSource = MutableInteractionSource(),
@@ -72,24 +77,38 @@ fun QuestionBox(
                 Text(
                     letter = letter,
                     style = MaterialTheme.typography.displayLarge,
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
                 )
             }
-            Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
-                AudioIcon(modifier = Modifier.size(100.dp), visible)
+            Box(modifier = Modifier.weight(1f).fillMaxSize(), contentAlignment = Alignment.Center) {
+                AudioIcon(visible, Modifier.fillMaxSize())
             }
         }
     }
 }
 
-@Preview()
+@DevicePreviewsDarkPortrait
+@DevicePreviewsLightPortrait
 @Composable
-fun QuestionBoxPreview() {
+fun QuestionBoxPreviewNoIcon() {
     LearnArabicAlphabetTheme() {
-//        QestionBox(
-//            letter = Alphabet.letters[0],
-//            modifier = Modifier
-//                .background(Color.Green)
-//                .size(100.dp),
-//        )
+        QuestionBox(
+            Alphabet.letters[1],
+            true,
+            { null },
+        )
+    }
+}
+
+@DevicePreviewsDarkPortrait
+@DevicePreviewsLightPortrait
+@Composable
+fun QuestionBoxPreviewIcon() {
+    LearnArabicAlphabetTheme() {
+        QuestionBox(
+            Alphabet.letters[1],
+            false,
+            { null },
+        )
     }
 }

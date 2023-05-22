@@ -14,7 +14,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import pl.pw.laa.data.Alphabet
 import pl.pw.laa.domain.Form
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
@@ -30,7 +29,7 @@ fun AnswerButton(
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
-            .border(1.dp, borderColor, shape = RoundedCornerShape(25))
+            .border(2.dp, borderColor, shape = RoundedCornerShape(25))
             .clip(RoundedCornerShape(25))
             .background(MaterialTheme.colorScheme.primaryContainer)
             .clickable { onClick() }
@@ -39,7 +38,7 @@ fun AnswerButton(
         Text(
             text = form.toString(),
             style = MaterialTheme.typography.displayLarge,
-           //modifier = Modifier.padding(8.dp),
+            color = MaterialTheme.colorScheme.onSecondaryContainer,
         )
     }
 }
