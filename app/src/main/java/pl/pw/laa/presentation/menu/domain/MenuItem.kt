@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.menu
+package pl.pw.laa.presentation.menu.domain
 
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import pl.pw.laa.presentation.destinations.AlphabetTableDestination
@@ -33,3 +33,5 @@ object Vocalization : MenuItem("Vocalization") {
         navigator.navigate(VocalizationScreenDestination())
     }
 }
+
+val menuItemsForPreview = listOf(Test, AlphabetTable, Vocalization, Settings)
