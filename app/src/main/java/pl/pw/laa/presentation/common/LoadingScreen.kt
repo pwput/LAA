@@ -18,11 +18,11 @@ fun LoadingScreen() {
         Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background),
         contentAlignment = Alignment.Center,
     ) {
-        CircularProgressIndicator(Modifier.fillMaxWidth(0.4f), color = MaterialTheme.colorScheme.onBackground)
+        CircularProgressIndicator(Modifier.fillMaxWidth(0.1f), color = MaterialTheme.colorScheme.onBackground)
     }
 }
 
-@Preview(showSystemUi = true,)
+@Preview(showSystemUi = true)
 @Composable
 fun LoadingScreenPreview() {
     LearnArabicAlphabetTheme() {
