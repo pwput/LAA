@@ -20,6 +20,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import pl.pw.laa.data.Alphabet
 import pl.pw.laa.presentation.alphabet.components.AlphabetTableColumNamesRow
 import pl.pw.laa.presentation.alphabet.components.AlphabetTableRow
+import pl.pw.laa.presentation.alphabet.components.RowDivider
 import pl.pw.laa.presentation.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
@@ -53,10 +54,7 @@ fun AlphabetTable(
     }
 }
 
-@Composable
-fun RowDivider() {
-    Divider(color = MaterialTheme.colorScheme.secondary, thickness = 1.dp)
-}
+
 
 @DevicePreviewsLightPortrait
 @DevicePreviewsDarkPortrait

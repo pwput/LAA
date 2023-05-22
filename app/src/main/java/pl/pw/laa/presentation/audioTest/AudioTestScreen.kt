@@ -23,7 +23,7 @@ import pl.pw.laa.data.Alphabet
 import pl.pw.laa.domain.Form
 import pl.pw.laa.presentation.audioTest.components.AnswersBox
 import pl.pw.laa.presentation.audioTest.components.AudioTestTopBar
-import pl.pw.laa.presentation.common.LoadingScreen
+import pl.pw.laa.presentation.common.componets.LoadingScreen
 import pl.pw.laa.presentation.common.Orientation
 import pl.pw.laa.presentation.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme

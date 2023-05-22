@@ -17,8 +17,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import pl.pw.laa.data.Alphabet
 import pl.pw.laa.domain.Letter
-import pl.pw.laa.presentation.common.AudioIcon
-import pl.pw.laa.presentation.common.Text
+import pl.pw.laa.presentation.common.componets.AudioIcon
+import pl.pw.laa.presentation.common.annotation.Text
 import pl.pw.laa.presentation.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 

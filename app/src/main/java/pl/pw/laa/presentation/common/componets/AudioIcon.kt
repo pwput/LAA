@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.common
+package pl.pw.laa.presentation.common.componets
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween

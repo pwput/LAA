@@ -37,7 +37,7 @@ fun SettingsNumberList(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(text = "answers", modifier = modifier, style = MaterialTheme.typography.bodyMedium)
+        Text(text = "answers", modifier = modifier, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onBackground)
         ExposedDropdownMenuBox(
             expanded = expanded,
             onExpandedChange = { expanded = !expanded },

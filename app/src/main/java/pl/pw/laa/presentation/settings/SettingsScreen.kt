@@ -1,17 +1,20 @@
 package pl.pw.laa.presentation.settings
 
+import DevicePreviewsDarkLandscape
+import DevicePreviewsDarkPortrait
+import DevicePreviewsLightLandscape
+import DevicePreviewsLightPortrait
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
+import pl.pw.laa.data.model.AppConfigKey
 import pl.pw.laa.data.model.DefaultKeys
 import pl.pw.laa.data.model.KeyNames.appConfigAnswers
 import pl.pw.laa.data.model.KeyNames.appConfigCheats
@@ -20,8 +23,9 @@ import pl.pw.laa.data.model.KeyNames.appConfigIsInitialTested
 import pl.pw.laa.data.model.KeyNames.appConfigIsIsolatedTested
 import pl.pw.laa.data.model.KeyNames.appConfigIsMedialTested
 import pl.pw.laa.data.model.KeyNames.appConfigTips
+import pl.pw.laa.presentation.alphabet.components.RowDivider
 import pl.pw.laa.presentation.settings.components.SettingsCheckBox
-import pl.pw.laa.presentation.settings.components.SettingsChip
+import pl.pw.laa.presentation.settings.components.SettingsChipGroup
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -31,10 +35,6 @@ fun SettingsScreen(
     navigator: DestinationsNavigator,
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
-    val expanded by remember {
-        mutableStateOf(false)
-    }
-
     val numbers by viewModel.appConfig.answers.collectAsState(
         initial = DefaultKeys.getDefaultKey(appConfigAnswers),
     )
@@ -61,39 +61,78 @@ fun SettingsScreen(
         initial = DefaultKeys.getDefaultKey(appConfigIsIsolatedTested),
     )
 
+    Settings(
+        numbers,
+        cheats,
+        tips,
+        isInitialTested,
+        isMedialTested,
+        isFinalTested,
+        isIsolatedTested,
+        viewModel::onEvent,
+    )
+}
+
+@Composable
+fun Settings(
+    numbers: AppConfigKey?,
+    cheats: AppConfigKey?,
+    tips: AppConfigKey?,
+    isInitialTested: AppConfigKey?,
+    isMedialTested: AppConfigKey?,
+    isFinalTested: AppConfigKey?,
+    isIsolatedTested: AppConfigKey?,
+    onEvent: (SettingsEvent) -> Unit,
+) {
+    val expanded by remember {
+        mutableStateOf(false)
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize().background(MaterialTheme.colorScheme.background)
-            .padding(32.dp),
+            .padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         SettingsNumberList(
             key = numbers,
             expanded = expanded,
-            onEvent = viewModel::onEvent,
+            onEvent = onEvent,
             modifier = Modifier.weight(1f),
         )
-        SettingsCheckBox(key = cheats, onEvent = viewModel::onEvent, modifier = Modifier.weight(1f))
-        SettingsCheckBox(key = tips, onEvent = viewModel::onEvent, modifier = Modifier.weight(1f))
-
-        FlowRow(Modifier.fillMaxWidth()) {
-            val mod = Modifier.padding(4.dp)
-
-            SettingsChip(key = isInitialTested, onEvent = viewModel::onEvent, modifier = mod)
-            SettingsChip(key = isMedialTested, onEvent = viewModel::onEvent, modifier = mod)
-            SettingsChip(key = isFinalTested, onEvent = viewModel::onEvent, modifier = mod)
-            SettingsChip(key = isIsolatedTested, onEvent = viewModel::onEvent, modifier = mod)
-        }
+        RowDivider()
+        SettingsCheckBox(key = cheats, onEvent = onEvent, modifier = Modifier.weight(1f))
+        SettingsCheckBox(key = tips, onEvent = onEvent, modifier = Modifier.weight(1f))
+        RowDivider()
+        SettingsChipGroup(
+            isInitialTested,
+            isMedialTested,
+            isFinalTested,
+            isIsolatedTested,
+            onEvent,
+        )
     }
 }
 
-@Preview
+@DevicePreviewsLightPortrait
+@DevicePreviewsDarkPortrait
+@DevicePreviewsLightLandscape
+@DevicePreviewsDarkLandscape
 @Composable
 fun SettingsScreenPreview() {
     LearnArabicAlphabetTheme() {
         Surface(modifier = Modifier.fillMaxSize()) {
-            SettingsScreen(navigator = EmptyDestinationsNavigator)
+            Settings(
+                DefaultKeys.getDefaultKey(appConfigAnswers),
+                DefaultKeys.getDefaultKey(appConfigCheats),
+                DefaultKeys.getDefaultKey(appConfigTips),
+                DefaultKeys.getDefaultKey(appConfigIsInitialTested),
+                DefaultKeys.getDefaultKey(appConfigIsMedialTested),
+                DefaultKeys.getDefaultKey(appConfigIsFinalTested),
+                DefaultKeys.getDefaultKey(appConfigIsIsolatedTested),
+                {},
+            )
         }
     }
 }

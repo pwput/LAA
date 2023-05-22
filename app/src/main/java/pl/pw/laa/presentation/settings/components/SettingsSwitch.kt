@@ -27,7 +27,12 @@ fun SettingsCheckBox(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(text = text ?: "null", modifier = modifier, style = MaterialTheme.typography.bodyMedium)
+        Text(
+            text = text ?: "null",
+            modifier = modifier,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground,
+        )
         Switch(
             checked = key?.value?.toBoolean() ?: false,
             onCheckedChange = {

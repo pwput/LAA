@@ -2,6 +2,8 @@ package pl.pw.laa.presentation.settings.components
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -9,7 +11,6 @@ import pl.pw.laa.data.model.AppConfigKey
 import pl.pw.laa.data.model.KeyNames.appConfigIsFinalTested
 import pl.pw.laa.data.model.KeyNames.appConfigIsInitialTested
 import pl.pw.laa.data.model.KeyNames.appConfigIsMedialTested
-
 import pl.pw.laa.presentation.common.toBoolean
 import pl.pw.laa.presentation.settings.SettingsEvent
 
@@ -25,6 +26,12 @@ fun SettingsChip(
         selected = key!!.value.toBoolean(),
         onClick = { onEvent(event(key)) },
         label = { Text(text = key.name) },
+        colors = FilterChipDefaults.filterChipColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+            labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+            selectedContainerColor = MaterialTheme.colorScheme.primary,
+            selectedLabelColor = MaterialTheme.colorScheme.onPrimary,
+        ),
     )
 }
 

@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import pl.pw.laa.presentation.common.AutoResizedText
+import pl.pw.laa.presentation.common.componets.AutoResizedText
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 private val cornerSize = 16.dp
