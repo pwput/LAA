@@ -24,6 +24,7 @@ import pl.pw.data.model.KeyNames.appConfigIsIsolatedTested
 import pl.pw.data.model.KeyNames.appConfigIsMedialTested
 import pl.pw.data.model.KeyNames.appConfigTips
 import pl.pw.laa.presentation.common.componets.RowDivider
+import pl.pw.laa.presentation.common.toInt
 import pl.pw.laa.presentation.settings.components.SettingsCheckBox
 import pl.pw.laa.presentation.settings.components.SettingsChipGroup
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
@@ -35,53 +36,15 @@ fun SettingsScreen(
     navigator: DestinationsNavigator,
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
-    val numbers by viewModel.appConfig.answers.collectAsState(
-        initial = DefaultKeys.getDefaultKey(appConfigAnswers),
-    )
-    val cheats by viewModel.appConfig.cheats.collectAsState(
-        initial = DefaultKeys.getDefaultKey(
-            appConfigCheats,
-        ),
-    )
-    val tips by viewModel.appConfig.tips.collectAsState(
-        initial = DefaultKeys.getDefaultKey(
-            appConfigTips,
-        ),
-    )
-    val isInitialTested by viewModel.appConfig.initial.collectAsState(
-        initial = DefaultKeys.getDefaultKey(appConfigIsInitialTested),
-    )
-    val isMedialTested by viewModel.appConfig.medial.collectAsState(
-        initial = DefaultKeys.getDefaultKey(appConfigIsMedialTested),
-    )
-    val isFinalTested by viewModel.appConfig.final.collectAsState(
-        initial = DefaultKeys.getDefaultKey(appConfigIsFinalTested),
-    )
-    val isIsolatedTested by viewModel.appConfig.isolated.collectAsState(
-        initial = DefaultKeys.getDefaultKey(appConfigIsIsolatedTested),
-    )
-
     Settings(
-        numbers,
-        cheats,
-        tips,
-        isInitialTested,
-        isMedialTested,
-        isFinalTested,
-        isIsolatedTested,
+        viewModel.state,
         viewModel::onEvent,
     )
 }
 
 @Composable
 fun Settings(
-    numbers: AppConfigKey?,
-    cheats: AppConfigKey?,
-    tips: AppConfigKey?,
-    isInitialTested: AppConfigKey?,
-    isMedialTested: AppConfigKey?,
-    isFinalTested: AppConfigKey?,
-    isIsolatedTested: AppConfigKey?,
+    state: SettingsState,
     onEvent: (SettingsEvent) -> Unit,
 ) {
     val expanded by remember {
@@ -96,24 +59,33 @@ fun Settings(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         SettingsNumberList(
-            key = numbers,
+            key = AppConfigKey(appConfigAnswers, appConfigAnswers , state.numbers),
             expanded = expanded,
             onEvent = onEvent,
             modifier = Modifier.weight(1f),
         )
         RowDivider()
-        SettingsCheckBox(key = cheats, onEvent = onEvent, modifier = Modifier.weight(1f))
-        SettingsCheckBox(key = tips, onEvent = onEvent, modifier = Modifier.weight(1f))
+        SettingsCheckBox(AppConfigKey(appConfigCheats, appConfigCheats,state.cheats.toInt()), onEvent = onEvent, modifier = Modifier.weight(1f))
+        SettingsCheckBox(AppConfigKey(appConfigTips, appConfigTips,state.tips.toInt()), onEvent = onEvent, modifier = Modifier.weight(1f))
         RowDivider()
         SettingsChipGroup(
-            isInitialTested,
-            isMedialTested,
-            isFinalTested,
-            isIsolatedTested,
+            AppConfigKey(appConfigIsInitialTested, appConfigIsInitialTested,state.isInitialTested.toInt()),
+            AppConfigKey(appConfigIsMedialTested, appConfigIsMedialTested,state.isMedialTested.toInt()),
+            AppConfigKey(appConfigIsFinalTested, appConfigIsFinalTested,state.isFinalTested.toInt()),
+            AppConfigKey(appConfigIsIsolatedTested, appConfigIsIsolatedTested,state.isIsolatedTested.toInt()),
             onEvent,
         )
     }
 }
+
+val state = SettingsState(8,
+    cheats = true,
+    tips = true,
+    isInitialTested = true,
+    isMedialTested = true,
+    isFinalTested = true,
+    isIsolatedTested = true
+)
 
 @DevicePreviewsLightPortrait
 @DevicePreviewsDarkPortrait
@@ -124,13 +96,7 @@ fun SettingsScreenPreview() {
     LearnArabicAlphabetTheme() {
         Surface(modifier = Modifier.fillMaxSize()) {
             Settings(
-                DefaultKeys.getDefaultKey(appConfigAnswers),
-                DefaultKeys.getDefaultKey(appConfigCheats),
-                DefaultKeys.getDefaultKey(appConfigTips),
-                DefaultKeys.getDefaultKey(appConfigIsInitialTested),
-                DefaultKeys.getDefaultKey(appConfigIsMedialTested),
-                DefaultKeys.getDefaultKey(appConfigIsFinalTested),
-                DefaultKeys.getDefaultKey(appConfigIsIsolatedTested),
+                state,
                 {},
             )
         }

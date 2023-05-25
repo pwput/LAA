@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import pl.pw.data.model.AppConfigKey
 import pl.pw.data.model.DefaultKeys
 import pl.pw.data.model.KeyNames
+import pl.pw.laa.presentation.common.toBoolean
 import pl.pw.laa.presentation.settings.SettingsEvent
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
@@ -47,6 +48,7 @@ fun SettingsChipGroup(
         }
     }
 }
+
 
 @Preview
 @Composable
