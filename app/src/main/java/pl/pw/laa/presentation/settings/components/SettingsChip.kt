@@ -7,10 +7,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import pl.pw.laa.data.model.AppConfigKey
-import pl.pw.laa.data.model.KeyNames.appConfigIsFinalTested
-import pl.pw.laa.data.model.KeyNames.appConfigIsInitialTested
-import pl.pw.laa.data.model.KeyNames.appConfigIsMedialTested
+import pl.pw.data.model.AppConfigKey
+import pl.pw.data.model.KeyNames.appConfigIsFinalTested
+import pl.pw.data.model.KeyNames.appConfigIsInitialTested
+import pl.pw.data.model.KeyNames.appConfigIsMedialTested
 import pl.pw.laa.presentation.common.toBoolean
 import pl.pw.laa.presentation.settings.SettingsEvent
 

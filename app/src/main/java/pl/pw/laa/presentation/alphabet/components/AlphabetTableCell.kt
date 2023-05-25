@@ -14,8 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import pl.pw.laa.data.Alphabet
-import pl.pw.laa.domain.Form
+import pl.pw.data.model.Form
 import pl.pw.laa.presentation.common.componets.AudioIcon
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
@@ -73,7 +72,7 @@ fun ColumnName(resourceId: Int, modifier: Modifier) {
 fun AlphabetTableCellRowNamePreview() {
     LearnArabicAlphabetTheme {
         AlphabetTableCellRowName(
-            Alphabet.letters[1].name,
+            pl.pw.data.Alphabet.letters[1].name,
             true,
         )
     }
@@ -84,7 +83,7 @@ fun AlphabetTableCellRowNamePreview() {
 fun SingleFormPreview() {
     LearnArabicAlphabetTheme {
         AlphabetTableCellLetterForm(
-            Alphabet.letters[1].final,
+            pl.pw.data.Alphabet.letters[1].final,
             modifier = Modifier.background(MaterialTheme.colorScheme.background),
         )
     }

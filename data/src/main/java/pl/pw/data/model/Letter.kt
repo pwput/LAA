@@ -1,4 +1,4 @@
-package pl.pw.laa.domain
+package pl.pw.data.model
 
 data class Letter(
     val isolated: Isolated,

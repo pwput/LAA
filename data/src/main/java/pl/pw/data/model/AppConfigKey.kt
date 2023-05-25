@@ -1,15 +1,15 @@
-package pl.pw.laa.data.model
+package pl.pw.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import pl.pw.laa.data.model.KeyNames.appConfigAnswers
-import pl.pw.laa.data.model.KeyNames.appConfigCheats
-import pl.pw.laa.data.model.KeyNames.appConfigIsFinalTested
-import pl.pw.laa.data.model.KeyNames.appConfigIsInitialTested
-import pl.pw.laa.data.model.KeyNames.appConfigIsIsolatedTested
-import pl.pw.laa.data.model.KeyNames.appConfigIsMedialTested
-import pl.pw.laa.data.model.KeyNames.appConfigTips
-import pl.pw.laa.data.presistence.AppConfigKeyRepository
+import pl.pw.data.model.KeyNames.appConfigAnswers
+import pl.pw.data.model.KeyNames.appConfigCheats
+import pl.pw.data.model.KeyNames.appConfigIsFinalTested
+import pl.pw.data.model.KeyNames.appConfigIsInitialTested
+import pl.pw.data.model.KeyNames.appConfigIsIsolatedTested
+import pl.pw.data.model.KeyNames.appConfigIsMedialTested
+import pl.pw.data.model.KeyNames.appConfigTips
+import pl.pw.data.presistence.AppConfigKeyRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 

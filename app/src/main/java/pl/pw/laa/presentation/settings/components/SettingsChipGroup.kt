@@ -14,9 +14,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import pl.pw.laa.data.model.AppConfigKey
-import pl.pw.laa.data.model.DefaultKeys
-import pl.pw.laa.data.model.KeyNames
+import pl.pw.data.model.AppConfigKey
+import pl.pw.data.model.DefaultKeys
+import pl.pw.data.model.KeyNames
 import pl.pw.laa.presentation.settings.SettingsEvent
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
@@ -56,7 +56,7 @@ fun SettingsScreenPreview() {
             DefaultKeys.getDefaultKey(KeyNames.appConfigIsInitialTested),
             DefaultKeys.getDefaultKey(KeyNames.appConfigIsMedialTested),
             DefaultKeys.getDefaultKey(KeyNames.appConfigIsFinalTested),
-            AppConfigKey("Initial","Initial",0),
+            AppConfigKey("Initial", "Initial", 0),
             {},
         )
     }

@@ -1,4 +1,4 @@
-package pl.pw.laa.domain
+package pl.pw.data.model
 
 enum class FormName(val value: String) {
     ISOLATED("Isolated"),

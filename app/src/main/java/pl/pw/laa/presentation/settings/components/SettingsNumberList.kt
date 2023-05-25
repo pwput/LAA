@@ -17,7 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import pl.pw.laa.data.model.AppConfigKey
+import pl.pw.data.model.AppConfigKey
 import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)

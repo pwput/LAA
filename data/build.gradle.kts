@@ -1,66 +1,42 @@
-
 plugins {
-    id ("com.android.application")
+    id("com.android.library")
     id ("org.jetbrains.kotlin.android")
     id ("com.google.devtools.ksp")
     id ("kotlin-kapt")
     id ("com.google.dagger.hilt.android")
 }
 
-
-
 android {
-    namespace ="pl.pw.laa"
-    compileSdk =33
+    namespace = "pl.pw.data"
+    compileSdk = 33
 
     defaultConfig {
-        applicationId ="pl.pw.laa"
-        minSdk= 24
-        targetSdk =33
-        versionCode= 1
-        versionName ="1.0"
+        minSdk = 24
+        targetSdk = 33
 
-        testInstrumentationRunner ="androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary= true
-        }
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
         release {
-            //minifyEnabled =false
-            proguardFiles (getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
-        sourceCompatibility =JavaVersion.VERSION_17
-        targetCompatibility= JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
         jvmTarget = "17"
     }
-    buildFeatures {
-        compose= true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion ="1.4.0"
-    }
-    packagingOptions {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-    applicationVariants.all {
-        kotlin.sourceSets {
-            getByName(name) {
-                kotlin.srcDir("build/generated/ksp/$name/kotlin")
-            }
-        }
-    }
 }
-dependencies {
-    implementation(project(":data"))
 
+dependencies {
     // material
     implementation("androidx.compose.material3:material3:1.1.0-beta01")
     // compose

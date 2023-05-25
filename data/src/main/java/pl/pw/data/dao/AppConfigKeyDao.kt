@@ -1,12 +1,12 @@
-package pl.pw.laa.data.dao
+package pl.pw.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
-import pl.pw.laa.data.model.AppConfigKey
-import pl.pw.laa.data.model.KeyNames.appConfigAnswers
+import pl.pw.data.model.AppConfigKey
+import pl.pw.data.model.KeyNames.appConfigAnswers
 
 @Dao
 interface AppConfigKeyDao {

@@ -7,14 +7,12 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import pl.pw.laa.data.Alphabet
-import pl.pw.laa.data.model.AppConfig
-import pl.pw.laa.domain.Final
-import pl.pw.laa.domain.Form
-import pl.pw.laa.domain.Initial
-import pl.pw.laa.domain.Isolated
-import pl.pw.laa.domain.Letter
-import pl.pw.laa.domain.Medial
+import pl.pw.data.model.Final
+import pl.pw.data.model.Form
+import pl.pw.data.model.Initial
+import pl.pw.data.model.Isolated
+import pl.pw.data.model.Letter
+import pl.pw.data.model.Medial
 import pl.pw.laa.presentation.common.toBoolean
 import pl.pw.laa.presentation.mediaplayer.BaseAudioViewModel
 import pl.pw.laa.presentation.mediaplayer.MediaPlayerResponse
@@ -24,7 +22,7 @@ import kotlin.random.Random
 import kotlin.random.nextInt
 
 @HiltViewModel
-class AudioTestViewModel @Inject constructor(private val appConfig: AppConfig) :
+class AudioTestViewModel @Inject constructor(private val appConfig: pl.pw.data.model.AppConfig) :
     BaseAudioViewModel() {
 
     var state by mutableStateOf(AudioTestState(null, 0, 0, null))
@@ -92,7 +90,7 @@ class AudioTestViewModel @Inject constructor(private val appConfig: AppConfig) :
     }
 
     private fun getNewState(size: Int, cheats: Boolean) {
-        val tmpList = generateLetterList(generateSequence(0, Alphabet.letters.size - 1, size))
+        val tmpList = generateLetterList(generateSequence(0, pl.pw.data.Alphabet.letters.size - 1, size))
 
         val tmpForms = mutableListOf<Form>()
 
@@ -137,7 +135,7 @@ class AudioTestViewModel @Inject constructor(private val appConfig: AppConfig) :
     private fun generateLetterList(set: Set<Int>): List<Letter> {
         val tmp = mutableListOf<Letter>()
         for (i in set) {
-            tmp.add(Alphabet.letters[i])
+            tmp.add(pl.pw.data.Alphabet.letters[i])
         }
         return tmp
     }

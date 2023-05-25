@@ -9,18 +9,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import pl.pw.laa.data.Alphabet
 import pl.pw.laa.presentation.alphabet.components.AlphabetTableColumNamesRow
 import pl.pw.laa.presentation.alphabet.components.AlphabetTableRow
-import pl.pw.laa.presentation.alphabet.components.RowDivider
+import pl.pw.laa.presentation.common.componets.RowDivider
 import pl.pw.laa.presentation.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
@@ -46,7 +43,7 @@ fun AlphabetTable(
         AlphabetTableColumNamesRow()
         RowDivider()
         LazyColumn(Modifier.fillMaxSize()) {
-            items(items = Alphabet.letters) {
+            items(items = pl.pw.data.Alphabet.letters) {
                 AlphabetTableRow(letter = it, onEvent, showIcon)
                 RowDivider()
             }

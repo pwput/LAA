@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import pl.pw.laa.R
-import pl.pw.laa.domain.Letter
+import pl.pw.data.model.Letter
 import pl.pw.laa.presentation.alphabet.AlphabetTableEvent
 import pl.pw.laa.presentation.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme

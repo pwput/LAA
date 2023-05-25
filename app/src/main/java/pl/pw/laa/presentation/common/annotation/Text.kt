@@ -14,8 +14,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
-import pl.pw.laa.domain.Form
-import pl.pw.laa.domain.Letter
+import pl.pw.data.model.Form
+import pl.pw.data.model.Letter
 
 @Composable
 fun Text(

@@ -1,7 +1,10 @@
-package pl.pw.laa.data
+package pl.pw.data
 
-import pl.pw.laa.R
-import pl.pw.laa.domain.*
+import pl.pw.data.model.Final
+import pl.pw.data.model.Initial
+import pl.pw.data.model.Isolated
+import pl.pw.data.model.Letter
+import pl.pw.data.model.Medial
 
 object Alphabet {
 
