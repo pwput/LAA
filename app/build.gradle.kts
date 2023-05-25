@@ -94,7 +94,7 @@ dependencies {
     implementation("com.jakewharton.timber:timber:5.0.1")
     // compose directions
     implementation("io.github.raamcosta.compose-destinations:animations-core:${Versions.destinations_version}")
-    kapt("io.github.raamcosta.compose-destinations:ksp:${Versions.destinations_version}")
+    ksp("io.github.raamcosta.compose-destinations:ksp:${Versions.destinations_version}")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
