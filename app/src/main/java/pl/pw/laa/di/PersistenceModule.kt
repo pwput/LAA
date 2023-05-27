@@ -8,6 +8,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import pl.pw.laa.R
+import pl.pw.laa.data.dao.AppConfigKeyDao
+import pl.pw.laa.data.presistence.AppConfigKeyRepository
+import pl.pw.laa.data.presistence.AppDatabase
+import pl.pw.laa.data.repository.AppConfigKeyRepositoryImpl
 import javax.inject.Singleton
 
 @Module
@@ -16,11 +20,11 @@ object PersistenceModule {
 
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext appContext: Context): pl.pw.data.presistence.AppDatabase {
+    fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
         return Room
             .databaseBuilder(
                 appContext,
-                pl.pw.data.presistence.AppDatabase::class.java,
+                AppDatabase::class.java,
                 appContext.getString(R.string.database),
             )
             .fallbackToDestructiveMigration()
@@ -29,13 +33,13 @@ object PersistenceModule {
 
     @Provides
     @Singleton
-    fun provideApplicationSettingsDao(appDatabase: pl.pw.data.presistence.AppDatabase): pl.pw.data.dao.AppConfigKeyDao {
+    fun provideApplicationSettingsDao(appDatabase: AppDatabase): AppConfigKeyDao {
         return appDatabase.applicationSettingsDao()
     }
 
     @Provides
     @Singleton
-    fun provideAppConfigKeyRepository(appConfigKeyDao: pl.pw.data.dao.AppConfigKeyDao): pl.pw.data.presistence.AppConfigKeyRepository {
-        return pl.pw.data.repository.AppConfigKeyRepositoryImpl(appConfigKeyDao)
+    fun provideAppConfigKeyRepository(appConfigKeyDao: AppConfigKeyDao): AppConfigKeyRepository {
+        return AppConfigKeyRepositoryImpl(appConfigKeyDao)
     }
 }

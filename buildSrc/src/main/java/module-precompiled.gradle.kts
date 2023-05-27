@@ -25,7 +25,7 @@ plugins {
   //  id("com.google.devtools.ksp") version "1.8.0-1.0.9"
 }
     android {
-        namespace ="pl.pw.laa"
+        namespace ="pl.pw.laa.${name}"
         compileSdk =33
         defaultConfig {
             minSdk= 24

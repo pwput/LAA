@@ -19,9 +19,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import pl.pw.data.model.Form
+import pl.pw.laa.data.Alphabet
+import pl.pw.laa.data.model.Form
 import pl.pw.laa.presentation.audioTest.components.AnswersBox
 import pl.pw.laa.presentation.audioTest.components.AudioTestTopBar
+import pl.pw.laa.presentation.audioTest.components.QuestionBox
 import pl.pw.laa.presentation.common.Orientation
 import pl.pw.laa.presentation.common.componets.LoadingScreen
 import pl.pw.laa.presentation.mediaplayer.MediaPlayerResponse
@@ -108,31 +110,31 @@ fun QuestionScreenPortrait(
 
 private val mockedState4 = AudioTestState(
     listOf(
-        pl.pw.data.Alphabet.letters[0].final,
-        pl.pw.data.Alphabet.letters[0].final,
-        pl.pw.data.Alphabet.letters[0].final,
-        pl.pw.data.Alphabet.letters[0].final,
+        Alphabet.letters[0].final,
+        Alphabet.letters[0].final,
+        Alphabet.letters[0].final,
+        Alphabet.letters[0].final,
     ),
     1,
     1,
-    rightAnswer = pl.pw.data.Alphabet.letters[0],
+    rightAnswer = Alphabet.letters[0],
     false,
 )
 
 private val mockedState8 = AudioTestState(
     listOf(
-        pl.pw.data.Alphabet.letters[0].final,
-        pl.pw.data.Alphabet.letters[0].final,
-        pl.pw.data.Alphabet.letters[0].final,
-        pl.pw.data.Alphabet.letters[0].final,
-        pl.pw.data.Alphabet.letters[0].final,
-        pl.pw.data.Alphabet.letters[0].final,
-        pl.pw.data.Alphabet.letters[0].final,
-        pl.pw.data.Alphabet.letters[0].final,
+        Alphabet.letters[0].final,
+        Alphabet.letters[0].final,
+        Alphabet.letters[0].final,
+        Alphabet.letters[0].final,
+        Alphabet.letters[0].final,
+        Alphabet.letters[0].final,
+        Alphabet.letters[0].final,
+        Alphabet.letters[0].final,
     ),
     1,
     1,
-    rightAnswer = pl.pw.data.Alphabet.letters[0],
+    rightAnswer = Alphabet.letters[0],
     false,
 )
 

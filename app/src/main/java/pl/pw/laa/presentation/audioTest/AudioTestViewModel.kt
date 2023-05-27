@@ -6,13 +6,14 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import pl.pw.data.model.Final
-import pl.pw.data.model.Form
-import pl.pw.data.model.Initial
-import pl.pw.data.model.Isolated
-import pl.pw.data.model.Letter
-import pl.pw.data.model.Medial
-import pl.pw.data.presistence.AppConfig
+import pl.pw.laa.data.Alphabet
+import pl.pw.laa.data.model.Final
+import pl.pw.laa.data.model.Form
+import pl.pw.laa.data.model.Initial
+import pl.pw.laa.data.model.Isolated
+import pl.pw.laa.data.model.Letter
+import pl.pw.laa.data.model.Medial
+import pl.pw.laa.data.presistence.AppConfig
 import pl.pw.laa.presentation.mediaplayer.BaseAudioViewModel
 import pl.pw.laa.presentation.mediaplayer.MediaPlayerResponse
 import timber.log.Timber
@@ -89,7 +90,7 @@ class AudioTestViewModel @Inject constructor(private val appConfig: AppConfig) :
     }
 
     private fun getNewState(size: Int, cheats: Boolean) {
-        val tmpList = generateLetterList(generateSequence(0, pl.pw.data.Alphabet.letters.size - 1, size))
+        val tmpList = generateLetterList(generateSequence(0, Alphabet.letters.size - 1, size))
 
         val tmpForms = mutableListOf<Form>()
 
@@ -134,7 +135,7 @@ class AudioTestViewModel @Inject constructor(private val appConfig: AppConfig) :
     private fun generateLetterList(set: Set<Int>): List<Letter> {
         val tmp = mutableListOf<Letter>()
         for (i in set) {
-            tmp.add(pl.pw.data.Alphabet.letters[i])
+            tmp.add(Alphabet.letters[i])
         }
         return tmp
     }

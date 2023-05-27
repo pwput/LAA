@@ -15,7 +15,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import pl.pw.data.model.Form
+import pl.pw.laa.data.Alphabet
+import pl.pw.laa.data.model.Form
 import pl.pw.laa.presentation.audioTest.AudioTestState
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
@@ -64,10 +65,10 @@ fun AnswersBoxPreview() {
         Surface() {
             AnswersBox(
                 state = AudioTestState(
-                    listOf(pl.pw.data.Alphabet.letters[0].final, pl.pw.data.Alphabet.letters[1].final),
+                    listOf(Alphabet.letters[0].final, Alphabet.letters[1].final),
                     1,
                     2,
-                    pl.pw.data.Alphabet.letters[1],
+                    Alphabet.letters[1],
                 ),
                 onAnswer = {},
             )

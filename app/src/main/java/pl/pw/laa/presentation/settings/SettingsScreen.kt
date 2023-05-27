@@ -15,12 +15,13 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import pl.pw.data.model.AppConfigKey
-import pl.pw.data.presistence.KeyNames
+import pl.pw.laa.data.model.AppConfigKey
+import pl.pw.laa.data.presistence.KeyNames
 import pl.pw.laa.presentation.common.componets.RowDivider
 import pl.pw.laa.presentation.common.toInt
 import pl.pw.laa.presentation.settings.components.SettingsCheckBox
 import pl.pw.laa.presentation.settings.components.SettingsChipGroup
+import pl.pw.laa.presentation.settings.components.SettingsNumberList
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Destination
