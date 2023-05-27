@@ -22,6 +22,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
+  //  id("com.google.devtools.ksp") version "1.8.0-1.0.9"
 }
     android {
         namespace ="pl.pw.laa"
@@ -97,9 +98,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines_version}")
     // timber log
     implementation("com.jakewharton.timber:timber:5.0.1")
-    // compose directions
-    implementation("io.github.raamcosta.compose-destinations:animations-core:${Versions.destinations_version}")
-    kapt("io.github.raamcosta.compose-destinations:ksp:${Versions.destinations_version}")
+
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

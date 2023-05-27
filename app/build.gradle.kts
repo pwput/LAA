@@ -1,7 +1,7 @@
 plugins {
     id ("com.android.application")
     id ("org.jetbrains.kotlin.android")
-    //id ("com.google.devtools.ksp")
+    id("com.google.devtools.ksp") version "1.8.0-1.0.9"
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
 }
@@ -91,7 +91,7 @@ dependencies {
     implementation("com.jakewharton.timber:timber:5.0.1")
     // compose directions
     implementation("io.github.raamcosta.compose-destinations:animations-core:${Versions.destinations_version}")
-    kapt("io.github.raamcosta.compose-destinations:ksp:${Versions.destinations_version}")
+    ksp("io.github.raamcosta.compose-destinations:ksp:${Versions.destinations_version}")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
