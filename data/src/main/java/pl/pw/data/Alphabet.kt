@@ -5,6 +5,7 @@ import pl.pw.data.model.Initial
 import pl.pw.data.model.Isolated
 import pl.pw.data.model.Letter
 import pl.pw.data.model.Medial
+import pl.pw.laa.R
 
 object Alphabet {
 

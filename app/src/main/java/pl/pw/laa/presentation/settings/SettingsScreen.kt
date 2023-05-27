@@ -15,7 +15,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import pl.pw.data.R
 import pl.pw.data.model.AppConfigKey
 import pl.pw.data.presistence.KeyNames
 import pl.pw.laa.presentation.common.componets.RowDivider
@@ -24,7 +23,6 @@ import pl.pw.laa.presentation.settings.components.SettingsCheckBox
 import pl.pw.laa.presentation.settings.components.SettingsChipGroup
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
-@OptIn(ExperimentalLayoutApi::class)
 @Destination
 @Composable
 fun SettingsScreen(
@@ -59,7 +57,7 @@ fun Settings(
         SettingsNumberList(
             key = AppConfigKey(
                 KeyNames.NumberOfAnswers.value,
-                context.getString(R.string.app_config_answers_display_name),
+                context.getString(KeyNames.NumberOfAnswers.resId),
                 state.numbers
             ),
             expanded = expanded,

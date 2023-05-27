@@ -1,63 +1,71 @@
-plugins {
-    id ("com.android.application")
-    id ("org.jetbrains.kotlin.android")
-    //id ("com.google.devtools.ksp")
-    kotlin("kapt")
-    id("dagger.hilt.android.plugin")
+import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.buildscript
+import org.gradle.kotlin.dsl.repositories
+import org.gradle.kotlin.dsl.version
+
+allprojects{
+    buildscript {
+        repositories {
+            google()
+            mavenCentral()
+        }
+        dependencies {
+            classpath("com.android.tools.build:gradle:8.0.2")
+            classpath ("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
+            classpath("com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt_version}")
+        }
+    }
 }
 
-android {
-    namespace ="pl.pw.laa"
-    compileSdk =33
-    defaultConfig {
-        applicationId ="pl.pw.laa"
-        minSdk= 24
-        versionCode= 1
-        versionName ="1.0"
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    id("com.android.library")
+    id("org.jetbrains.kotlin.android")
+    kotlin("kapt")
+}
+    android {
+        namespace ="pl.pw.laa"
+        compileSdk =33
+        defaultConfig {
+            minSdk= 24
 
-        testInstrumentationRunner ="androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary= true
-        }
-    }
-
-    buildTypes {
-        release {
-            //minifyEnabled =false
-            proguardFiles (getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
-    }
-    compileOptions {
-        sourceCompatibility =JavaVersion.VERSION_17
-        targetCompatibility= JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-    buildFeatures {
-        compose= true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion ="1.4.0"
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-    applicationVariants.all {
-        kotlin.sourceSets {
-            getByName(name) {
-                kotlin.srcDir("build/generated/ksp/$name/kotlin")
+            testInstrumentationRunner ="androidx.test.runner.AndroidJUnitRunner"
+            vectorDrawables {
+                useSupportLibrary= true
             }
         }
-    }
-}
-dependencies {
-    implementation(project(":data"))
 
+        buildTypes {
+            release {
+                //minifyEnabled =false
+                proguardFiles (getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            }
+        }
+        compileOptions {
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility= JavaVersion.VERSION_17
+        }
+        kotlinOptions {
+            jvmTarget = "17"
+        }
+        buildFeatures {
+            compose= true
+        }
+        composeOptions {
+            kotlinCompilerExtensionVersion ="1.4.0"
+        }
+        packaging {
+            resources {
+                excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            }
+        }
+
+    }
+
+
+dependencies {
     // material
-    implementation("androidx.compose.material3:material3:1.1.0-beta01")
+    implementation("androidx.compose.material3:material3:1.2.0-alpha02")
     // compose
     implementation("androidx.compose.ui:ui:${Versions.compose_version}")
     implementation("androidx.activity:activity-compose:${Versions.activity_version}")

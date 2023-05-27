@@ -3,8 +3,8 @@ package pl.pw.data.presistence
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.first
-import pl.pw.data.R
 import pl.pw.data.model.AppConfigKey
+import pl.pw.laa.R
 import javax.inject.Inject
 import javax.inject.Singleton
 

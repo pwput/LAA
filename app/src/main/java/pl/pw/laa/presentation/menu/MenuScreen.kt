@@ -48,7 +48,7 @@ fun MenuScreenLandscape(list: List<MenuItem>, navigator: DestinationsNavigator) 
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.background)
                 .padding(64.dp),
-            verticalAlignment = Alignment.CenterVertically,
+            verticalArrangement = Arrangement.Center,
         ) {
             list.forEach {
                 MenuButton(

@@ -12,7 +12,3 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-
-rootProject.name = "learnArabicAlphabet"
-include (":app")
-include(":data")
