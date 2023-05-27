@@ -8,10 +8,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import pl.pw.laa.R
-import pl.pw.data.dao.AppConfigKeyDao
-import pl.pw.data.repository.AppConfigKeyRepositoryImpl
-import pl.pw.data.presistence.AppDatabase
-import pl.pw.data.presistence.AppConfigKeyRepository
 import javax.inject.Singleton
 
 @Module

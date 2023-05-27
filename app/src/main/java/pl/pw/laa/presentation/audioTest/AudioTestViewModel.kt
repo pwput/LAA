@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import pl.pw.data.model.Final
 import pl.pw.data.model.Form
@@ -13,7 +12,7 @@ import pl.pw.data.model.Initial
 import pl.pw.data.model.Isolated
 import pl.pw.data.model.Letter
 import pl.pw.data.model.Medial
-import pl.pw.laa.presentation.common.toBoolean
+import pl.pw.data.presistence.AppConfig
 import pl.pw.laa.presentation.mediaplayer.BaseAudioViewModel
 import pl.pw.laa.presentation.mediaplayer.MediaPlayerResponse
 import timber.log.Timber
@@ -22,7 +21,7 @@ import kotlin.random.Random
 import kotlin.random.nextInt
 
 @HiltViewModel
-class AudioTestViewModel @Inject constructor(private val appConfig: pl.pw.data.model.AppConfig) :
+class AudioTestViewModel @Inject constructor(private val appConfig: AppConfig) :
     BaseAudioViewModel() {
 
     var state by mutableStateOf(AudioTestState(null, 0, 0, null))
@@ -46,13 +45,13 @@ class AudioTestViewModel @Inject constructor(private val appConfig: pl.pw.data.m
     private fun fetchData() {
         viewModelScope.launch {
             setupViewModel(
-                appConfig.answers.first().value,
-                appConfig.cheats.first().value.toBoolean(),
-                appConfig.tips.first().value.toBoolean(),
-                appConfig.initial.first().value.toBoolean(),
-                appConfig.medial.first().value.toBoolean(),
-                appConfig.final.first().value.toBoolean(),
-                appConfig.isolated.first().value.toBoolean(),
+                appConfig.answers.getValue(),
+                appConfig.cheats.getValue(),
+                appConfig.tips.getValue(),
+                appConfig.initial.getValue(),
+                appConfig.medial.getValue(),
+                appConfig.final.getValue(),
+                appConfig.isolated.getValue(),
             )
             stopLoading()
         }

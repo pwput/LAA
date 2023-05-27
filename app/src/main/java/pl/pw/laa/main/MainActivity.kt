@@ -1,30 +1,28 @@
-package pl.pw.laa.presentation.main
+package pl.pw.laa.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material3.*
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.ramcosta.composedestinations.DestinationsNavHost
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import pl.pw.data.repository.AppConfigKeyRepositoryImpl
 import pl.pw.laa.presentation.NavGraphs
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
-    lateinit var appConfigRepository: AppConfigKeyRepositoryImpl
-
+class MainActivity @Inject constructor() : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.plant(Timber.DebugTree())
+
+
         setContent {
-            LearnArabicAlphabetTheme {
+            LearnArabicAlphabetTheme (darkTheme = isSystemInDarkTheme()){
                 DestinationsNavHost(navGraph = NavGraphs.root)
             }
         }

@@ -7,25 +7,25 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import pl.pw.data.model.AppConfigKey
-import pl.pw.data.model.KeyNames.appConfigIsFinalTested
-import pl.pw.data.model.KeyNames.appConfigIsInitialTested
-import pl.pw.data.model.KeyNames.appConfigIsMedialTested
+import pl.pw.data.presistence.KeyNames
 import pl.pw.laa.presentation.common.toBoolean
 import pl.pw.laa.presentation.settings.SettingsEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsChip(
-    key: AppConfigKey?,
+    key: KeyNames,
+    value: Int,
     onEvent: (SettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     FilterChip(
         modifier = modifier,
-        selected = key!!.value.toBoolean(),
-        onClick = { onEvent(event(key)) },
-        label = { Text(text = key.name) },
+        selected = value.toBoolean(),
+        onClick = { onEvent(event(AppConfigKey(key.value,"",value))) },
+        label = { Text(stringResource(id = key.resId)) },
         colors = FilterChipDefaults.filterChipColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant,
             labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -37,8 +37,8 @@ fun SettingsChip(
 
 fun event(key: AppConfigKey) =
     when (key.key) {
-        appConfigIsInitialTested -> SettingsEvent.SetisInitialTested(!key.value.toBoolean())
-        appConfigIsMedialTested -> SettingsEvent.SetisMedialTested(!key.value.toBoolean())
-        appConfigIsFinalTested -> SettingsEvent.SetisFinalTested(!key.value.toBoolean())
+        KeyNames.IsInitial.value -> SettingsEvent.SetisInitialTested(!key.value.toBoolean())
+        KeyNames.IsMedial.value -> SettingsEvent.SetisMedialTested(!key.value.toBoolean())
+        KeyNames.IsFinal.value -> SettingsEvent.SetisFinalTested(!key.value.toBoolean())
         else -> SettingsEvent.SetisIsolatedTested(!key.value.toBoolean())
     }

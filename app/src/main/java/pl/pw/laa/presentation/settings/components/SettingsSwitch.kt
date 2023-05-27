@@ -9,18 +9,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import pl.pw.data.model.AppConfigKey
-import pl.pw.data.model.KeyNames.appConfigCheats
+import androidx.compose.ui.res.stringResource
+import pl.pw.data.presistence.KeyNames
 import pl.pw.laa.presentation.common.toBoolean
 import pl.pw.laa.presentation.settings.SettingsEvent
 import timber.log.Timber
 
 @Composable
 fun SettingsCheckBox(
-    key: AppConfigKey?,
+    key: KeyNames,
+    value : Int,
     onEvent: (SettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
-    text: String? = key?.key,
 ) {
     Row(
         Modifier.fillMaxWidth(),
@@ -28,16 +28,16 @@ fun SettingsCheckBox(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
-            text = text ?: "null",
+            stringResource(id = key.resId),
             modifier = modifier,
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onBackground,
         )
         Switch(
-            checked = key?.value?.toBoolean() ?: false,
+            checked = value.toBoolean(),
             onCheckedChange = {
-                Timber.d("Clicked at Settings Check Box for key: ${key?.key}, current value:${key?.value?.toBoolean()}, changing to: $it")
-                if ((key?.key ?: "") == appConfigCheats) {
+                Timber.d("Clicked at Settings Check Box for key: ${key}, current value:${value?.toBoolean()}, changing to: $it")
+                if ((key) == KeyNames.AreCheats) {
                     onEvent(SettingsEvent.SetAreCheatsOn(it))
                 } else {
                     onEvent(SettingsEvent.SetAreTipsOn(it))

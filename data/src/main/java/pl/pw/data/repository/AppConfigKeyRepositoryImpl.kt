@@ -3,9 +3,9 @@ package pl.pw.data.repository
 import kotlinx.coroutines.flow.Flow
 import pl.pw.data.dao.AppConfigKeyDao
 import pl.pw.data.model.AppConfigKey
-import pl.pw.data.model.DefaultKeys
 
 import pl.pw.data.presistence.AppConfigKeyRepository
+import pl.pw.data.presistence.DefaultKeys
 import timber.log.Timber
 
 class AppConfigKeyRepositoryImpl(

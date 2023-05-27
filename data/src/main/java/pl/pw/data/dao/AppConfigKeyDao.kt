@@ -6,7 +6,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 import pl.pw.data.model.AppConfigKey
-import pl.pw.data.model.KeyNames.appConfigAnswers
 
 @Dao
 interface AppConfigKeyDao {
@@ -16,7 +15,7 @@ interface AppConfigKeyDao {
     @Query("SELECT * FROM AppConfigKey WHERE key = :name_")
     fun getAppSettingsKey(name_: String): Flow<AppConfigKey>
 
-    @Query("SELECT value FROM AppConfigKey WHERE key = '$appConfigAnswers'")
+    @Query("SELECT value FROM AppConfigKey WHERE key = 'numberOfAnswers'")
     fun getNumber(): Int
 
     @Query("SELECT * FROM AppConfigKey ")
