@@ -7,16 +7,15 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import pl.pw.data.presistence.AppConfig
-import pl.pw.data.presistence.AppConfigKeyRepository
+import pl.pw.laa.data.presistence.AppConfig
+import pl.pw.laa.data.presistence.AppConfigKeyRepository
 import pl.pw.laa.presentation.common.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    val appConfig: AppConfig,
-    private val repository: AppConfigKeyRepository,
+    private val appConfig: AppConfig,
 ) : BaseViewModel() {
 
     var state by mutableStateOf(

@@ -15,7 +15,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import pl.pw.data.model.Form
+import pl.pw.laa.data.Alphabet
+import pl.pw.laa.data.model.Form
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Composable
@@ -48,7 +49,7 @@ fun AnswerButton(
 fun AnswerButtonPreview() {
     LearnArabicAlphabetTheme() {
         AnswerButton(
-            form = pl.pw.data.Alphabet.letters[0].final,
+            form = Alphabet.letters[0].final,
             modifier = Modifier.background(Color.Green).size(100.dp),
             onClick = {},
         )

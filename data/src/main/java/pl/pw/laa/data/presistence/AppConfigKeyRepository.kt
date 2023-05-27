@@ -1,7 +1,7 @@
-package pl.pw.data.presistence
+package pl.pw.laa.data.presistence
 
 import kotlinx.coroutines.flow.Flow
-import pl.pw.data.model.AppConfigKey
+import pl.pw.laa.data.model.AppConfigKey
 
 interface AppConfigKeyRepository {
     fun getAppConfigKey(keyName: String): Flow<AppConfigKey>

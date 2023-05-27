@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import pl.pw.laa.data.Alphabet
 import pl.pw.laa.presentation.alphabet.components.AlphabetTableColumNamesRow
 import pl.pw.laa.presentation.alphabet.components.AlphabetTableRow
 import pl.pw.laa.presentation.common.componets.RowDivider
@@ -43,7 +44,7 @@ fun AlphabetTable(
         AlphabetTableColumNamesRow()
         RowDivider()
         LazyColumn(Modifier.fillMaxSize()) {
-            items(items = pl.pw.data.Alphabet.letters) {
+            items(items = Alphabet.letters) {
                 AlphabetTableRow(letter = it, onEvent, showIcon)
                 RowDivider()
             }

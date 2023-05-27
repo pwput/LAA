@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.audioTest
+package pl.pw.laa.presentation.audioTest.components
 
 import DevicePreviewsDarkPortrait
 import DevicePreviewsLightPortrait
@@ -26,7 +26,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import pl.pw.data.model.Letter
+import pl.pw.laa.data.Alphabet
+import pl.pw.laa.data.model.Letter
+import pl.pw.laa.presentation.audioTest.AudioTestEvent
 import pl.pw.laa.presentation.common.annotation.Text
 import pl.pw.laa.presentation.common.componets.AudioIcon
 import pl.pw.laa.presentation.mediaplayer.MediaPlayerResponse
@@ -103,7 +105,7 @@ fun QuestionBox(
 fun QuestionBoxPreviewNoIcon() {
     LearnArabicAlphabetTheme() {
         QuestionBox(
-            pl.pw.data.Alphabet.letters[1],
+            Alphabet.letters[1],
             true,
             { null },
         )
@@ -116,7 +118,7 @@ fun QuestionBoxPreviewNoIcon() {
 fun QuestionBoxPreviewIcon() {
     LearnArabicAlphabetTheme() {
         QuestionBox(
-            pl.pw.data.Alphabet.letters[1],
+            Alphabet.letters[1],
             false,
             { null },
         )

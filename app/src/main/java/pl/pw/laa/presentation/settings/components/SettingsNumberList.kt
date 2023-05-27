@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.settings
+package pl.pw.laa.presentation.settings.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -17,7 +17,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import pl.pw.data.model.AppConfigKey
+import pl.pw.laa.data.model.AppConfigKey
+import pl.pw.laa.presentation.settings.SettingsEvent
 import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)

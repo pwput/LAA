@@ -1,10 +1,10 @@
-package pl.pw.data.presistence
+package pl.pw.laa.data.presistence
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.first
-import pl.pw.data.model.AppConfigKey
-import pl.pw.laa.R
+import pl.pw.laa.data.R
+import pl.pw.laa.data.model.AppConfigKey
 import javax.inject.Inject
 import javax.inject.Singleton
 

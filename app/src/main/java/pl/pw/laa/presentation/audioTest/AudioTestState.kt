@@ -1,7 +1,7 @@
 package pl.pw.laa.presentation.audioTest
 
-import pl.pw.data.model.Form
-import pl.pw.data.model.Letter
+import pl.pw.laa.data.model.Form
+import pl.pw.laa.data.model.Letter
 
 data class AudioTestState(
     val formsList: List<Form>? = mutableListOf(),
