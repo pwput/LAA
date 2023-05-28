@@ -1,8 +1,14 @@
+import pl.pw.buildsrc.Dependencies
+import pl.pw.buildsrc.Dependencies.Kotlinx
+import pl.pw.buildsrc.Dependencies.Androidx
+import pl.pw.buildsrc.Dependencies.ComposeDestinations
+import pl.pw.buildsrc.Dependencies.Dagger
+
 plugins {
     id ("com.android.application")
+    kotlin("kapt")
     id ("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp") version "1.8.0-1.0.9"
-    kotlin("kapt")
     id("dagger.hilt.android.plugin")
 }
 
@@ -54,52 +60,52 @@ android {
     }
 }
 dependencies {
-    implementation(project(pl.pw.buildsrc.Dependencies.Project.data))
-    implementation(project(pl.pw.buildsrc.Dependencies.Project.common))
-
+    // project
+    implementation(project(Dependencies.Project.data))
+    implementation(project(Dependencies.Project.common))
     // material
-    implementation("androidx.compose.material3:material3:1.1.0-beta01")
+    implementation(Androidx.Compose.material3)
     // compose
-    implementation("androidx.compose.ui:ui:${Versions.compose_version}")
-    implementation("androidx.activity:activity-compose:${Versions.activity_version}")
-    implementation("androidx.compose.material:material:${Versions.compose_version}")
-    implementation("androidx.compose.material:material-icons-extended:${Versions.compose_version}")
-    implementation("androidx.compose.foundation:foundation:${Versions.compose_version}")
-    implementation("androidx.compose.foundation:foundation-layout:${Versions.compose_version}")
-    implementation("androidx.compose.animation:animation:${Versions.compose_version}")
-    implementation("androidx.compose.runtime:runtime:${Versions.compose_version}")
-    implementation("androidx.compose.runtime:runtime-livedata:${Versions.compose_version}")
-    implementation("androidx.navigation:navigation-compose:${Versions.compose_NavVersion}")
-    implementation("androidx.compose.ui:ui-tooling:${Versions.compose_version}")
-    implementation("androidx.constraintlayout:constraintlayout-compose:${Versions.constraint_version}")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:${Versions.compose_version}")
+    implementation(Androidx.Compose.ui)
+    implementation(Androidx.Compose.material)
+    implementation(Androidx.Compose.materialIconsExtended)
+    implementation(Androidx.Compose.foundation)
+    implementation(Androidx.Compose.foundationLayout)
+    implementation(Androidx.Compose.animation)
+    implementation(Androidx.Compose.runtime)
+    implementation(Androidx.Compose.runtimeLivedata)
+    implementation(Androidx.Compose.uiTooling)
+    // androidx
+    implementation(Androidx.startup)
+    implementation(Androidx.navigationCompose)
+    implementation(Androidx.constraintlayoutCompose)
+    implementation(Androidx.activityCompose)
+    implementation(Androidx.hiltNavigationCompose)
     // Room
-    implementation("androidx.room:room-runtime:${Versions.room_version}")
-    annotationProcessor("androidx.room:room-compiler:${Versions.room_version}")
-    kapt("androidx.room:room-compiler:${Versions.room_version}")
-    implementation("androidx.room:room-ktx:${Versions.room_version}")
+    implementation(Androidx.Room.runtime)
+    annotationProcessor(Androidx.Room.compiler)
+    kapt(Androidx.Room.compiler)
+    implementation(Androidx.Room.ktx)
     // hilt
-    implementation("com.google.dagger:hilt-android:${Versions.hilt_version}")
-    implementation("androidx.hilt:hilt-navigation-compose:${Versions.hiltComposeNavigation}")
-    kapt("com.google.dagger:hilt-compiler:${Versions.hilt_version}")
-    androidTestImplementation("com.google.dagger:hilt-android-testing:${Versions.hilt_version}")
-    kaptAndroidTest("com.google.dagger:hilt-compiler:${Versions.hilt_version}")
+    implementation(Dagger.hilt)
+    kapt(Dagger.hiltCompiler)
     // coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines_version}")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines_version}")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines_version}")
+    implementation(Kotlinx.Coroutines.android)
     // timber log
-    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation(Dependencies.Others.timber)
     // compose directions
-    implementation("io.github.raamcosta.compose-destinations:animations-core:${Versions.destinations_version}")
-    ksp("io.github.raamcosta.compose-destinations:ksp:${Versions.destinations_version}")
+    implementation(ComposeDestinations.animationsCore)
+    ksp(ComposeDestinations.ksp)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:${Versions.compose_version}")
-    debugImplementation("androidx.compose.ui:ui-tooling:${Versions.compose_version}")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:${Versions.compose_version}")
-
-    implementation("androidx.startup:startup-runtime:1.1.1")
+    //Test
+    testImplementation(Dependencies.Others.junit)
+    testImplementation(Kotlinx.Coroutines.android)
+    testImplementation(Kotlinx.Coroutines.test)
+    androidTestImplementation(Androidx.Compose.uiTestJunit4)
+    androidTestImplementation(Dagger.hiltAndroidTesting)
+    androidTestImplementation(Androidx.junit)
+    androidTestImplementation(Androidx.espresso)
+    debugImplementation(Androidx.Compose.uiTooling)
+    debugImplementation(Androidx.Compose.uiTestManifest)
+    kaptAndroidTest(Dagger.hiltCompiler)
 }
