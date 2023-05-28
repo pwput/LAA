@@ -4,6 +4,10 @@ object Dependencies {
     object Project {
         const val data = ":data"
         const val common = ":common"
+        const val alphabetTable = ":arabicalphabettable"
+        const val audioQuiz = ":audioquiz"
+        const val menu = ":menu"
+        const val settings = ":settings"
     }
 
     object Others {

@@ -8,7 +8,7 @@ plugins {
     id ("com.android.application")
     kotlin("kapt")
     id ("org.jetbrains.kotlin.android")
-    id("com.google.devtools.ksp") version "1.8.0-1.0.9"
+    id("com.google.devtools.ksp")
     id("dagger.hilt.android.plugin")
 }
 
@@ -58,11 +58,16 @@ android {
             }
         }
     }
+
 }
 dependencies {
     // project
     implementation(project(Dependencies.Project.data))
     implementation(project(Dependencies.Project.common))
+    implementation(project(Dependencies.Project.alphabetTable))
+    implementation(project(Dependencies.Project.audioQuiz))
+    implementation(project(Dependencies.Project.settings))
+    implementation(project(Dependencies.Project.menu))
     // material
     implementation(Androidx.Compose.material3)
     // compose

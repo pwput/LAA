@@ -9,6 +9,7 @@ allprojects{
         repositories {
             google()
             mavenCentral()
+            gradlePluginPortal()
         }
         dependencies {
             classpath("com.android.tools.build:gradle:8.0.2")
@@ -23,7 +24,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
-  //  id("com.google.devtools.ksp") version "1.8.0-1.0.9"
+    id("com.google.devtools.ksp")
 }
     android {
         namespace ="pl.pw.laa.${name}"
@@ -62,6 +63,11 @@ plugins {
             }
         }
 
+//        ksp {
+//            arg("compose-destinations.mode", "destinations")
+//            arg("compose-destinations.moduleName", name)
+//        }
+
     }
 
 
@@ -91,7 +97,6 @@ dependencies {
     implementation(Dependencies.Kotlinx.Coroutines.android)
     // timber log
     implementation(Dependencies.Others.timber)
-
 
     //Test
     testImplementation(Dependencies.Others.junit)

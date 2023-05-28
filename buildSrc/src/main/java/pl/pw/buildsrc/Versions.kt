@@ -8,7 +8,7 @@ object Versions{
     const val compose = "1.4.0-rc01"
     const val lifecycle = "2.6.0"
     const val arch_version = "2.2.0"
-    const val destinations = "1.8.36-beta"
+    const val destinations = "1.9.42-beta"
     const val kotlin = ""
     const val coroutines = "1.6.4"
     const val hilt = "2.44"

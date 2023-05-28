@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="alphabet_table_top_row_name">name</string>
+    <string name="alphabet_table_top_row_isolated">isolated</string>
+    <string name="alphabet_table_top_row_initial">initial</string>
+    <string name="alphabet_table_top_row_medial">medial</string>
+    <string name="alphabet_table_top_row_final">final</string>
+</resources>
