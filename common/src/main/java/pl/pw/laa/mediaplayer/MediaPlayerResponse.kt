@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.mediaplayer
+package pl.pw.laa.mediaplayer
 
 sealed interface MediaPlayerResponse {
     object Success : MediaPlayerResponse

@@ -1,7 +1,6 @@
 package pl.pw.laa.presentation.audioTest.components
 
-import DevicePreviewsDarkPortrait
-import DevicePreviewsLightPortrait
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -26,12 +25,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import pl.pw.laa.Text
 import pl.pw.laa.data.Alphabet
 import pl.pw.laa.data.model.Letter
 import pl.pw.laa.presentation.audioTest.AudioTestEvent
-import pl.pw.laa.presentation.common.annotation.Text
-import pl.pw.laa.presentation.common.componets.AudioIcon
-import pl.pw.laa.presentation.mediaplayer.MediaPlayerResponse
+import pl.pw.laa.annotation.preview.DevicePreviewsDarkPortrait
+import pl.pw.laa.annotation.preview.DevicePreviewsLightPortrait
+import pl.pw.laa.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Composable
@@ -93,7 +93,7 @@ fun QuestionBox(
                 )
             }
             Box(modifier = Modifier.weight(1f).fillMaxSize(), contentAlignment = Alignment.Center) {
-                AudioIcon(visible, Modifier.fillMaxSize())
+                pl.pw.laa.componets.AudioIcon(visible, Modifier.fillMaxSize())
             }
         }
     }

@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.common.componets
+package pl.pw.laa.componets
 
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme

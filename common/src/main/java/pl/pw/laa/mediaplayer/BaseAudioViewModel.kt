@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.mediaplayer
+package pl.pw.laa.mediaplayer
 
 import android.content.Context
 import android.media.MediaPlayer
@@ -6,13 +6,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import dagger.hilt.android.lifecycle.HiltViewModel
-import pl.pw.laa.presentation.common.BaseViewModel
+import pl.pw.laa.BaseViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 open class BaseAudioViewModel @Inject constructor() :
-    BaseViewModel() {
+    pl.pw.laa.BaseViewModel() {
 
     private var raw: Int = 0
     private var mediaPlayer: MediaPlayer = MediaPlayer()

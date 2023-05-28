@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.common.annotation
+package pl.pw.laa
 
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text

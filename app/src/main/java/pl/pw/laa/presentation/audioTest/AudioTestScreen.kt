@@ -1,9 +1,6 @@
 package pl.pw.laa.presentation.audioTest
 
-import DevicePreviewsDarkLandscape
-import DevicePreviewsDarkPortrait
-import DevicePreviewsLightLandscape
-import DevicePreviewsLightPortrait
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,9 +21,11 @@ import pl.pw.laa.data.model.Form
 import pl.pw.laa.presentation.audioTest.components.AnswersBox
 import pl.pw.laa.presentation.audioTest.components.AudioTestTopBar
 import pl.pw.laa.presentation.audioTest.components.QuestionBox
-import pl.pw.laa.presentation.common.Orientation
-import pl.pw.laa.presentation.common.componets.LoadingScreen
-import pl.pw.laa.presentation.mediaplayer.MediaPlayerResponse
+import pl.pw.laa.Orientation
+import pl.pw.laa.annotation.preview.PreviewsLandscape
+import pl.pw.laa.annotation.preview.PreviewsPortrait
+import pl.pw.laa.componets.LoadingScreen
+import pl.pw.laa.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 val paddingValues = PaddingValues(16.dp, 0.dp, 16.dp, 16.dp)
@@ -138,8 +137,7 @@ private val mockedState8 = AudioTestState(
     false,
 )
 
-@DevicePreviewsLightPortrait
-@DevicePreviewsDarkPortrait
+@PreviewsPortrait
 @Composable
 fun QuestionScreenPortrait4Preview() {
     LearnArabicAlphabetTheme() {
@@ -152,8 +150,7 @@ fun QuestionScreenPortrait4Preview() {
     }
 }
 
-@DevicePreviewsLightLandscape
-@DevicePreviewsDarkLandscape
+@PreviewsLandscape
 @Composable
 fun QuestionScreenLandscape4Preview() {
     LearnArabicAlphabetTheme() {
@@ -166,8 +163,7 @@ fun QuestionScreenLandscape4Preview() {
     }
 }
 
-@DevicePreviewsLightPortrait
-@DevicePreviewsDarkPortrait
+@PreviewsPortrait
 @Composable
 fun QuestionScreenPortrait8Preview() {
     LearnArabicAlphabetTheme() {
@@ -180,8 +176,7 @@ fun QuestionScreenPortrait8Preview() {
     }
 }
 
-@DevicePreviewsLightLandscape
-@DevicePreviewsDarkLandscape
+@PreviewsLandscape
 @Composable
 fun QuestionScreenLandscape8Preview() {
     LearnArabicAlphabetTheme() {

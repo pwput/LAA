@@ -1,9 +1,6 @@
 package pl.pw.laa.presentation.menu
 
-import DevicePreviewsDarkLandscape
-import DevicePreviewsDarkPortrait
-import DevicePreviewsLightLandscape
-import DevicePreviewsLightPortrait
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.* // ktlint-disable no-wildcard-imports
 import androidx.compose.material3.MaterialTheme
@@ -16,10 +13,11 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
-import pl.pw.laa.presentation.common.Orientation
 import pl.pw.laa.presentation.menu.components.MenuButton
 import pl.pw.laa.presentation.menu.domain.MenuItem
 import pl.pw.laa.presentation.menu.domain.menuItemsForPreview
+import pl.pw.laa.annotation.preview.PreviewsLandscape
+import pl.pw.laa.annotation.preview.PreviewsPortrait
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @RootNavGraph(start = true)
@@ -29,7 +27,7 @@ fun MenuScreen(
     navigator: DestinationsNavigator,
     viewModel: MenuViewModel = hiltViewModel(),
 ) {
-    if (Orientation.isLandscape()) {
+    if (pl.pw.laa.Orientation.isLandscape()) {
         MenuScreenLandscape(viewModel.list, navigator)
     } else {
         MenuScreenPortrait(viewModel.list, navigator)
@@ -81,8 +79,7 @@ fun MenuScreenPortrait(list: List<MenuItem>, navigator: DestinationsNavigator) {
     }
 }
 
-@DevicePreviewsLightPortrait
-@DevicePreviewsDarkPortrait
+@PreviewsPortrait
 @Composable
 fun MenuScreenPortraitPreview() {
     LearnArabicAlphabetTheme() {
@@ -90,8 +87,7 @@ fun MenuScreenPortraitPreview() {
     }
 }
 
-@DevicePreviewsLightLandscape
-@DevicePreviewsDarkLandscape
+@PreviewsLandscape
 @Composable
 fun MenuScreenLandscapePreview() {
     LearnArabicAlphabetTheme() {

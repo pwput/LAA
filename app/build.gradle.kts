@@ -54,7 +54,8 @@ android {
     }
 }
 dependencies {
-    implementation(project(":data"))
+    implementation(project(pl.pw.buildsrc.Dependencies.Project.data))
+    implementation(project(pl.pw.buildsrc.Dependencies.Project.common))
 
     // material
     implementation("androidx.compose.material3:material3:1.1.0-beta01")

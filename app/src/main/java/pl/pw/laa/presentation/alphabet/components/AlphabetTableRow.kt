@@ -23,13 +23,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import pl.pw.laa.data.model.Letter
 import pl.pw.laa.R
 import pl.pw.laa.presentation.alphabet.AlphabetTableEvent
-import pl.pw.laa.presentation.mediaplayer.MediaPlayerResponse
+import pl.pw.laa.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Composable
 fun AlphabetTableRow(
     letter: Letter,
-    onRowClick: (AlphabetTableEvent) -> MediaPlayerResponse,
+    onRowClick: (AlphabetTableEvent) -> pl.pw.laa.mediaplayer.MediaPlayerResponse,
     showIncon: Boolean,
     modifier: Modifier = Modifier,
     formsModifier: Modifier = Modifier,
@@ -48,7 +48,7 @@ fun AlphabetTableRow(
             ) {
                 val resp = onRowClick(AlphabetTableEvent.PlayLetterAudio(context, letter))
                 visible =
-                    resp is MediaPlayerResponse.Success || resp is MediaPlayerResponse.AlreadyPlayingRequestedAudio
+                    resp is pl.pw.laa.mediaplayer.MediaPlayerResponse.Success || resp is pl.pw.laa.mediaplayer.MediaPlayerResponse.AlreadyPlayingRequestedAudio
             },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly,

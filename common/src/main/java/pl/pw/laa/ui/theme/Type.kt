@@ -6,7 +6,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import pl.pw.laa.R
+import pl.pw.laa.common.R
 
 val Lateef = FontFamily(
     Font(R.font.lateef_bold, FontWeight.Bold),

@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.common
+package pl.pw.laa
 
 import android.content.res.Configuration
 import androidx.compose.runtime.Composable

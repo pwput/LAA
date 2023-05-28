@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.common.componets
+package pl.pw.laa.componets
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -12,7 +12,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import pl.pw.laa.R
+import pl.pw.laa.common.R
 
 @Composable
 fun AudioIcon(visible: Boolean, modifier: Modifier = Modifier) {

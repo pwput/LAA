@@ -1,9 +1,5 @@
 package pl.pw.laa.presentation.settings
 
-import DevicePreviewsDarkLandscape
-import DevicePreviewsDarkPortrait
-import DevicePreviewsLightLandscape
-import DevicePreviewsLightPortrait
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -15,10 +11,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import pl.pw.laa.annotation.preview.PreviewsLandscape
+import pl.pw.laa.annotation.preview.PreviewsPortrait
+import pl.pw.laa.componets.RowDivider
 import pl.pw.laa.data.model.AppConfigKey
 import pl.pw.laa.data.presistence.KeyNames
-import pl.pw.laa.presentation.common.componets.RowDivider
-import pl.pw.laa.presentation.common.toInt
+import pl.pw.laa.toInt
 import pl.pw.laa.presentation.settings.components.SettingsCheckBox
 import pl.pw.laa.presentation.settings.components.SettingsChipGroup
 import pl.pw.laa.presentation.settings.components.SettingsNumberList
@@ -101,10 +99,8 @@ val state = SettingsState(
     isIsolatedTested = true
 )
 
-@DevicePreviewsLightPortrait
-@DevicePreviewsDarkPortrait
-@DevicePreviewsLightLandscape
-@DevicePreviewsDarkLandscape
+@PreviewsLandscape
+@PreviewsPortrait
 @Composable
 fun SettingsScreenPreview() {
     LearnArabicAlphabetTheme() {

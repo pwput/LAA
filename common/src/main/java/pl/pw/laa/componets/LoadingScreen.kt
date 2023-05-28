@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.common.componets
+package pl.pw.laa.componets
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

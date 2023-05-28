@@ -1,8 +1,8 @@
 package pl.pw.laa.presentation.alphabet
 
 import dagger.hilt.android.lifecycle.HiltViewModel
-import pl.pw.laa.presentation.mediaplayer.BaseAudioViewModel
-import pl.pw.laa.presentation.mediaplayer.MediaPlayerResponse
+import pl.pw.laa.mediaplayer.BaseAudioViewModel
+import pl.pw.laa.mediaplayer.MediaPlayerResponse
 import javax.inject.Inject
 
 @HiltViewModel

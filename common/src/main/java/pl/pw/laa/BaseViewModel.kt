@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.common
+package pl.pw.laa
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

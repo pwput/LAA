@@ -14,8 +14,8 @@ import pl.pw.laa.data.model.Isolated
 import pl.pw.laa.data.model.Letter
 import pl.pw.laa.data.model.Medial
 import pl.pw.laa.data.presistence.AppConfig
-import pl.pw.laa.presentation.mediaplayer.BaseAudioViewModel
-import pl.pw.laa.presentation.mediaplayer.MediaPlayerResponse
+import pl.pw.laa.mediaplayer.BaseAudioViewModel
+import pl.pw.laa.mediaplayer.MediaPlayerResponse
 import timber.log.Timber
 import javax.inject.Inject
 import kotlin.random.Random
@@ -23,7 +23,7 @@ import kotlin.random.nextInt
 
 @HiltViewModel
 class AudioTestViewModel @Inject constructor(private val appConfig: AppConfig) :
-    BaseAudioViewModel() {
+    pl.pw.laa.mediaplayer.BaseAudioViewModel() {
 
     var state by mutableStateOf(AudioTestState(null, 0, 0, null))
         private set
@@ -106,7 +106,7 @@ class AudioTestViewModel @Inject constructor(private val appConfig: AppConfig) :
         )
     }
 
-    fun onEvent(event: AudioTestEvent): MediaPlayerResponse? {
+    fun onEvent(event: AudioTestEvent): pl.pw.laa.mediaplayer.MediaPlayerResponse? {
         return when (event) {
             is AudioTestEvent.ReplayAudio -> {
                 startMediaPlayer(event.context, event.letter.vocalizationRaw)

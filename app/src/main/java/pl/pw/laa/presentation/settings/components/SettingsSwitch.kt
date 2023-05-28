@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import pl.pw.laa.data.presistence.KeyNames
-import pl.pw.laa.presentation.common.toBoolean
+import pl.pw.laa.toBoolean
 import pl.pw.laa.presentation.settings.SettingsEvent
 import timber.log.Timber
 

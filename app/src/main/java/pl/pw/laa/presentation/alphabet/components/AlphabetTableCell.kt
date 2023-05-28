@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pl.pw.laa.data.Alphabet
 import pl.pw.laa.data.model.Form
-import pl.pw.laa.presentation.common.componets.AudioIcon
+import pl.pw.laa.componets.AudioIcon
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 val padding = 8.dp
@@ -50,7 +50,10 @@ fun AlphabetTableCellRowName(
             modifier = Modifier.align(Alignment.Center),
             color = MaterialTheme.colorScheme.onBackground,
         )
-        AudioIcon(visible = isAudioIconVisible, modifier = Modifier.fillMaxHeight(1f))
+        pl.pw.laa.componets.AudioIcon(
+            visible = isAudioIconVisible,
+            modifier = Modifier.fillMaxHeight(1f)
+        )
     }
 }
 

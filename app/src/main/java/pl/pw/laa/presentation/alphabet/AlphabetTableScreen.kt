@@ -1,9 +1,6 @@
 package pl.pw.laa.presentation.alphabet
 
-import DevicePreviewsDarkLandscape
-import DevicePreviewsDarkPortrait
-import DevicePreviewsLightLandscape
-import DevicePreviewsLightPortrait
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,11 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import pl.pw.laa.componets.RowDivider
 import pl.pw.laa.data.Alphabet
+import pl.pw.laa.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.presentation.alphabet.components.AlphabetTableColumNamesRow
 import pl.pw.laa.presentation.alphabet.components.AlphabetTableRow
-import pl.pw.laa.presentation.common.componets.RowDivider
-import pl.pw.laa.presentation.mediaplayer.MediaPlayerResponse
+import pl.pw.laa.annotation.preview.PreviewsLandscape
+import pl.pw.laa.annotation.preview.PreviewsPortrait
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Destination
@@ -54,10 +53,8 @@ fun AlphabetTable(
 
 
 
-@DevicePreviewsLightPortrait
-@DevicePreviewsDarkPortrait
-@DevicePreviewsLightLandscape
-@DevicePreviewsDarkLandscape
+@PreviewsLandscape
+@PreviewsPortrait
 @Composable
 fun AlphabetTablePreview() {
     LearnArabicAlphabetTheme() {
