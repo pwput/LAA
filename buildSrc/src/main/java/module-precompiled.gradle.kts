@@ -70,7 +70,6 @@ dependencies {
     implementation(Dependencies.Androidx.Compose.material3)
     // compose
     implementation(Dependencies.Androidx.Compose.ui)
-    implementation(Dependencies.Androidx.Compose.material)
     implementation(Dependencies.Androidx.Compose.materialIconsExtended)
     implementation(Dependencies.Androidx.Compose.foundation)
     implementation(Dependencies.Androidx.Compose.foundationLayout)

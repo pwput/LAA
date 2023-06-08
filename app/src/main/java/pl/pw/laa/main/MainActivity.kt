@@ -19,8 +19,6 @@ class MainActivity @Inject constructor() : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.plant(Timber.DebugTree())
-
-
         setContent {
             LearnArabicAlphabetTheme (darkTheme = isSystemInDarkTheme()){
                 DestinationsNavHost(navGraph = NavGraphs.root)

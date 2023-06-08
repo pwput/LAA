@@ -11,6 +11,7 @@ plugins {
     id("com.google.devtools.ksp") version "1.8.0-1.0.9"
     id("dagger.hilt.android.plugin")
 }
+val composeStateEventsVersion by extra("1.2.3")
 
 android {
     namespace ="pl.pw.laa"
@@ -67,7 +68,6 @@ dependencies {
     implementation(Androidx.Compose.material3)
     // compose
     implementation(Androidx.Compose.ui)
-    implementation(Androidx.Compose.material)
     implementation(Androidx.Compose.materialIconsExtended)
     implementation(Androidx.Compose.foundation)
     implementation(Androidx.Compose.foundationLayout)
@@ -96,6 +96,10 @@ dependencies {
     // compose directions
     implementation(ComposeDestinations.animationsCore)
     ksp(ComposeDestinations.ksp)
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0-beta01")
+
+    implementation ("com.github.leonard-palm:compose-state-events:$composeStateEventsVersion")
+
 
     //Test
     testImplementation(Dependencies.Others.junit)

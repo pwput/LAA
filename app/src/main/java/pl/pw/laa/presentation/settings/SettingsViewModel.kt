@@ -1,11 +1,15 @@
 package pl.pw.laa.presentation.settings
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import de.palm.composestateevents.StateEvent
+import de.palm.composestateevents.consumed
+import de.palm.composestateevents.triggered
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.pw.laa.data.presistence.AppConfig
 import pl.pw.laa.BaseViewModel
@@ -15,29 +19,10 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val appConfig: AppConfig,
-) : pl.pw.laa.BaseViewModel() {
+) : BaseViewModel() {
 
-    var state by mutableStateOf(
-        SettingsState(
-            8,
-            cheats = true,
-            tips = true,
-            isInitialTested = true,
-            isMedialTested = true,
-            isFinalTested = true,
-            isIsolatedTested = true
-        )
-    )
-        private set
-
-    private var numberOfAnswers = 8
-    private var cheat = false
-    private var tips = false
-    private var isInitialTested = true
-    private var isMedialTested = true
-    private var isFinalTested = true
-    private var isIsolated = true
-
+    private val  viewStateNotifier = MutableStateFlow(SettingsState())
+    val viewState = viewStateNotifier.asStateFlow()
     init {
         startLoading()
         fetchData()
@@ -45,49 +30,21 @@ class SettingsViewModel @Inject constructor(
 
     private fun fetchData() {
         viewModelScope.launch {
-            setupViewModel(
-                appConfig.answers.getValue(),
-                appConfig.cheats.getValue(),
-                appConfig.tips.getValue(),
-                appConfig.initial.getValue(),
-                appConfig.medial.getValue(),
-                appConfig.final.getValue(),
-                appConfig.isolated.getValue(),
-            )
+            viewStateNotifier.update {
+                it.copy(
+                    numbers = appConfig.answers.getValue(),
+                    cheats = appConfig.cheats.getValue(),
+                    tips = appConfig.tips.getValue(),
+                    isInitialTested = appConfig.initial.getValue(),
+                    isMedialTested = appConfig.medial.getValue(),
+                    isFinalTested = appConfig.final.getValue(),
+                    isIsolatedTested = appConfig.isolated.getValue(),
+                )
+        }
             stopLoading()
         }
     }
 
-    private fun setupViewModel(
-        num: Int,
-        cheats: Boolean,
-        tips: Boolean,
-        initial: Boolean,
-        medial: Boolean,
-        final: Boolean,
-        isolated: Boolean,
-    ) {
-        numberOfAnswers = num
-        cheat = cheats
-        isInitialTested = initial
-        isMedialTested = medial
-        isFinalTested = final
-        isIsolated = isolated
-        this.tips = tips
-        getNewState()
-    }
-
-    private fun getNewState() {
-        state = state.copy(
-            numbers = numberOfAnswers,
-            cheats = cheat,
-            tips = tips,
-            isInitialTested = isInitialTested,
-            isMedialTested = isMedialTested,
-            isFinalTested = isFinalTested,
-            isIsolatedTested = isIsolated
-        )
-    }
 
     fun onEvent(event: SettingsEvent) {
         when (event) {
@@ -113,7 +70,7 @@ class SettingsViewModel @Inject constructor(
                 }
 
             is SettingsEvent.SetisFinalTested ->
-                if (canChange(event.isForm))
+                if (canFormBeChanged(event.isForm))
                     viewModelScope.launch(context = Dispatchers.IO) {
                         Timber.d("Setting appConfigIsFinalTested to ${event.isForm}")
                         appConfig.final.setValue(event.isForm)
@@ -121,7 +78,7 @@ class SettingsViewModel @Inject constructor(
                     }
 
             is SettingsEvent.SetisInitialTested ->
-                if (canChange(event.isForm))
+                if (canFormBeChanged(event.isForm))
                     viewModelScope.launch(context = Dispatchers.IO) {
                         Timber.d("Setting appConfigIsInitialTested to ${event.isForm}")
                         appConfig.initial.setValue(event.isForm)
@@ -129,7 +86,7 @@ class SettingsViewModel @Inject constructor(
                     }
 
             is SettingsEvent.SetisIsolatedTested ->
-                if (canChange(event.isForm))
+                if (canFormBeChanged(event.isForm))
                     viewModelScope.launch(context = Dispatchers.IO) {
                         Timber.d("Setting appConfigIsIsolatedTested to ${event.isForm}")
                         appConfig.isolated.setValue(event.isForm)
@@ -137,25 +94,39 @@ class SettingsViewModel @Inject constructor(
                     }
 
             is SettingsEvent.SetisMedialTested ->
-                if (canChange(event.isForm))
+                if (canFormBeChanged(event.isForm))
                     viewModelScope.launch(context = Dispatchers.IO) {
                         Timber.d("Setting appConfigIsMedialTested to ${event.isForm}")
                         appConfig.medial.setValue(event.isForm)
                         fetchData()
                     }
-        }
-    }
+        }}
 
-    fun canChange(newValue: Boolean): Boolean {
-        var sum = 0
-        if (isIsolated) sum += 1
-        if (isInitialTested) sum += 1
-        if (isMedialTested) sum += 1
-        if (isFinalTested) sum += 1
 
+    private fun canFormBeChanged(newValue: Boolean): Boolean {
         if (newValue) return true
-        if (sum > 1) return true
+        if (countOfForms() > 1)  return true
+        setShowMessageEvent(triggered)
         return false
     }
 
+    private fun setShowMessageEvent(state: StateEvent){
+        viewStateNotifier.update {
+            it.copy(
+                showMessageEvent = state
+            )
+        }
+    }
+
+    private fun countOfForms():Int{
+        var sum = 0
+        if (viewState.value.isInitialTested) sum += 1
+        if (viewState.value.isMedialTested) sum += 1
+        if (viewState.value.isFinalTested) sum += 1
+        if (viewState.value.isIsolatedTested) sum += 1
+        return sum
+    }
+    fun setShowMessageConsumed() {
+        setShowMessageEvent(consumed)
+    }
 }

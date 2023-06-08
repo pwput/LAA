@@ -10,4 +10,5 @@
     <string name="appConfigAnswers">numberOfAnswers</string>
     <string name="appConfigCheats">cheats</string>
     <string name="appConfigTips">tips</string>
+    <string name="settings_snackbar_text">You have to leave at least one form chosen.</string>
 </resources>
