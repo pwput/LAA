@@ -1,4 +1,4 @@
-package pl.pw.laa
+package pl.pw.laa.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

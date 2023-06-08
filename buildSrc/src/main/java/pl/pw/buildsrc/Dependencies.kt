@@ -1,5 +1,7 @@
 package pl.pw.buildsrc
 
+import Versions
+
 object Dependencies {
     object Project {
         const val data = ":data"
@@ -9,6 +11,8 @@ object Dependencies {
     object Others {
         const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
         const val junit = "junit:junit:4.13.2"
+        const val composeStateEvents = "com.github.leonard-palm:compose-state-events:${
+            Versions.composeStateEvents}"
     }
 
     object Kotlinx {
@@ -29,6 +33,7 @@ object Dependencies {
     object Androidx {
         const val startup = "androidx.startup:startup-runtime:${Versions.startup}"
         const val activityCompose = "androidx.activity:activity-compose:${Versions.activityCompose}"
+        const val lifecycleRuntimeCompose = "androidx.lifecycle:lifecycle-runtime-compose:${Versions.lifecycleRuntimeCompose}"
         const val navigationCompose =
             "androidx.navigation:navigation-compose:${Versions.navigationCompose}"
         const val constraintlayoutCompose =

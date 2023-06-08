@@ -10,13 +10,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:name=".LearnArabicAlphabetApp"
-        android:theme="@style/Theme.MyApplication"
+        android:theme="@style/Theme.MyApp.Starting"
         tools:targetApi="31">
         <activity
             android:name=".main.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.MyApplication">
+            android:theme="@style/Theme.MyApp.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

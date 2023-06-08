@@ -3,7 +3,6 @@ package pl.pw.laa.presentation.settings
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.ScaffoldState
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -48,7 +47,7 @@ fun SettingsScreen(
         )
 }
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
+@SuppressLint( "UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Settings(
     state: SettingsState,
@@ -75,7 +74,7 @@ fun Settings(
                 key = AppConfigKey(
                     KeyNames.NumberOfAnswers.value,
                     context.getString(KeyNames.NumberOfAnswers.resId),
-                    state.numbers
+                    state.numberOfAnswers
                 ),
                 expanded = expanded,
                 onEvent = onEvent,
@@ -84,18 +83,17 @@ fun Settings(
             RowDivider()
             SettingsCheckBox(
                 KeyNames.AreCheats,
-                state.cheats.toInt(),
+                state.areCheatsOn.toInt(),
                 onEvent = onEvent,
                 modifier = Modifier.weight(1f)
             )
             SettingsCheckBox(
                 KeyNames.AreTips,
-                state.tips.toInt(),
+                state.areTipsOn.toInt(),
                 onEvent = onEvent,
                 modifier = Modifier.weight(1f)
             )
             RowDivider()
-
 
             SettingsChipGroup(
                 KeyNames.IsInitial, state.isInitialTested.toInt(),
@@ -106,7 +104,7 @@ fun Settings(
             )
 
             EventEffect(
-                event = state.showMessageEvent,
+                event = state.showSnackbarEvent,
                 onConsumed = showMessageConsumed
             ) {
                 snackbarHostState.ShowSnackbar(Message(context.getString(R.string.settings_snackbar_text)))

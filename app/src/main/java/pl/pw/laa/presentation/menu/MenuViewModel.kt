@@ -26,7 +26,7 @@ class MenuViewModel @Inject constructor(repository: AppConfigKeyRepository) :
 
     init {
       viewModelScope.launch(context = Dispatchers.IO) {
-            repository.initDb()
+            //repository.initDb()
         }
     }
 }

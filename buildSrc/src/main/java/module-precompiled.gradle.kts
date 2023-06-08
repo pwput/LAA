@@ -90,6 +90,8 @@ dependencies {
     implementation(Dependencies.Kotlinx.Coroutines.android)
     // timber log
     implementation(Dependencies.Others.timber)
+    //compose state events
+    implementation(Dependencies.Others.composeStateEvents)
 
 
     //Test

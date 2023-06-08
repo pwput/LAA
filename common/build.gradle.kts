@@ -1,6 +1,7 @@
 import pl.pw.buildsrc.Dependencies
 
 plugins {
+    id("org.jetbrains.kotlin.android")
     `module-precompiled`
 }
 

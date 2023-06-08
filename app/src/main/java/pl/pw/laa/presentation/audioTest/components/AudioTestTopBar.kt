@@ -11,11 +11,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import pl.pw.laa.presentation.audioTest.AudioTestState
+import pl.pw.laa.presentation.audioTest.AudioTestStateWithContent
 
 @Composable
 fun AudioTestTopBar(
-    state: AudioTestState,
+    state: AudioTestStateWithContent,
     modifier: Modifier = Modifier,
 ) {
     Box(

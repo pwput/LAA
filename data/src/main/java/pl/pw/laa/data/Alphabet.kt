@@ -1,6 +1,7 @@
 package pl.pw.laa.data
 
 import pl.pw.laa.data.model.Final
+import pl.pw.laa.data.model.Form
 import pl.pw.laa.data.model.Initial
 import pl.pw.laa.data.model.Isolated
 import pl.pw.laa.data.model.Letter
@@ -235,4 +236,7 @@ object Alphabet {
         ),
 
     )
+
+    fun getLetterName(form: Form) = letters.first{it.hasForm(form)}.name
+
 }

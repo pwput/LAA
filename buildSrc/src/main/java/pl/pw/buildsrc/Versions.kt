@@ -17,4 +17,6 @@ object Versions{
     const val timber = "5.0.1"
     const val material3 = "1.2.0-alpha02"
     const val startup = "1.1.1"
+    const val composeStateEvents = "1.2.3"
+    const val lifecycleRuntimeCompose = "2.6.0-beta01"
 }

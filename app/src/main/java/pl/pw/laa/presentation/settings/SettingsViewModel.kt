@@ -4,6 +4,7 @@ package pl.pw.laa.presentation.settings
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import de.palm.composestateevents.StateEvent
+import de.palm.composestateevents.StateEventWithContent
 import de.palm.composestateevents.consumed
 import de.palm.composestateevents.triggered
 import kotlinx.coroutines.Dispatchers
@@ -12,17 +13,18 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.pw.laa.data.presistence.AppConfig
-import pl.pw.laa.BaseViewModel
+import pl.pw.laa.viewmodel.BaseViewModel
+import pl.pw.laa.viewmodel.IStateViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val appConfig: AppConfig,
-) : BaseViewModel() {
+) : BaseViewModel(), IStateViewModel{
 
     private val  viewStateNotifier = MutableStateFlow(SettingsState())
-    val viewState = viewStateNotifier.asStateFlow()
+    override val viewState = viewStateNotifier.asStateFlow()
     init {
         startLoading()
         fetchData()
@@ -32,15 +34,15 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             viewStateNotifier.update {
                 it.copy(
-                    numbers = appConfig.answers.getValue(),
-                    cheats = appConfig.cheats.getValue(),
-                    tips = appConfig.tips.getValue(),
+                    numberOfAnswers = appConfig.answers.getValue(),
+                    areCheatsOn = appConfig.cheats.getValue(),
+                    areTipsOn = appConfig.tips.getValue(),
                     isInitialTested = appConfig.initial.getValue(),
                     isMedialTested = appConfig.medial.getValue(),
                     isFinalTested = appConfig.final.getValue(),
                     isIsolatedTested = appConfig.isolated.getValue(),
                 )
-        }
+            }
             stopLoading()
         }
     }
@@ -113,7 +115,7 @@ class SettingsViewModel @Inject constructor(
     private fun setShowMessageEvent(state: StateEvent){
         viewStateNotifier.update {
             it.copy(
-                showMessageEvent = state
+                showSnackbarEvent = state
             )
         }
     }
@@ -126,7 +128,7 @@ class SettingsViewModel @Inject constructor(
         if (viewState.value.isIsolatedTested) sum += 1
         return sum
     }
-    fun setShowMessageConsumed() {
+    override fun setShowMessageConsumed() {
         setShowMessageEvent(consumed)
     }
 }

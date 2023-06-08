@@ -1,36 +1,34 @@
 package pl.pw.laa.data.model
 
-enum class FormName(val value: String) {
-    ISOLATED("Isolated"),
-    FINAL("Final"),
-    MEDIAL("Medial"),
-    INITIAL("Initial"),
+enum class FormName {
+    Isolated,
+    Final,
+    Medial,
+    Initial,
 }
-
-fun getAllFormNames() =
-    listOf<FormName>(FormName.ISOLATED, FormName.FINAL, FormName.MEDIAL, FormName.INITIAL)
-
 sealed class Form(
     val char: Char,
 ) {
     abstract val name: FormName
+
+    fun getName() = name.toString()
     override fun toString(): String {
         return this.char.toString()
     }
 }
 
 class Isolated(char: Char) : Form(char) {
-    override val name: FormName = FormName.ISOLATED
+    override val name: FormName = FormName.Isolated
 }
 
 class Final(char: Char) : Form(char) {
-    override val name: FormName = FormName.FINAL
+    override val name: FormName = FormName.Final
 }
 
 class Medial(char: Char) : Form(char) {
-    override val name: FormName = FormName.MEDIAL
+    override val name: FormName = FormName.Medial
 }
 
 class Initial(char: Char) : Form(char) {
-    override val name: FormName = FormName.INITIAL
+    override val name: FormName = FormName.Initial
 }

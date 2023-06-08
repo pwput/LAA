@@ -75,12 +75,15 @@ dependencies {
     implementation(Androidx.Compose.runtime)
     implementation(Androidx.Compose.runtimeLivedata)
     implementation(Androidx.Compose.uiTooling)
+    implementation ("androidx.core:core-splashscreen:1.0.0")
+
     // androidx
     implementation(Androidx.startup)
     implementation(Androidx.navigationCompose)
     implementation(Androidx.constraintlayoutCompose)
     implementation(Androidx.activityCompose)
     implementation(Androidx.hiltNavigationCompose)
+    implementation(Androidx.lifecycleRuntimeCompose)
     // Room
     implementation(Androidx.Room.runtime)
     annotationProcessor(Androidx.Room.compiler)
@@ -96,9 +99,8 @@ dependencies {
     // compose directions
     implementation(ComposeDestinations.animationsCore)
     ksp(ComposeDestinations.ksp)
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0-beta01")
-
-    implementation ("com.github.leonard-palm:compose-state-events:$composeStateEventsVersion")
+    //compose state events
+    implementation(Dependencies.Others.composeStateEvents)
 
 
     //Test

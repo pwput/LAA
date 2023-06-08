@@ -17,14 +17,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pl.pw.laa.data.Alphabet
 import pl.pw.laa.data.model.Form
-import pl.pw.laa.presentation.audioTest.AudioTestState
+import pl.pw.laa.presentation.audioTest.AudioTestStateWithContent
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 val paddingValues = PaddingValues(16.dp, 0.dp)
 
 @Composable
 fun AnswersBox(
-    state: AudioTestState,
+    state: AudioTestStateWithContent,
     onAnswer: (Form) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -64,7 +64,7 @@ fun AnswersBoxPreview() {
     LearnArabicAlphabetTheme() {
         Surface() {
             AnswersBox(
-                state = AudioTestState(
+                state = AudioTestStateWithContent(
                     listOf(Alphabet.letters[0].final, Alphabet.letters[1].final),
                     1,
                     2,

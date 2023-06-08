@@ -11,4 +11,5 @@
     <string name="appConfigCheats">cheats</string>
     <string name="appConfigTips">tips</string>
     <string name="settings_snackbar_text">You have to leave at least one form chosen.</string>
+    <string name="audiotest_snackbar_text">Wrong Answer! You have clicked letter \"%1$s\", in form \"%2$s\".</string>
 </resources>
