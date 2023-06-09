@@ -29,35 +29,45 @@ import pl.pw.laa.presentation.settings.components.SettingsChipGroup
 import pl.pw.laa.presentation.settings.components.SettingsNumberList
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
+@SuppressLint( "UnusedMaterial3ScaffoldPaddingParameter")
+
 @Destination
 @Composable
 fun SettingsScreen(
     navigator: DestinationsNavigator,
+    paddingValues: PaddingValues,
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val viewState: SettingsState by viewModel.viewState.collectAsStateWithLifecycle()
+    val snackbarHostState = remember {
+        SnackbarHostState()
+    }
+
+    val context = LocalContext.current
 
     if (viewModel.isLoading)
         LoadingScreen()
     else
+        Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) {
         Settings(
             viewState,
             viewModel::onEvent,
-            viewModel::setShowMessageConsumed,
         )
+
+            EventEffect(
+                event = viewState.showSnackbarEvent,
+                onConsumed = viewModel::setShowMessageConsumed
+            ) {
+                snackbarHostState.ShowSnackbar(Message(context.getString(R.string.settings_snackbar_text)))
+            }
+        }
 }
 
-@SuppressLint( "UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Settings(
     state: SettingsState,
     onEvent: (SettingsEvent) -> Unit,
-    showMessageConsumed: () -> Unit
 ) {
-    val snackbarHostState = remember {
-        SnackbarHostState()
-    }
-    Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) {
         val expanded by remember {
             mutableStateOf(false)
         }
@@ -94,7 +104,6 @@ fun Settings(
                 modifier = Modifier.weight(1f)
             )
             RowDivider()
-
             SettingsChipGroup(
                 KeyNames.IsInitial, state.isInitialTested.toInt(),
                 KeyNames.IsMedial, state.isMedialTested.toInt(),
@@ -102,17 +111,8 @@ fun Settings(
                 KeyNames.IsIsolated, state.isIsolatedTested.toInt(),
                 onEvent,
             )
-
-            EventEffect(
-                event = state.showSnackbarEvent,
-                onConsumed = showMessageConsumed
-            ) {
-                snackbarHostState.ShowSnackbar(Message(context.getString(R.string.settings_snackbar_text)))
-            }
-        }
     }
 }
-
 
 @PreviewsLandscape
 @PreviewsPortrait
@@ -122,9 +122,7 @@ fun SettingsScreenPreview() {
         Surface(modifier = Modifier.fillMaxSize()) {
             Settings(
                 SettingsState(),
-                {},
-                {}
-            )
+            ) {}
         }
     }
 }

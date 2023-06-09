@@ -4,7 +4,6 @@ package pl.pw.laa.presentation.settings
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import de.palm.composestateevents.StateEvent
-import de.palm.composestateevents.StateEventWithContent
 import de.palm.composestateevents.consumed
 import de.palm.composestateevents.triggered
 import kotlinx.coroutines.Dispatchers
@@ -108,7 +107,7 @@ class SettingsViewModel @Inject constructor(
     private fun canFormBeChanged(newValue: Boolean): Boolean {
         if (newValue) return true
         if (countOfForms() > 1)  return true
-        setShowMessageEvent(triggered)
+        if (viewStateNotifier.value.areTipsOn) setShowMessageEvent(triggered)
         return false
     }
 
@@ -122,10 +121,10 @@ class SettingsViewModel @Inject constructor(
 
     private fun countOfForms():Int{
         var sum = 0
-        if (viewState.value.isInitialTested) sum += 1
-        if (viewState.value.isMedialTested) sum += 1
-        if (viewState.value.isFinalTested) sum += 1
-        if (viewState.value.isIsolatedTested) sum += 1
+        if (viewStateNotifier.value.isInitialTested) sum += 1
+        if (viewStateNotifier.value.isMedialTested) sum += 1
+        if (viewStateNotifier.value.isFinalTested) sum += 1
+        if (viewStateNotifier.value.isIsolatedTested) sum += 1
         return sum
     }
     override fun setShowMessageConsumed() {

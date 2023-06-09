@@ -40,7 +40,7 @@ import pl.pw.laa.componets.ShowSnackbar
 import pl.pw.laa.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
-val paddingValues = PaddingValues(16.dp, 0.dp, 16.dp, 16.dp)
+private val paddingValues = PaddingValues(16.dp, 0.dp, 16.dp, 16.dp)
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 
@@ -48,6 +48,7 @@ val paddingValues = PaddingValues(16.dp, 0.dp, 16.dp, 16.dp)
 @Composable
 fun QuestionScreen(
     navigator: DestinationsNavigator,
+    padding: PaddingValues,
     viewModel: AudioTestViewModel = hiltViewModel(),
 ) {
     val viewState: AudioTestStateWithContent by viewModel.viewState.collectAsStateWithLifecycle()
@@ -56,7 +57,6 @@ fun QuestionScreen(
     }
     Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) {
         val context = LocalContext.current
-
         if (viewModel.isLoading) {
             LoadingScreen()
         } else {
@@ -80,7 +80,7 @@ fun QuestionScreen(
             event = viewState.showSnackbarEvent,
             onConsumed = viewModel::setShowMessageConsumed
         ) {
-            val string = context.resources.getString(R.string.audiotest_snackbar_text,it[0],it[1])
+            val string = context.resources.getString(R.string.audiotest_snackbar_text, it[0], it[1])
             snackbarHostState.ShowSnackbar(
                 Message(string)
             )
@@ -106,7 +106,7 @@ fun QuestionScreenLandscape(
     ) {
         Column(modifier = Modifier.weight(0.5f)) {
             AudioTestTopBar(state, modifier = Modifier.padding(0.dp))
-            QuestionBox(state.rightAnswer, showIcon, onEvent)
+            QuestionBox(state, showIcon, onEvent)
         }
         AnswersBox(state, onAnswer, modifier = Modifier.weight(0.5f))
     }
@@ -135,11 +135,72 @@ fun QuestionScreenPortrait(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly,
         ) {
-            QuestionBox(state.rightAnswer, showIcon, onEvent)
+            QuestionBox(state, showIcon, onEvent)
             AnswersBox(state, onAnswer)
         }
     }
 }
+
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@PreviewsPortrait
+@Composable
+fun QuestionScreenPortrait4Preview() {
+    LearnArabicAlphabetTheme() {
+        Scaffold(topBar = {}) {
+            QuestionScreenPortrait(
+                mockedState4,
+                { null },
+                {},
+                false,
+            )
+        }
+    }
+}
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@PreviewsLandscape
+@Composable
+fun QuestionScreenLandscape4Preview() {
+    LearnArabicAlphabetTheme() {
+        Scaffold(topBar = {}) {
+            QuestionScreenLandscape(
+                mockedState4,
+                { null },
+                {},
+                false,
+            )
+        }
+    }
+}
+
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@PreviewsPortrait
+@Composable
+fun QuestionScreenPortrait8Preview() {
+    LearnArabicAlphabetTheme() {
+        Scaffold(topBar = {}) {
+        QuestionScreenPortrait(
+            mockedState8,
+            { null },
+            {},
+            false,
+        )
+    }
+}}
+
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@PreviewsLandscape
+@Composable
+fun QuestionScreenLandscape8Preview() {
+    LearnArabicAlphabetTheme() {
+        Scaffold(topBar = {}) {
+        QuestionScreenLandscape(
+            mockedState8,
+            { null },
+            {},
+            false,
+        )
+    }
+}}
 
 private val mockedState4 = AudioTestStateWithContent(
     listOf(
@@ -170,55 +231,3 @@ private val mockedState8 = AudioTestStateWithContent(
     rightAnswer = Alphabet.letters[0],
     false,
 )
-
-@PreviewsPortrait
-@Composable
-fun QuestionScreenPortrait4Preview() {
-    LearnArabicAlphabetTheme() {
-        QuestionScreenPortrait(
-            mockedState4,
-            { null },
-            {},
-            false,
-        )
-    }
-}
-
-@PreviewsLandscape
-@Composable
-fun QuestionScreenLandscape4Preview() {
-    LearnArabicAlphabetTheme() {
-        QuestionScreenLandscape(
-            mockedState4,
-            { null },
-            {},
-            false,
-        )
-    }
-}
-
-@PreviewsPortrait
-@Composable
-fun QuestionScreenPortrait8Preview() {
-    LearnArabicAlphabetTheme() {
-        QuestionScreenPortrait(
-            mockedState8,
-            { null },
-            {},
-            false,
-        )
-    }
-}
-
-@PreviewsLandscape
-@Composable
-fun QuestionScreenLandscape8Preview() {
-    LearnArabicAlphabetTheme() {
-        QuestionScreenLandscape(
-            mockedState8,
-            { null },
-            {},
-            false,
-        )
-    }
-}

@@ -13,6 +13,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
+import pl.pw.laa.Orientation
 import pl.pw.laa.presentation.menu.components.MenuButton
 import pl.pw.laa.presentation.menu.domain.MenuItem
 import pl.pw.laa.presentation.menu.domain.menuItemsForPreview
@@ -25,9 +26,10 @@ import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 @Composable
 fun MenuScreen(
     navigator: DestinationsNavigator,
+    padding: PaddingValues,
     viewModel: MenuViewModel = hiltViewModel(),
 ) {
-    if (pl.pw.laa.Orientation.isLandscape()) {
+    if (Orientation.isLandscape()) {
         MenuScreenLandscape(viewModel.list, navigator)
     } else {
         MenuScreenPortrait(viewModel.list, navigator)

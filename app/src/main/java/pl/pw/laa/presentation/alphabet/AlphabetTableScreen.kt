@@ -3,6 +3,7 @@ package pl.pw.laa.presentation.alphabet
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -25,6 +26,7 @@ import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 @Composable
 fun AlphabetTableScreen(
     navigator: DestinationsNavigator,
+    padding: PaddingValues,
     viewModel: AlphabetTableViewModel = hiltViewModel(),
 ) {
     AlphabetTable(viewModel::onEvent, viewModel.showIcon)

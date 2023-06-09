@@ -1,6 +1,5 @@
 package pl.pw.laa.main
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.ramcosta.composedestinations.DestinationsNavHost
+import com.ramcosta.composedestinations.navigation.dependency
 import dagger.hilt.android.AndroidEntryPoint
 import pl.pw.laa.presentation.NavGraphs
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
@@ -24,17 +24,21 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity @Inject constructor() : ComponentActivity() {
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         Timber.plant(Timber.DebugTree())
         setContent {
-            LearnArabicAlphabetTheme (darkTheme = isSystemInDarkTheme()){
-                Scaffold() {
-                    Surface(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-                        DestinationsNavHost(navGraph = NavGraphs.root)
-
+            LearnArabicAlphabetTheme(darkTheme = isSystemInDarkTheme()) {
+                Scaffold() { paddingValues ->
+                    Surface(
+                        Modifier
+                            .fillMaxSize()
+                            .background(MaterialTheme.colorScheme.background)
+                    ) {
+                        DestinationsNavHost(
+                            navGraph = NavGraphs.root,
+                            dependenciesContainerBuilder = { dependency(paddingValues) })
                     }
                 }
             }

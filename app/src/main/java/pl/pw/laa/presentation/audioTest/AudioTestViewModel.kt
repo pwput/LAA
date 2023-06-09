@@ -109,12 +109,12 @@ class AudioTestViewModel @Inject constructor(private val appConfig: AppConfig) :
 
     fun onAnswerEvent(form: Form) {
         Timber.d("Answer: $form")
-        Timber.d("RightAnswer: ${viewState.value.rightAnswer}")
-        if (viewState.value.rightAnswer!!.hasForm(form)) {
+        Timber.d("RightAnswer: ${viewStateNotifier.value.rightAnswer}")
+        if (viewStateNotifier.value.rightAnswer!!.hasForm(form)) {
             Timber.d("Win!!!!")
             getNewState()
         } else {
-            setShowMessageEvent(
+            if (viewStateNotifier.value.areTipsOn) setShowMessageEvent(
                 triggered(
                     arrayOf(
                         Alphabet.getLetterName(form),

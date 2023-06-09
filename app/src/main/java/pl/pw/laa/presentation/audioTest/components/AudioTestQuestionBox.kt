@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,24 +26,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import pl.pw.laa.Text
-import pl.pw.laa.data.Alphabet
-import pl.pw.laa.data.model.Letter
 import pl.pw.laa.presentation.audioTest.AudioTestEvent
 import pl.pw.laa.annotation.preview.DevicePreviewsDarkPortrait
 import pl.pw.laa.annotation.preview.DevicePreviewsLightPortrait
 import pl.pw.laa.mediaplayer.MediaPlayerResponse
+import pl.pw.laa.presentation.audioTest.AudioTestStateWithContent
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Composable
 fun QuestionBox(
-    letter: Letter?,
+    viewState: AudioTestStateWithContent,
     showIcon: Boolean,
     onEvent: (AudioTestEvent) -> MediaPlayerResponse?,
     modifier: Modifier = Modifier,
 ) {
     var firstAudioPlay by remember { mutableStateOf(true) }
-    var previousAudioPlayLetter by remember { mutableStateOf(letter) }
+    var previousAudioPlayLetter by remember { mutableStateOf(viewState.rightAnswer) }
 
     val context = LocalContext.current
 
@@ -50,12 +49,12 @@ fun QuestionBox(
 
     if (!showIcon) visible = false
 
-    if (firstAudioPlay || previousAudioPlayLetter != letter) {
-        letter?.let {
-            onEvent(AudioTestEvent.ReplayAudio(context, letter))
+    if (firstAudioPlay || previousAudioPlayLetter != viewState.rightAnswer) {
+        viewState.rightAnswer?.let {
+            onEvent(AudioTestEvent.ReplayAudio(context, viewState.rightAnswer!!))
         }
         firstAudioPlay = false
-        previousAudioPlayLetter = letter
+        previousAudioPlayLetter = viewState.rightAnswer
     }
 
     Box(
@@ -73,8 +72,8 @@ fun QuestionBox(
                 interactionSource = MutableInteractionSource(),
                 indication = null,
             ) {
-                letter?.let {
-                    val resp = onEvent(AudioTestEvent.ReplayAudio(context, letter))
+                viewState.rightAnswer?.let {
+                    val resp = onEvent(AudioTestEvent.ReplayAudio(context, viewState.rightAnswer!!))
                     visible =
                         resp is MediaPlayerResponse.Success || resp is MediaPlayerResponse.AlreadyPlayingRequestedAudio
                 }
@@ -87,12 +86,14 @@ fun QuestionBox(
         ) {
             Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.BottomCenter) {
                 Text(
-                    letter = letter,
+                    text = if (viewState.areCheatsOn) viewState.rightAnswer.toString() else viewState.rightAnswer?.name ?: "null",
                     style = MaterialTheme.typography.displayLarge,
                     color = MaterialTheme.colorScheme.onSecondaryContainer,
                 )
             }
-            Box(modifier = Modifier.weight(1f).fillMaxSize(), contentAlignment = Alignment.Center) {
+            Box(modifier = Modifier
+                .weight(1f)
+                .fillMaxSize(), contentAlignment = Alignment.Center) {
                 pl.pw.laa.componets.AudioIcon(visible, Modifier.fillMaxSize())
             }
         }
@@ -105,7 +106,7 @@ fun QuestionBox(
 fun QuestionBoxPreviewNoIcon() {
     LearnArabicAlphabetTheme() {
         QuestionBox(
-            Alphabet.letters[1],
+            AudioTestStateWithContent(),
             true,
             { null },
         )
@@ -118,7 +119,7 @@ fun QuestionBoxPreviewNoIcon() {
 fun QuestionBoxPreviewIcon() {
     LearnArabicAlphabetTheme() {
         QuestionBox(
-            Alphabet.letters[1],
+            AudioTestStateWithContent(),
             false,
             { null },
         )
