@@ -1,10 +1,6 @@
 package pl.pw.laa.presentation.menu
 
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import pl.pw.laa.data.presistence.AppConfigKeyRepository
 import pl.pw.laa.mediaplayer.BaseAudioViewModel
 import pl.pw.laa.presentation.menu.domain.AlphabetTable
 import pl.pw.laa.presentation.menu.domain.MenuItem
@@ -14,7 +10,7 @@ import pl.pw.laa.presentation.menu.domain.Vocalization
 import javax.inject.Inject
 
 @HiltViewModel
-class MenuViewModel @Inject constructor(repository: AppConfigKeyRepository) :
+class MenuViewModel @Inject constructor() :
     BaseAudioViewModel() {
 
     val list: List<MenuItem> = listOf(
@@ -23,10 +19,4 @@ class MenuViewModel @Inject constructor(repository: AppConfigKeyRepository) :
         Vocalization,
         Settings,
     )
-
-    init {
-      viewModelScope.launch(context = Dispatchers.IO) {
-            //repository.initDb()
-        }
-    }
 }

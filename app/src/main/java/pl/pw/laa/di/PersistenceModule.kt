@@ -2,6 +2,8 @@ package pl.pw.laa.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,6 +20,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object PersistenceModule {
 
+    private const val DATABASE_DIR = "database/AppConfigData1.db"
+
     @Provides
     @Singleton
     fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
@@ -27,7 +31,7 @@ object PersistenceModule {
                 AppDatabase::class.java,
                 appContext.getString(R.string.database),
             )
-            .fallbackToDestructiveMigration()
+            .createFromAsset(DATABASE_DIR)
             .build()
     }
 
