@@ -48,7 +48,7 @@ fun SettingsScreen(
     if (viewModel.isLoading)
         LoadingScreen()
     else
-        Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) {
+        Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }, modifier = Modifier.padding(paddingValues)) {
         Settings(
             viewState,
             viewModel::onEvent,
