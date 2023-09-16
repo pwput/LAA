@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Learn Arabic Alphabet</string>
+    <string name="alphabet_table_top_row_name">name</string>
+    <string name="alphabet_table_top_row_isolated">isolated</string>
+    <string name="alphabet_table_top_row_initial">initial</string>
+    <string name="alphabet_table_top_row_medial">medial</string>
+    <string name="alphabet_table_top_row_final">final</string>
+    <string name="database">AppConfigData1.db</string>
+
+    <string name="appConfigAnswers">numberOfAnswers</string>
+    <string name="appConfigCheats">cheats</string>
+    <string name="appConfigTips">tips</string>
+    <string name="settings_snackbar_text">You have to leave at least one form chosen.</string>
+    <string name="audiotest_snackbar_text">Wrong Answer! You have clicked letter \"%1$s\", in form \"%2$s\".</string>
+</resources>
