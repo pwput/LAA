@@ -12,4 +12,7 @@
     <string name="appConfigTips">tips</string>
     <string name="settings_snackbar_text">You have to leave at least one form chosen.</string>
     <string name="audiotest_snackbar_text">Wrong Answer! You have clicked letter \"%1$s\", in form \"%2$s\".</string>
+    <string name="navigation_item_quiz_top_bar_label">Test</string>
+    <string name="navigation_item_alphabet_top_bar_label">Alphabet</string>
+    <string name="navigation_item_Settings_top_bar_label">Settings</string>
 </resources>

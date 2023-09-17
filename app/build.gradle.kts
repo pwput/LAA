@@ -102,7 +102,8 @@ dependencies {
     ksp(ComposeDestinations.ksp)
     //compose state events
     implementation(Dependencies.Others.composeStateEvents)
-
+    // Preferences DataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     //Test
     testImplementation(Dependencies.Others.junit)

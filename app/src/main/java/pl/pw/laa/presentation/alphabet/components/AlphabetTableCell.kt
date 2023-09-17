@@ -15,8 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pl.pw.laa.data.Alphabet
-import pl.pw.laa.data.model.Form
-import pl.pw.laa.componets.AudioIcon
+import pl.pw.laa.data.domain.Form
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 val padding = 8.dp

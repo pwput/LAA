@@ -10,15 +10,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import pl.pw.laa.data.presistence.KeyNames
+import pl.pw.laa.data.domain.BooleanPreference
 import pl.pw.laa.toBoolean
 import pl.pw.laa.presentation.settings.SettingsEvent
 import timber.log.Timber
 
 @Composable
 fun SettingsCheckBox(
-    key: KeyNames,
-    value : Int,
+    preference: BooleanPreference,
+    value: Int,
     onEvent: (SettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -28,7 +28,7 @@ fun SettingsCheckBox(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
-            stringResource(id = key.resId),
+            text = stringResource(id = preference.labelId),
             modifier = modifier,
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onBackground,
@@ -36,14 +36,24 @@ fun SettingsCheckBox(
         Switch(
             checked = value.toBoolean(),
             onCheckedChange = {
-                Timber.d("Clicked at Settings Check Box for key: ${key}, current value:${value?.toBoolean()}, changing to: $it")
-                if ((key) == KeyNames.AreCheats) {
-                    onEvent(SettingsEvent.SetAreCheatsOn(it))
-                } else {
-                    onEvent(SettingsEvent.SetAreTipsOn(it))
-                }
+                SettingsCheckBoxOnEvent(preference, value.toBoolean(), it, onEvent)
             },
             modifier = Modifier.weight(1f),
         )
     }
+}
+
+internal fun SettingsCheckBoxOnEvent(
+    preference: BooleanPreference,
+    oldValue: Boolean,
+    newValue: Boolean,
+    onEvent: (SettingsEvent) -> Unit
+) {
+    Timber.d("Clicked at Settings Check Box for key: ${preference}, current value:${oldValue}, changing to: ${newValue}")
+    when(preference) {
+        BooleanPreference.AreCheatsEnabled -> onEvent(SettingsEvent.SetAreCheatsOn(newValue))
+        BooleanPreference.AreTipsEnabled -> onEvent(SettingsEvent.SetAreTipsOn(newValue))
+        else -> {}
+    }
+
 }
