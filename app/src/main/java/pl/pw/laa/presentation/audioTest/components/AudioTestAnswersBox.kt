@@ -20,7 +20,7 @@ import pl.pw.laa.data.model.Form
 import pl.pw.laa.presentation.audioTest.AudioTestStateWithContent
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
-val paddingValues = PaddingValues(16.dp, 0.dp)
+val paddingValues = PaddingValues(8.dp, 0.dp)
 
 @Composable
 fun AnswersBox(
@@ -33,7 +33,7 @@ fun AnswersBox(
             modifier = modifier
                 .fillMaxWidth()
                 .height(IntrinsicSize.Min).background(MaterialTheme.colorScheme.background),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             for (i in 0 until state.formsList.size - 1 step 2) {
                 Row(

@@ -13,15 +13,6 @@ plugins {
 }
 val composeStateEventsVersion by extra("1.2.3")
 
-private val major: Int = 0
-private val minor: Int = 1
-private val patch: Int = 0
-
-fun getVersionName(): String = "$major.$minor.$patch"
-
-
-
-
 android {
     namespace ="pl.pw.laa"
     compileSdk =33
@@ -29,7 +20,7 @@ android {
         applicationId ="pl.pw.laa"
         minSdk= 24
         versionCode= 1
-        versionName = getVersionName()
+        versionName ="1.0"
 
         testInstrumentationRunner ="androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

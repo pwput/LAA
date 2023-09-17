@@ -55,7 +55,7 @@ fun QuestionScreen(
     val snackbarHostState = remember {
         SnackbarHostState()
     }
-    Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) {
+    Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }, modifier = Modifier.padding(padding)){
         val context = LocalContext.current
         if (viewModel.isLoading) {
             LoadingScreen()

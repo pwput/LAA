@@ -61,7 +61,7 @@ fun QuestionBox(
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .fillMaxWidth(1f)
-            .aspectRatio(1.4f, false)
+            .aspectRatio(1.6f, false)
             .background(MaterialTheme.colorScheme.background)
             .padding(PaddingValues(16.dp, 0.dp))
             .border(2.dp, MaterialTheme.colorScheme.secondary, shape = RoundedCornerShape(5))

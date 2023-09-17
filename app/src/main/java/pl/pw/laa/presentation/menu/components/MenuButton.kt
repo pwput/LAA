@@ -37,7 +37,7 @@ fun MenuButton(
             .clickable { onClick() },
         contentAlignment = Alignment.Center,
     ) {
-        pl.pw.laa.componets.AutoResizedText(
+        AutoResizedText(
             text = content,
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onPrimaryContainer,
