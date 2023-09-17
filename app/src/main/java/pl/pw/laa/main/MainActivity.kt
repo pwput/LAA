@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -20,14 +19,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
-import androidx.compose.material3.TopAppBarDefaults.windowInsets
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -35,14 +32,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.navigation.dependency
-import com.ramcosta.composedestinations.navigation.navigate
 import dagger.hilt.android.AndroidEntryPoint
+import pl.pw.laa.navigation.NavigationItem
 import pl.pw.laa.navigation.getCurrentDestination
+import pl.pw.laa.navigation.getTopBarTitle
 import pl.pw.laa.navigation.navigateAndPopUp
 import pl.pw.laa.presentation.NavGraphs
-import pl.pw.laa.presentation.appCurrentDestinationAsState
-import pl.pw.laa.presentation.destinations.Destination
-import pl.pw.laa.presentation.startAppDestination
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 import timber.log.Timber
 import javax.inject.Inject
@@ -84,10 +79,10 @@ class MainActivity @Inject constructor() : ComponentActivity() {
                         modifier = Modifier
                             .nestedScroll(scrollBehavior.nestedScrollConnection),
                         topBar = {
-                            LAATopBar(navController, scrollBehavior)
+                            TopBar(navController, scrollBehavior)
                         },
                         bottomBar = {
-                            LAABotNavBar(navController)
+                            BotNavBar(navController)
                         }
                     ) { paddingValues ->
                         DestinationsNavHost(
@@ -104,7 +99,7 @@ class MainActivity @Inject constructor() : ComponentActivity() {
     }
 
     @Composable
-    fun LAABotNavBar(
+    fun BotNavBar(
         navController: NavHostController
     ) {
         val currentDestination = navController.getCurrentDestination()
@@ -119,7 +114,7 @@ class MainActivity @Inject constructor() : ComponentActivity() {
                             navController.navigateAndPopUp(item.direction)
                     },
                     icon = {
-                        item.getIcon(isSelected = item.direction == navController.getCurrentDestination())
+                        item.GetIcon(isSelected = item.direction == navController.getCurrentDestination())
                     },
                     label = {
                         if (!item.label.isNullOrEmpty()) Text(
@@ -132,28 +127,18 @@ class MainActivity @Inject constructor() : ComponentActivity() {
         }
     }
 
-
-    private fun getTopBarActionsForDestination(currentDestination: Destination) =
-        when (currentDestination) {
-            NavigationItem.Quiz.direction -> "Quiz"
-            NavigationItem.Alphabet.direction -> "Alphabet"
-            NavigationItem.Settings.direction -> "Settings"
-            else -> "LLA"
-        }
-
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun LAATopBar(
+    fun TopBar(
         navController: NavHostController,
         scrollBehavior: TopAppBarScrollBehavior
     ) {
-
         val currentDestination = navController.getCurrentDestination()
 
         TopAppBar(
             title = {
                 Text(
-                    getTopBarActionsForDestination(navController.getCurrentDestination()),
+                    navController.getCurrentDestination().getTopBarTitle(),
                 )
             },
             actions = {
@@ -162,7 +147,7 @@ class MainActivity @Inject constructor() : ComponentActivity() {
                         if (item.direction != currentDestination)
                             navController.navigateAndPopUp(item.direction)
                     }) {
-                        item.getIcon(isSelected = item.direction == navController.getCurrentDestination())
+                        item.GetIcon(isSelected = item.direction == navController.getCurrentDestination())
                     }
                 }
             },
@@ -175,7 +160,6 @@ class MainActivity @Inject constructor() : ComponentActivity() {
                 actionIconContentColor = MaterialTheme.colorScheme.onBackground
             )
         )
-
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
@@ -186,7 +170,7 @@ class MainActivity @Inject constructor() : ComponentActivity() {
             val navController = rememberNavController()
             val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
-            LAATopBar(navController, scrollBehavior)
+            TopBar(navController, scrollBehavior)
         }
     }
 
@@ -196,8 +180,7 @@ class MainActivity @Inject constructor() : ComponentActivity() {
         LearnArabicAlphabetTheme {
             val navController = rememberNavController()
 
-            LAABotNavBar(navController)
+            BotNavBar(navController)
         }
     }
-
 }

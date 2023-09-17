@@ -17,7 +17,7 @@ fun NavHostController.getCurrentDestination(): Destination =
     this.appCurrentDestinationAsState().value ?: NavGraphs.root.startAppDestination
 
 fun NavHostController.navigateAndPopUp(direction: Direction) {
-    Timber.i("navigateAndPopUp: ${direction::class.java.simpleName}")
+    Timber.i("Navigate to destination: '${direction::class.java.simpleName}', and pop up.")
     this.navigate(direction){
         popUpTo(direction.route){
             inclusive = true
