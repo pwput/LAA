@@ -49,13 +49,12 @@ private val paddingValues = PaddingValues(16.dp, 0.dp, 16.dp, 16.dp)
 fun QuestionScreen(
     navigator: DestinationsNavigator,
     padding: PaddingValues,
+    snackbarHostState: SnackbarHostState,
     viewModel: AudioTestViewModel = hiltViewModel(),
 ) {
     val viewState: AudioTestStateWithContent by viewModel.viewState.collectAsStateWithLifecycle()
-    val snackbarHostState = remember {
-        SnackbarHostState()
-    }
-    Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }) {
+
+    Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }, modifier = Modifier.padding(padding)){
         val context = LocalContext.current
         if (viewModel.isLoading) {
             LoadingScreen()
@@ -80,9 +79,8 @@ fun QuestionScreen(
             event = viewState.showSnackbarEvent,
             onConsumed = viewModel::setShowMessageConsumed
         ) {
-            val string = context.resources.getString(R.string.audiotest_snackbar_text, it[0], it[1])
             snackbarHostState.ShowSnackbar(
-                Message(string)
+                Message(context.resources.getString(R.string.audiotest_snackbar_text, it[0], it[1]))
             )
         }
     }

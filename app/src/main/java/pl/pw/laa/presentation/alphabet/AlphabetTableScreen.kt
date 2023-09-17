@@ -5,11 +5,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -29,18 +31,19 @@ fun AlphabetTableScreen(
     padding: PaddingValues,
     viewModel: AlphabetTableViewModel = hiltViewModel(),
 ) {
-    AlphabetTable(viewModel::onEvent, viewModel.showIcon)
+    AlphabetTable(viewModel::onEvent, viewModel.showIcon,padding)
 }
 
 @Composable
 fun AlphabetTable(
     onEvent: (AlphabetTableEvent) -> MediaPlayerResponse,
     showIcon: Boolean,
+    padding: PaddingValues
 ) {
     Column(
         Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
+            .background(MaterialTheme.colorScheme.background).padding(padding)
     ) {
         AlphabetTableColumNamesRow()
         RowDivider()
@@ -60,6 +63,6 @@ fun AlphabetTable(
 @Composable
 fun AlphabetTablePreview() {
     LearnArabicAlphabetTheme() {
-        AlphabetTable({ MediaPlayerResponse.Error }, false)
+        AlphabetTable({ MediaPlayerResponse.Error }, false, PaddingValues(0.dp))
     }
 }

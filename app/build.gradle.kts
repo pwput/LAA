@@ -1,3 +1,4 @@
+import pl.pw.buildsrc.BuildVersion.getVersionName
 import pl.pw.buildsrc.Dependencies
 import pl.pw.buildsrc.Dependencies.Kotlinx
 import pl.pw.buildsrc.Dependencies.Androidx
@@ -12,15 +13,6 @@ plugins {
     id("dagger.hilt.android.plugin")
 }
 val composeStateEventsVersion by extra("1.2.3")
-
-private val major: Int = 0
-private val minor: Int = 1
-private val patch: Int = 0
-
-fun getVersionName(): String = "$major.$minor.$patch"
-
-
-
 
 android {
     namespace ="pl.pw.laa"
