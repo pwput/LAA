@@ -36,31 +36,27 @@ import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 fun SettingsScreen(
     navigator: DestinationsNavigator,
     paddingValues: PaddingValues,
+    snackbarHostState: SnackbarHostState,
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val viewState: SettingsState by viewModel.viewState.collectAsStateWithLifecycle()
-    val snackbarHostState = remember {
-        SnackbarHostState()
-    }
 
     val context = LocalContext.current
 
     if (viewModel.isLoading)
         LoadingScreen()
     else
-        Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }, modifier = Modifier.padding(paddingValues)) {
         Settings(
             viewState,
             viewModel::onEvent,
         )
+    EventEffect(
+        event = viewState.showSnackbarEvent,
+        onConsumed = viewModel::setShowMessageConsumed
+    ) {
+        snackbarHostState.ShowSnackbar(Message(context.getString(R.string.settings_snackbar_text)))
+    }
 
-            EventEffect(
-                event = viewState.showSnackbarEvent,
-                onConsumed = viewModel::setShowMessageConsumed
-            ) {
-                snackbarHostState.ShowSnackbar(Message(context.getString(R.string.settings_snackbar_text)))
-            }
-        }
 }
 
 @Composable

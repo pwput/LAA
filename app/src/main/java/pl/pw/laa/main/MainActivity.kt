@@ -13,6 +13,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -22,6 +24,7 @@ import androidx.compose.material3.TopAppBarDefaults.windowInsets
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextOverflow
@@ -67,12 +70,17 @@ class MainActivity @Inject constructor() : ComponentActivity() {
             navController.enableOnBackPressed(false)
             val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
+            val snackbarHostState = remember {
+                SnackbarHostState()
+            }
+
             LearnArabicAlphabetTheme(darkTheme = isSystemInDarkTheme()) {
                 Surface(
                     Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Scaffold(
+                        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
                         modifier = Modifier
                             .nestedScroll(scrollBehavior.nestedScrollConnection),
                         topBar = {
@@ -85,7 +93,10 @@ class MainActivity @Inject constructor() : ComponentActivity() {
                         DestinationsNavHost(
                             navGraph = NavGraphs.root,
                             navController = navController,
-                            dependenciesContainerBuilder = { dependency(paddingValues) })
+                            dependenciesContainerBuilder = {
+                                dependency(paddingValues)
+                                dependency(snackbarHostState)
+                            })
                     }
                 }
             }
@@ -97,8 +108,9 @@ class MainActivity @Inject constructor() : ComponentActivity() {
         navController: NavHostController
     ) {
         val currentDestination = navController.getCurrentDestination()
-        NavigationBar ( modifier = Modifier.height(64.dp)
-        ){
+        NavigationBar(
+            modifier = Modifier.height(64.dp)
+        ) {
             bottomNavigationItems.forEach { item ->
                 BottomNavigationItem(
                     selected = item.direction == navController.getCurrentDestination(),
@@ -121,11 +133,11 @@ class MainActivity @Inject constructor() : ComponentActivity() {
     }
 
 
-    private fun getTopBarActionsForDestination(currentDestination: Destination)=
-     when (currentDestination) {
-             NavigationItem.Quiz.direction -> "Quiz"
-             NavigationItem.Alphabet.direction -> "Alphabet"
-             NavigationItem.Settings.direction -> "Settings"
+    private fun getTopBarActionsForDestination(currentDestination: Destination) =
+        when (currentDestination) {
+            NavigationItem.Quiz.direction -> "Quiz"
+            NavigationItem.Alphabet.direction -> "Alphabet"
+            NavigationItem.Settings.direction -> "Settings"
             else -> "LLA"
         }
 

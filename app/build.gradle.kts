@@ -1,3 +1,4 @@
+import pl.pw.buildsrc.BuildVersion.getVersionName
 import pl.pw.buildsrc.Dependencies
 import pl.pw.buildsrc.Dependencies.Kotlinx
 import pl.pw.buildsrc.Dependencies.Androidx
@@ -20,7 +21,7 @@ android {
         applicationId ="pl.pw.laa"
         minSdk= 24
         versionCode= 1
-        versionName ="1.0"
+        versionName = getVersionName()
 
         testInstrumentationRunner ="androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
