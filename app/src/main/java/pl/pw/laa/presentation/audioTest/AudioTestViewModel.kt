@@ -7,16 +7,17 @@ import de.palm.composestateevents.consumed
 import de.palm.composestateevents.triggered
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.pw.laa.data.Alphabet
-import pl.pw.laa.data.model.Final
-import pl.pw.laa.data.model.Form
-import pl.pw.laa.data.model.Initial
-import pl.pw.laa.data.model.Isolated
-import pl.pw.laa.data.model.Letter
-import pl.pw.laa.data.model.Medial
-import pl.pw.laa.data.presistence.AppConfig
+import pl.pw.laa.data.domain.Final
+import pl.pw.laa.data.domain.Form
+import pl.pw.laa.data.domain.Initial
+import pl.pw.laa.data.domain.Isolated
+import pl.pw.laa.data.domain.Letter
+import pl.pw.laa.data.domain.Medial
+import pl.pw.laa.data.repository.IUserPreferencesRepository
 import pl.pw.laa.mediaplayer.BaseAudioViewModel
 import pl.pw.laa.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.viewmodel.IStateViewModel
@@ -26,7 +27,7 @@ import kotlin.random.Random
 import kotlin.random.nextInt
 
 @HiltViewModel
-class AudioTestViewModel @Inject constructor(private val appConfig: AppConfig) :
+class AudioTestViewModel @Inject constructor(private val userPreferencesRepository: IUserPreferencesRepository) :
     BaseAudioViewModel(), IStateViewModel {
 
     private val viewStateNotifier = MutableStateFlow(AudioTestStateWithContent())
@@ -35,24 +36,28 @@ class AudioTestViewModel @Inject constructor(private val appConfig: AppConfig) :
         setShowMessageEvent(consumed())
     }
 
+    private val availableForms = mutableListOf<Class<out Form>>()
+
     init {
         startLoading()
         fetchData()
     }
 
-    private val availableForms = mutableListOf<Class<out Form>>()
 
     private fun fetchData() {
         viewModelScope.launch {
+
+            val preferences = userPreferencesRepository.userPreferencesFlow
+
             viewStateNotifier.update {
                 it.copy(
-                    numberOfAnswers = appConfig.answers.getValue(),
-                    areCheatsOn = appConfig.cheats.getValue(),
-                    areTipsOn = appConfig.tips.getValue(),
-                    isInitialTested = appConfig.initial.getValue(),
-                    isMedialTested = appConfig.medial.getValue(),
-                    isFinalTested = appConfig.final.getValue(),
-                    isIsolatedTested = appConfig.isolated.getValue(),
+                    numberOfAnswers = preferences.first().answersCount,
+                    areCheatsOn = preferences.first().areCheatsEnabled,
+                    areTipsOn = preferences.first().areTipsEnabled,
+                    isInitialTested = preferences.first().isInitial,
+                    isMedialTested = preferences.first().isMedial,
+                    isFinalTested = preferences.first().isFinal,
+                    isIsolatedTested = preferences.first().isIsolated,
                 )
             }
             getNewState()
@@ -63,7 +68,8 @@ class AudioTestViewModel @Inject constructor(private val appConfig: AppConfig) :
 
     private fun setupAvailableForms() {
         Timber.d("Settingup avaliable forms")
-        availableForms.clear()
+        if (!availableForms.isNullOrEmpty())
+            availableForms.clear()
         if (viewStateNotifier.value.isInitialTested) availableForms.add(Initial::class.java)
         if (viewStateNotifier.value.isMedialTested) availableForms.add(Medial::class.java)
         if (viewStateNotifier.value.isFinalTested) availableForms.add(Final::class.java)

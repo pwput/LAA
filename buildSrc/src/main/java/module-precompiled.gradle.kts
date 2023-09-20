@@ -83,6 +83,8 @@ dependencies {
     implementation(Dependencies.Androidx.constraintlayoutCompose)
     implementation(Dependencies.Androidx.activityCompose)
     implementation(Dependencies.Androidx.hiltNavigationCompose)
+    // Preferences DataStore
+    implementation(Dependencies.Androidx.datastorePreferences)
     // hilt
     implementation(Dependencies.Dagger.hilt)
     kapt(Dependencies.Dagger.hiltCompiler)

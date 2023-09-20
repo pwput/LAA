@@ -11,6 +11,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.ramcosta.composedestinations.spec.Direction
+import pl.pw.laa.R
 import pl.pw.laa.presentation.destinations.AlphabetTableScreenDestination
 import pl.pw.laa.presentation.destinations.Destination
 import pl.pw.laa.presentation.destinations.QuestionScreenDestination
@@ -18,26 +19,26 @@ import pl.pw.laa.presentation.destinations.SettingsScreenDestination
 
 enum class NavigationItem(
     val direction: Direction,
-    val label: String? = null,
+    val textId: Int? = null,
     val selectedIcon: ImageVector,
     val unselectedIcon: ImageVector,
 ) {
     Quiz(
         direction = QuestionScreenDestination(),
         selectedIcon = Icons.Filled.Edit,
-        label = "Test",
+        textId = R.string.navigation_item_quiz_button_label,
         unselectedIcon = Icons.Outlined.Edit,
     ),
     Alphabet(
         direction = AlphabetTableScreenDestination,
         selectedIcon = Icons.Filled.List,
-        label = "Alphabet",
+        textId = R.string.navigation_item_alphabet_button_label,
         unselectedIcon = Icons.Outlined.List,
     ),
     Settings(
         direction = SettingsScreenDestination,
         selectedIcon = Icons.Filled.Settings,
-        label = "Alphabet",
+        textId = R.string.navigation_item_settings_button_label,
         unselectedIcon = Icons.Outlined.Settings,
     );
 
@@ -50,8 +51,8 @@ enum class NavigationItem(
 
 fun Destination.getTopBarTitle() =
     when (this) {
-        NavigationItem.Quiz.direction -> "Quiz"
-        NavigationItem.Alphabet.direction -> "Alphabet"
-        NavigationItem.Settings.direction -> "Settings"
-        else -> "LLA"
+        NavigationItem.Quiz.direction -> R.string.navigation_item_quiz_top_bar_text
+        NavigationItem.Alphabet.direction -> R.string.navigation_item_alphabet_top_bar_text
+        NavigationItem.Settings.direction -> R.string.navigation_item_settings_top_bar_text
+        else -> R.string.app_name
     }

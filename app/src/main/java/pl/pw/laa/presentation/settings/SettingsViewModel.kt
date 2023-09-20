@@ -9,9 +9,11 @@ import de.palm.composestateevents.triggered
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import pl.pw.laa.data.presistence.AppConfig
+import pl.pw.laa.data.repository.IUserPreferencesRepository
+import pl.pw.laa.data.repository.UserPreferencesRepository
 import pl.pw.laa.viewmodel.BaseViewModel
 import pl.pw.laa.viewmodel.IStateViewModel
 import timber.log.Timber
@@ -19,7 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    private val appConfig: AppConfig,
+    private val userPreferencesRepository: IUserPreferencesRepository
 ) : BaseViewModel(), IStateViewModel{
 
     private val  viewStateNotifier = MutableStateFlow(SettingsState())
@@ -31,15 +33,17 @@ class SettingsViewModel @Inject constructor(
 
     private fun fetchData() {
         viewModelScope.launch {
+            val preferences = userPreferencesRepository.userPreferencesFlow
+
             viewStateNotifier.update {
                 it.copy(
-                    numberOfAnswers = appConfig.answers.getValue(),
-                    areCheatsOn = appConfig.cheats.getValue(),
-                    areTipsOn = appConfig.tips.getValue(),
-                    isInitialTested = appConfig.initial.getValue(),
-                    isMedialTested = appConfig.medial.getValue(),
-                    isFinalTested = appConfig.final.getValue(),
-                    isIsolatedTested = appConfig.isolated.getValue(),
+                    numberOfAnswers = preferences.first().answersCount,
+                    areCheatsOn = preferences.first().areCheatsEnabled,
+                    areTipsOn = preferences.first().areTipsEnabled,
+                    isInitialTested = preferences.first().isInitial,
+                    isMedialTested = preferences.first().isMedial,
+                    isFinalTested = preferences.first().isFinal,
+                    isIsolatedTested = preferences.first().isIsolated,
                 )
             }
             stopLoading()
@@ -52,21 +56,21 @@ class SettingsViewModel @Inject constructor(
             is SettingsEvent.SetAnswersCount ->
                 viewModelScope.launch(context = Dispatchers.IO) {
                     Timber.d("Setting ac to ${event.answersCount}")
-                    appConfig.answers.setValue(event.answersCount)
+                    userPreferencesRepository.updateAnswersCount(event.answersCount)
                     fetchData()
                 }
 
             is SettingsEvent.SetAreCheatsOn ->
                 viewModelScope.launch(context = Dispatchers.IO) {
                     Timber.d("Setting cheets to ${event.areCheatsOn}")
-                    appConfig.cheats.setValue(event.areCheatsOn)
+                    userPreferencesRepository.updateAreCheatsEnabled(event.areCheatsOn)
                     fetchData()
                 }
 
             is SettingsEvent.SetAreTipsOn ->
                 viewModelScope.launch(context = Dispatchers.IO) {
                     Timber.d("Setting tips to ${event.areTipsOn}")
-                    appConfig.tips.setValue(event.areTipsOn)
+                    userPreferencesRepository.updateAreTipsEnabled(event.areTipsOn)
                     fetchData()
                 }
 
@@ -74,7 +78,7 @@ class SettingsViewModel @Inject constructor(
                 if (canFormBeChanged(event.isForm))
                     viewModelScope.launch(context = Dispatchers.IO) {
                         Timber.d("Setting appConfigIsFinalTested to ${event.isForm}")
-                        appConfig.final.setValue(event.isForm)
+                        userPreferencesRepository.updateIsFinal(event.isForm)
                         fetchData()
                     }
 
@@ -82,7 +86,7 @@ class SettingsViewModel @Inject constructor(
                 if (canFormBeChanged(event.isForm))
                     viewModelScope.launch(context = Dispatchers.IO) {
                         Timber.d("Setting appConfigIsInitialTested to ${event.isForm}")
-                        appConfig.initial.setValue(event.isForm)
+                        userPreferencesRepository.updateIsInitial(event.isForm)
                         fetchData()
                     }
 
@@ -90,7 +94,7 @@ class SettingsViewModel @Inject constructor(
                 if (canFormBeChanged(event.isForm))
                     viewModelScope.launch(context = Dispatchers.IO) {
                         Timber.d("Setting appConfigIsIsolatedTested to ${event.isForm}")
-                        appConfig.isolated.setValue(event.isForm)
+                        userPreferencesRepository.updateIsIsolated(event.isForm)
                         fetchData()
                     }
 
@@ -98,7 +102,7 @@ class SettingsViewModel @Inject constructor(
                 if (canFormBeChanged(event.isForm))
                     viewModelScope.launch(context = Dispatchers.IO) {
                         Timber.d("Setting appConfigIsMedialTested to ${event.isForm}")
-                        appConfig.medial.setValue(event.isForm)
+                        userPreferencesRepository.updateIsMedial(event.isForm)
                         fetchData()
                     }
         }}

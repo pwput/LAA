@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -41,6 +42,7 @@ import pl.pw.laa.presentation.NavGraphs
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 import timber.log.Timber
 import javax.inject.Inject
+
 
 
 @AndroidEntryPoint
@@ -117,8 +119,8 @@ class MainActivity @Inject constructor() : ComponentActivity() {
                         item.GetIcon(isSelected = item.direction == navController.getCurrentDestination())
                     },
                     label = {
-                        if (!item.label.isNullOrEmpty()) Text(
-                            text = item.label,
+                        if (item.textId != null) Text(
+                            text = stringResource(id = item.textId),
                             style = MaterialTheme.typography.labelSmall
                         )
                     },
@@ -138,7 +140,8 @@ class MainActivity @Inject constructor() : ComponentActivity() {
         TopAppBar(
             title = {
                 Text(
-                    navController.getCurrentDestination().getTopBarTitle(),
+                    text = stringResource(id = currentDestination.getTopBarTitle()),
+                    style = MaterialTheme.typography.titleMedium
                 )
             },
             actions = {

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_config_are_answers_display_name">answers</string>
-    <string name="app_config_answers_display_name">answers</string>
-    <string name="app_config_are_cheats_display_name">cheats</string>
-    <string name="app_config_are_tips_display_name">tips</string>
-    <string name="app_config_is_initial_display_name">initial</string>
-    <string name="app_config_is_medial_display_name">medial</string>
-    <string name="app_config_is_final_display_name">final</string>
-    <string name="app_config_is_isolated_display_name">isolated</string>
+    <string name="prefernece_are_answers_label">answers</string>
+    <string name="prefernece_are_cheats_label">cheats</string>
+    <string name="prefernece_are_tips_label">tips</string>
+    <string name="prefernece_is_initial_label">initial</string>
+    <string name="prefernece_is_medial_label">medial</string>
+    <string name="prefernece_is_final_label">final</string>
+    <string name="prefernece_is_isolated_label">isolated</string>
 </resources>

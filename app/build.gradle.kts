@@ -76,7 +76,6 @@ dependencies {
     implementation(Androidx.Compose.runtime)
     implementation(Androidx.Compose.runtimeLivedata)
     implementation(Androidx.Compose.uiTooling)
-    implementation ("androidx.core:core-splashscreen:1.0.0")
 
     // androidx
     implementation(Androidx.startup)
@@ -85,6 +84,9 @@ dependencies {
     implementation(Androidx.activityCompose)
     implementation(Androidx.hiltNavigationCompose)
     implementation(Androidx.lifecycleRuntimeCompose)
+    implementation(Androidx.splashscreen)
+    // Preferences DataStore
+    implementation(Dependencies.Androidx.datastorePreferences)
     // Room
     implementation(Androidx.Room.runtime)
     annotationProcessor(Androidx.Room.compiler)

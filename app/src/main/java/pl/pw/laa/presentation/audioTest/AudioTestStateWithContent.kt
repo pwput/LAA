@@ -2,8 +2,8 @@ package pl.pw.laa.presentation.audioTest
 
 import de.palm.composestateevents.StateEventWithContent
 import de.palm.composestateevents.consumed
-import pl.pw.laa.data.model.Form
-import pl.pw.laa.data.model.Letter
+import pl.pw.laa.data.domain.Form
+import pl.pw.laa.data.domain.Letter
 import pl.pw.laa.state.BaseState
 import pl.pw.laa.state.IAppConfigState
 import pl.pw.laa.state.ISnackbarEventStateWithContent

@@ -7,25 +7,23 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import pl.pw.laa.data.model.AppConfigKey
-import pl.pw.laa.data.presistence.KeyNames
-import pl.pw.laa.toBoolean
+import pl.pw.laa.data.domain.FormPreference
 import pl.pw.laa.presentation.settings.SettingsEvent
+import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsChip(
-    key: KeyNames,
-    value: Int,
+    preferenceEnum: FormPreference,
+    value: Boolean,
     onEvent: (SettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     FilterChip(
         modifier = modifier,
-        selected = value.toBoolean(),
-        onClick = { onEvent(event(AppConfigKey(key.value,"",value))) },
-        label = { Text(stringResource(id = key.resId)) },
+        selected = value,
+        onClick = { SettingsChipOnEvent(preferenceEnum, !value , onEvent) },
+        label = { Text(text = preferenceEnum.toString()) },
         colors = FilterChipDefaults.filterChipColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant,
             labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -35,10 +33,12 @@ fun SettingsChip(
     )
 }
 
-fun event(key: AppConfigKey) =
-    when (key.key) {
-        KeyNames.IsInitial.value -> SettingsEvent.SetisInitialTested(!key.value.toBoolean())
-        KeyNames.IsMedial.value -> SettingsEvent.SetisMedialTested(!key.value.toBoolean())
-        KeyNames.IsFinal.value -> SettingsEvent.SetisFinalTested(!key.value.toBoolean())
-        else -> SettingsEvent.SetisIsolatedTested(!key.value.toBoolean())
+internal fun SettingsChipOnEvent(enum: FormPreference, newValue: Boolean, onEvent: (SettingsEvent) -> Unit) {
+    Timber.d("Clicked at Settings Chip for key: ${enum}, current value:${newValue}, changing to: ${!newValue}")
+    when (enum) {
+        FormPreference.IsInitial -> onEvent(SettingsEvent.SetisInitialTested(newValue))
+        FormPreference.IsMedial -> onEvent(SettingsEvent.SetisMedialTested(newValue))
+        FormPreference.IsFinal -> onEvent(SettingsEvent.SetisFinalTested(newValue))
+        FormPreference.IsIsolated -> onEvent(SettingsEvent.SetisIsolatedTested(newValue))
     }
+}

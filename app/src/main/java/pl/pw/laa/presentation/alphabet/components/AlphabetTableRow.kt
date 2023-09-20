@@ -20,10 +20,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import pl.pw.laa.data.model.Letter
+import pl.pw.laa.data.domain.Letter
 import pl.pw.laa.R
 import pl.pw.laa.presentation.alphabet.AlphabetTableEvent
-import pl.pw.laa.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Composable

@@ -21,15 +21,16 @@ import pl.pw.laa.componets.LoadingScreen
 import pl.pw.laa.componets.Message
 import pl.pw.laa.componets.RowDivider
 import pl.pw.laa.componets.ShowSnackbar
-import pl.pw.laa.data.model.AppConfigKey
-import pl.pw.laa.data.presistence.KeyNames
+import pl.pw.laa.data.domain.BooleanPreference
+import pl.pw.laa.data.domain.FormPreference
+import pl.pw.laa.data.domain.IntPreference
 import pl.pw.laa.toInt
 import pl.pw.laa.presentation.settings.components.SettingsCheckBox
 import pl.pw.laa.presentation.settings.components.SettingsChipGroup
 import pl.pw.laa.presentation.settings.components.SettingsNumberList
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
-@SuppressLint( "UnusedMaterial3ScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 
 @Destination
 @Composable
@@ -48,6 +49,7 @@ fun SettingsScreen(
     else
         Settings(
             viewState,
+            paddingValues,
             viewModel::onEvent,
         )
     EventEffect(
@@ -62,12 +64,15 @@ fun SettingsScreen(
 @Composable
 fun Settings(
     state: SettingsState,
+    paddingValues: PaddingValues,
     onEvent: (SettingsEvent) -> Unit,
 ) {
-        val expanded by remember {
-            mutableStateOf(false)
-        }
-        val context = LocalContext.current
+    val expanded by remember {
+        mutableStateOf(false)
+    }
+    Surface(modifier = Modifier.padding(paddingValues)) {
+
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -77,36 +82,34 @@ fun Settings(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             SettingsNumberList(
-                key = AppConfigKey(
-                    KeyNames.NumberOfAnswers.value,
-                    context.getString(KeyNames.NumberOfAnswers.resId),
-                    state.numberOfAnswers
-                ),
+                IntPreference.AnswersCount,
+                state.numberOfAnswers,
                 expanded = expanded,
                 onEvent = onEvent,
                 modifier = Modifier.weight(1f),
             )
             RowDivider()
             SettingsCheckBox(
-                KeyNames.AreCheats,
+                BooleanPreference.AreCheatsEnabled,
                 state.areCheatsOn.toInt(),
                 onEvent = onEvent,
                 modifier = Modifier.weight(1f)
             )
             SettingsCheckBox(
-                KeyNames.AreTips,
+                BooleanPreference.AreTipsEnabled,
                 state.areTipsOn.toInt(),
                 onEvent = onEvent,
                 modifier = Modifier.weight(1f)
             )
             RowDivider()
             SettingsChipGroup(
-                KeyNames.IsInitial, state.isInitialTested.toInt(),
-                KeyNames.IsMedial, state.isMedialTested.toInt(),
-                KeyNames.IsFinal, state.isFinalTested.toInt(),
-                KeyNames.IsIsolated, state.isIsolatedTested.toInt(),
+                FormPreference.IsInitial, state.isInitialTested,
+                FormPreference.IsMedial, state.isMedialTested,
+                FormPreference.IsFinal, state.isFinalTested,
+                FormPreference.IsIsolated, state.isIsolatedTested,
                 onEvent,
             )
+        }
     }
 }
 
@@ -118,6 +121,7 @@ fun SettingsScreenPreview() {
         Surface(modifier = Modifier.fillMaxSize()) {
             Settings(
                 SettingsState(),
+                PaddingValues(),
             ) {}
         }
     }
