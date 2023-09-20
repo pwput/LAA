@@ -1,6 +1,5 @@
 package pl.pw.laa.main
 
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -30,7 +29,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.ramcosta.composedestinations.DestinationsNavHost
@@ -142,7 +140,8 @@ class MainActivity @Inject constructor() : ComponentActivity() {
         TopAppBar(
             title = {
                 Text(
-                    navController.getCurrentDestination().getTopBarTitle(),
+                    text = stringResource(id = currentDestination.getTopBarTitle()),
+                    style = MaterialTheme.typography.titleMedium
                 )
             },
             actions = {

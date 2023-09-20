@@ -36,9 +36,9 @@ fun SettingsChip(
 internal fun SettingsChipOnEvent(enum: FormPreference, newValue: Boolean, onEvent: (SettingsEvent) -> Unit) {
     Timber.d("Clicked at Settings Chip for key: ${enum}, current value:${newValue}, changing to: ${!newValue}")
     when (enum) {
-        FormPreference.Initial -> onEvent(SettingsEvent.SetisInitialTested(newValue))
-        FormPreference.Medial -> onEvent(SettingsEvent.SetisMedialTested(newValue))
-        FormPreference.Final -> onEvent(SettingsEvent.SetisFinalTested(newValue))
-        FormPreference.Isolated -> onEvent(SettingsEvent.SetisIsolatedTested(newValue))
+        FormPreference.IsInitial -> onEvent(SettingsEvent.SetisInitialTested(newValue))
+        FormPreference.IsMedial -> onEvent(SettingsEvent.SetisMedialTested(newValue))
+        FormPreference.IsFinal -> onEvent(SettingsEvent.SetisFinalTested(newValue))
+        FormPreference.IsIsolated -> onEvent(SettingsEvent.SetisIsolatedTested(newValue))
     }
 }

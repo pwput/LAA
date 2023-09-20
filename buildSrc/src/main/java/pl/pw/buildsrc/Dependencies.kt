@@ -42,6 +42,8 @@ object Dependencies {
             "androidx.hilt:hilt-navigation-compose:${Versions.hiltComposeNavigation}"
         const val junit = "androidx.test.ext:junit:1.1.5"
         const val espresso = "androidx.test.espresso:espresso-core:3.5.1"
+        const val datastorePreferences = "androidx.datastore:datastore-preferences:1.0.0"
+        const val splashscreen = "androidx.core:core-splashscreen:1.0.0"
 
         object Compose {
             const val material3 = "androidx.compose.material3:material3:${Versions.material3}"

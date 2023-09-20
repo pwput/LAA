@@ -26,19 +26,19 @@ enum class NavigationItem(
     Quiz(
         direction = QuestionScreenDestination(),
         selectedIcon = Icons.Filled.Edit,
-        textId = R.string.navigation_item_quiz_top_bar_label,
+        textId = R.string.navigation_item_quiz_button_label,
         unselectedIcon = Icons.Outlined.Edit,
     ),
     Alphabet(
         direction = AlphabetTableScreenDestination,
         selectedIcon = Icons.Filled.List,
-        textId = R.string.navigation_item_alphabet_top_bar_label,
+        textId = R.string.navigation_item_alphabet_button_label,
         unselectedIcon = Icons.Outlined.List,
     ),
     Settings(
         direction = SettingsScreenDestination,
         selectedIcon = Icons.Filled.Settings,
-        textId = R.string.navigation_item_Settings_top_bar_label,
+        textId = R.string.navigation_item_settings_button_label,
         unselectedIcon = Icons.Outlined.Settings,
     );
 
@@ -51,8 +51,8 @@ enum class NavigationItem(
 
 fun Destination.getTopBarTitle() =
     when (this) {
-        NavigationItem.Quiz.direction -> "Quiz"
-        NavigationItem.Alphabet.direction -> "Alphabet"
-        NavigationItem.Settings.direction -> "Settings"
-        else -> "LLA"
+        NavigationItem.Quiz.direction -> R.string.navigation_item_quiz_top_bar_text
+        NavigationItem.Alphabet.direction -> R.string.navigation_item_alphabet_top_bar_text
+        NavigationItem.Settings.direction -> R.string.navigation_item_settings_top_bar_text
+        else -> R.string.app_name
     }

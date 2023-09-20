@@ -103,10 +103,10 @@ fun Settings(
             )
             RowDivider()
             SettingsChipGroup(
-                FormPreference.Initial, state.isInitialTested,
-                FormPreference.Medial, state.isMedialTested,
-                FormPreference.Final, state.isFinalTested,
-                FormPreference.Isolated, state.isIsolatedTested,
+                FormPreference.IsInitial, state.isInitialTested,
+                FormPreference.IsMedial, state.isMedialTested,
+                FormPreference.IsFinal, state.isFinalTested,
+                FormPreference.IsIsolated, state.isIsolatedTested,
                 onEvent,
             )
         }
