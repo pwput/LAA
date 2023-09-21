@@ -5,6 +5,5 @@ import pl.pw.laa.state.BaseState
 
 interface IStateViewModel {
     val viewState: StateFlow<BaseState>
-
     fun setShowMessageConsumed()
 }

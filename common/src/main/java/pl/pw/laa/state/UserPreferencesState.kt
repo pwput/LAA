@@ -1,9 +1,9 @@
 package pl.pw.laa.state
 
-interface IAppConfigState {
-    var areCheatsOn: Boolean
-    var numberOfAnswers: Int
-    var areTipsOn: Boolean
+interface UserPreferencesState {
+    var answersCount: Int
+    var areCheatsEnabled: Boolean
+    var areTipsEnabled: Boolean
     var isInitialTested: Boolean
     var isMedialTested: Boolean
     var isFinalTested: Boolean

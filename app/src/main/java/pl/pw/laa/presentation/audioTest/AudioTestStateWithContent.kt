@@ -5,7 +5,7 @@ import de.palm.composestateevents.consumed
 import pl.pw.laa.data.domain.Form
 import pl.pw.laa.data.domain.Letter
 import pl.pw.laa.state.BaseState
-import pl.pw.laa.state.IAppConfigState
+import pl.pw.laa.state.UserPreferencesState
 import pl.pw.laa.state.ISnackbarEventStateWithContent
 
 
@@ -15,15 +15,15 @@ data class AudioTestStateWithContent(
     val score: Int = 0,
     val mistakes: Int = 0,
     var rightAnswer: Letter? = null,
-    override var areCheatsOn: Boolean = false,
-    override var numberOfAnswers: Int = 8,
-    override var areTipsOn: Boolean = false,
+    override var areCheatsEnabled: Boolean = false,
+    override var answersCount: Int = 8,
+    override var areTipsEnabled: Boolean = false,
     override var isInitialTested: Boolean = true,
     override var isMedialTested: Boolean = true,
     override var isFinalTested: Boolean = true,
     override var isIsolatedTested: Boolean = true,
     override val showSnackbarEvent: StateEventWithContent<Array<String>> = consumed(),
-): BaseState(),ISnackbarEventStateWithContent, IAppConfigState {
+): BaseState(),ISnackbarEventStateWithContent, UserPreferencesState {
     fun isRightAnswer(index: Int): Boolean {
         if (rightAnswer == null) {
             return false

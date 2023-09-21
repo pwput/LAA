@@ -17,7 +17,7 @@ import javax.inject.Inject
 class UserPreferencesRepository @Inject constructor(private val dataStore: DataStore<Preferences>) :
     IUserPreferencesRepository {
 
-    private companion object{
+    private companion object {
         const val ANSWERS_COUNT_KEY_NAME = "pl.pw.laa.answers_count"
         const val ARE_CHEATS_ENABLED_KEY_NAME = "pl.pw.laa.are_cheats_enabled"
         const val ARE_TIPS_ENABLED_KEY_NAME = "pl.pw.laa.are_tips_enabled"
@@ -38,12 +38,13 @@ class UserPreferencesRepository @Inject constructor(private val dataStore: DataS
     }
 
 
-    override val userPreferencesFlow: Flow<UserPreferences> = dataStore.data.catch {
-        Timber.e("Error reading preferences: ${it.message}")
-        emit(emptyPreferences())
-    }.map {
-        mapUserPreferences(it)
-    }
+    override val userPreferencesFlow: Flow<UserPreferences> = dataStore.data
+        .catch {
+            Timber.e("Error reading preferences: ${it.message}")
+            emit(emptyPreferences())
+        }.map {
+            mapUserPreferences(it)
+        }
 
     override suspend fun fetchInitialPreferences() =
         mapUserPreferences(dataStore.data.first().toPreferences())
@@ -69,28 +70,28 @@ class UserPreferencesRepository @Inject constructor(private val dataStore: DataS
         }
     }
 
-    override suspend fun updateIsInitial(isInitial: Boolean) {
+    override suspend fun updateIsInitialTested(isInitial: Boolean) {
         dataStore.edit { preferences ->
             Timber.d("Updating is initial to $isInitial")
             preferences[PreferencesKeys.IS_INITIAL] = isInitial
         }
     }
 
-    override suspend fun updateIsMedial(isMedial: Boolean) {
+    override suspend fun updateIsMedialTested(isMedial: Boolean) {
         dataStore.edit { preferences ->
             Timber.d("Updating is medial to $isMedial")
             preferences[PreferencesKeys.IS_MEDIAL] = isMedial
         }
     }
 
-    override suspend fun updateIsFinal(isFinal: Boolean) {
+    override suspend fun updateIsFinalTested(isFinal: Boolean) {
         dataStore.edit { preferences ->
             Timber.d("Updating is final to $isFinal")
             preferences[PreferencesKeys.IS_FINAL] = isFinal
         }
     }
 
-    override suspend fun updateIsIsolated(isIsolated: Boolean) {
+    override suspend fun updateIsIsolatedTested(isIsolated: Boolean) {
         dataStore.edit { preferences ->
             Timber.d("Updating is isolated to $isIsolated")
             preferences[PreferencesKeys.IS_ISOLATED] = isIsolated
@@ -107,18 +108,18 @@ class UserPreferencesRepository @Inject constructor(private val dataStore: DataS
         val answersCount = preferences[PreferencesKeys.ANSWERS_COUNT] ?: 4
         val areCheatsEnabled = preferences[PreferencesKeys.ARE_CHEATS_ENABLED] ?: false
         val areTipsEnabled = preferences[PreferencesKeys.ARE_TIPS_ENABLES] ?: false
-        val isInitial = preferences[PreferencesKeys.IS_INITIAL] ?: true
-        val isMedial = preferences[PreferencesKeys.IS_MEDIAL] ?: false
-        val isFinal = preferences[PreferencesKeys.IS_FINAL] ?: false
-        val isIsolated = preferences[PreferencesKeys.IS_ISOLATED] ?: false
+        val isInitialTested = preferences[PreferencesKeys.IS_INITIAL] ?: true
+        val isMedialTested = preferences[PreferencesKeys.IS_MEDIAL] ?: false
+        val isFinalTested = preferences[PreferencesKeys.IS_FINAL] ?: false
+        val isIsolatedTested = preferences[PreferencesKeys.IS_ISOLATED] ?: false
         return UserPreferences(
             answersCount,
             areCheatsEnabled,
             areTipsEnabled,
-            isInitial,
-            isMedial,
-            isFinal,
-            isIsolated
+            isInitialTested,
+            isMedialTested,
+            isFinalTested,
+            isIsolatedTested
         )
     }
 }

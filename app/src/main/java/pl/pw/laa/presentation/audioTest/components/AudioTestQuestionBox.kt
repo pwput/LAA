@@ -86,7 +86,7 @@ fun QuestionBox(
         ) {
             Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.BottomCenter) {
                 Text(
-                    text = if (viewState.areCheatsOn) viewState.rightAnswer.toString() else viewState.rightAnswer?.name ?: "null",
+                    text = if (viewState.areCheatsEnabled) viewState.rightAnswer.toString() else viewState.rightAnswer?.name ?: "null",
                     style = MaterialTheme.typography.displayLarge,
                     color = MaterialTheme.colorScheme.onSecondaryContainer,
                 )
