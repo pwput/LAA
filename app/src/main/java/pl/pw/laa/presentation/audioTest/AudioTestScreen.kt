@@ -35,7 +35,7 @@ import pl.pw.laa.annotation.preview.PreviewsLandscape
 import pl.pw.laa.annotation.preview.PreviewsPortrait
 import pl.pw.laa.componets.LoadingScreen
 import pl.pw.laa.componets.Message
-import pl.pw.laa.componets.ShowSnackbar
+import pl.pw.laa.componets.showSnackbar
 import pl.pw.laa.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
@@ -55,7 +55,7 @@ fun QuestionScreen(
 
     Scaffold(snackbarHost = { SnackbarHost(hostState = snackbarHostState) }, modifier = Modifier.padding(padding)){
         val context = LocalContext.current
-        if (viewModel.isLoading) {
+        if (viewModel.isLoading()) {
             LoadingScreen()
         } else {
             if (Orientation.isLandscape()) {
@@ -78,7 +78,7 @@ fun QuestionScreen(
             event = viewState.showSnackbarEvent,
             onConsumed = viewModel::setShowMessageConsumed
         ) {
-            snackbarHostState.ShowSnackbar(
+            snackbarHostState.showSnackbar(
                 Message(context.resources.getString(R.string.audiotest_snackbar_text, it[0], it[1]))
             )
         }

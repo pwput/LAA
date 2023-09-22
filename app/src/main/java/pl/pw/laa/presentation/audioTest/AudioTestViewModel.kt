@@ -51,9 +51,9 @@ class AudioTestViewModel @Inject constructor(private val userPreferencesReposito
 
             viewStateNotifier.update {
                 it.copy(
-                    numberOfAnswers = preferences.first().answersCount,
-                    areCheatsOn = preferences.first().areCheatsEnabled,
-                    areTipsOn = preferences.first().areTipsEnabled,
+                    answersCount = preferences.first().answersCount,
+                    areCheatsEnabled = preferences.first().areCheatsEnabled,
+                    areTipsEnabled = preferences.first().areTipsEnabled,
                     isInitialTested = preferences.first().isInitial,
                     isMedialTested = preferences.first().isMedial,
                     isFinalTested = preferences.first().isFinal,
@@ -83,7 +83,7 @@ class AudioTestViewModel @Inject constructor(private val userPreferencesReposito
             generateSequence(
                 0,
                 Alphabet.letters.size - 1,
-                viewStateNotifier.value.numberOfAnswers
+                viewStateNotifier.value.answersCount
             )
         )
         val tmpForms = mutableListOf<Form>()
@@ -120,7 +120,7 @@ class AudioTestViewModel @Inject constructor(private val userPreferencesReposito
             Timber.d("Win!!!!")
             getNewState()
         } else {
-            if (viewStateNotifier.value.areTipsOn) setShowMessageEvent(
+            if (viewStateNotifier.value.areTipsEnabled) setShowMessageEvent(
                 triggered(
                     arrayOf(
                         Alphabet.getLetterName(form),

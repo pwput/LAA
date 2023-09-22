@@ -1,11 +1,21 @@
 package pl.pw.laa.presentation.settings
 
-sealed interface SettingsEvent {
-    data class SetAnswersCount(val answersCount: Int) : SettingsEvent
-    data class SetAreCheatsOn(val areCheatsOn: Boolean) : SettingsEvent
-    data class SetAreTipsOn(val areTipsOn: Boolean) : SettingsEvent
-    data class SetisInitialTested(val isForm: Boolean) : SettingsEvent
-    data class SetisMedialTested(val isForm: Boolean) : SettingsEvent
-    data class SetisFinalTested(val isForm: Boolean) : SettingsEvent
-    data class SetisIsolatedTested(val isForm: Boolean) : SettingsEvent
+sealed interface  SettingsEvent {
+    val value: Any
+
+    interface SettingsEventInt : SettingsEvent {
+        override val value: Int
+    }
+    interface SettingsEventBoolean : SettingsEvent {
+        override val value: Boolean
+    }
+    interface SettingsEventForm : SettingsEventBoolean
+
+    data class SetAnswersCount(override val value: Int) : SettingsEventInt
+    data class SetAreCheatsOn(override val value: Boolean) : SettingsEventBoolean
+    data class SetAreTipsOn(override val value: Boolean) : SettingsEventBoolean
+    data class SetIsInitialTested(override val value: Boolean) : SettingsEventForm
+    data class SetIsMedialTested(override val value: Boolean) : SettingsEventForm
+    data class SetIsFinalTested(override val value: Boolean) : SettingsEventForm
+    data class SetIsIsolatedTested(override val value: Boolean) : SettingsEventForm
 }

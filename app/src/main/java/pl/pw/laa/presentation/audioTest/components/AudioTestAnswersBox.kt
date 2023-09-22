@@ -44,13 +44,13 @@ fun AnswersBox(
                         form = state.formsList[i],
                         onClick = { onAnswer(state.formsList[i]) },
                         modifier = Modifier.weight(1f),
-                        cheats = state.isRightAnswer(i) && state.areCheatsOn,
+                        cheats = state.isRightAnswer(i) && state.areCheatsEnabled,
                     )
                     AnswerButton(
                         form = state.formsList[i + 1],
                         onClick = { onAnswer(state.formsList[i + 1]) },
                         modifier = Modifier.weight(1f),
-                        cheats = state.isRightAnswer(i + 1) && state.areCheatsOn,
+                        cheats = state.isRightAnswer(i + 1) && state.areCheatsEnabled,
                     )
                 }
             }

@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.pw.laa.data.repository.IUserPreferencesRepository
-import pl.pw.laa.data.repository.UserPreferencesRepository
 import pl.pw.laa.viewmodel.BaseViewModel
 import pl.pw.laa.viewmodel.IStateViewModel
 import timber.log.Timber
@@ -22,100 +21,75 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val userPreferencesRepository: IUserPreferencesRepository
-) : BaseViewModel(), IStateViewModel{
+) : BaseViewModel(), IStateViewModel {
 
-    private val  viewStateNotifier = MutableStateFlow(SettingsState())
+    private val viewStateNotifier = MutableStateFlow(SettingsState())
     override val viewState = viewStateNotifier.asStateFlow()
+
     init {
-        startLoading()
-        fetchData()
-    }
-
-    private fun fetchData() {
-        viewModelScope.launch {
-            val preferences = userPreferencesRepository.userPreferencesFlow
-
-            viewStateNotifier.update {
-                it.copy(
-                    numberOfAnswers = preferences.first().answersCount,
-                    areCheatsOn = preferences.first().areCheatsEnabled,
-                    areTipsOn = preferences.first().areTipsEnabled,
-                    isInitialTested = preferences.first().isInitial,
-                    isMedialTested = preferences.first().isMedial,
-                    isFinalTested = preferences.first().isFinal,
-                    isIsolatedTested = preferences.first().isIsolated,
-                )
-            }
-            stopLoading()
+        runInLoading {
+            loadUserPreferences()
         }
     }
 
+    private suspend fun loadUserPreferences() {
+        val preferences = userPreferencesRepository.userPreferencesFlow
+        viewStateNotifier.update {
+            it.copy(
+                answersCount = preferences.first().answersCount,
+                areCheatsEnabled = preferences.first().areCheatsEnabled,
+                areTipsEnabled = preferences.first().areTipsEnabled,
+                isInitialTested = preferences.first().isInitial,
+                isMedialTested = preferences.first().isMedial,
+                isFinalTested = preferences.first().isFinal,
+                isIsolatedTested = preferences.first().isIsolated,
+            )
+        }
+    }
 
     fun onEvent(event: SettingsEvent) {
-        when (event) {
-            is SettingsEvent.SetAnswersCount ->
-                viewModelScope.launch(context = Dispatchers.IO) {
-                    Timber.d("Setting ac to ${event.answersCount}")
-                    userPreferencesRepository.updateAnswersCount(event.answersCount)
-                    fetchData()
-                }
+        viewModelScope.launch(context = Dispatchers.IO) {
+            Timber.d("SettingsEvent: ${event::class.simpleName}, value: '${event.value}'.")
+            when (event) {
+                is SettingsEvent.SetAnswersCount ->
+                    userPreferencesRepository.updateAnswersCount(event.value)
+                is SettingsEvent.SetAreCheatsOn ->
+                    userPreferencesRepository.updateAreCheatsEnabled(event.value)
+                is SettingsEvent.SetAreTipsOn ->
+                    userPreferencesRepository.updateAreTipsEnabled(event.value)
+                is SettingsEvent.SettingsEventForm ->
+                    onFormEvent(event)
+                else ->
+                    Timber.d("Unknown event: ${event::class.simpleName}")
+            }
+            loadUserPreferences()
+        }
+    }
 
-            is SettingsEvent.SetAreCheatsOn ->
-                viewModelScope.launch(context = Dispatchers.IO) {
-                    Timber.d("Setting cheets to ${event.areCheatsOn}")
-                    userPreferencesRepository.updateAreCheatsEnabled(event.areCheatsOn)
-                    fetchData()
-                }
-
-            is SettingsEvent.SetAreTipsOn ->
-                viewModelScope.launch(context = Dispatchers.IO) {
-                    Timber.d("Setting tips to ${event.areTipsOn}")
-                    userPreferencesRepository.updateAreTipsEnabled(event.areTipsOn)
-                    fetchData()
-                }
-
-            is SettingsEvent.SetisFinalTested ->
-                if (canFormBeChanged(event.isForm))
-                    viewModelScope.launch(context = Dispatchers.IO) {
-                        Timber.d("Setting appConfigIsFinalTested to ${event.isForm}")
-                        userPreferencesRepository.updateIsFinal(event.isForm)
-                        fetchData()
-                    }
-
-            is SettingsEvent.SetisInitialTested ->
-                if (canFormBeChanged(event.isForm))
-                    viewModelScope.launch(context = Dispatchers.IO) {
-                        Timber.d("Setting appConfigIsInitialTested to ${event.isForm}")
-                        userPreferencesRepository.updateIsInitial(event.isForm)
-                        fetchData()
-                    }
-
-            is SettingsEvent.SetisIsolatedTested ->
-                if (canFormBeChanged(event.isForm))
-                    viewModelScope.launch(context = Dispatchers.IO) {
-                        Timber.d("Setting appConfigIsIsolatedTested to ${event.isForm}")
-                        userPreferencesRepository.updateIsIsolated(event.isForm)
-                        fetchData()
-                    }
-
-            is SettingsEvent.SetisMedialTested ->
-                if (canFormBeChanged(event.isForm))
-                    viewModelScope.launch(context = Dispatchers.IO) {
-                        Timber.d("Setting appConfigIsMedialTested to ${event.isForm}")
-                        userPreferencesRepository.updateIsMedial(event.isForm)
-                        fetchData()
-                    }
-        }}
-
+    private suspend fun onFormEvent(event: SettingsEvent.SettingsEventForm) {
+        if (canFormBeChanged(event.value)) {
+            when(event){
+                is SettingsEvent.SetIsFinalTested ->
+                    userPreferencesRepository.updateIsFinalTested(event.value)
+                is SettingsEvent.SetIsInitialTested ->
+                    userPreferencesRepository.updateIsInitialTested(event.value)
+                is SettingsEvent.SetIsIsolatedTested ->
+                    userPreferencesRepository.updateIsIsolatedTested(event.value)
+                is SettingsEvent.SetIsMedialTested ->
+                    userPreferencesRepository.updateIsMedialTested(event.value)
+            }
+        }
+    }
 
     private fun canFormBeChanged(newValue: Boolean): Boolean {
         if (newValue) return true
-        if (countOfForms() > 1)  return true
-        if (viewStateNotifier.value.areTipsOn) setShowMessageEvent(triggered)
+        if (viewStateNotifier.value.formCount() > 1) return true
+        if (viewStateNotifier.value.areTipsEnabled) setShowMessageEvent(triggered)
+        Timber.d("Can't change form")
         return false
     }
 
-    private fun setShowMessageEvent(state: StateEvent){
+    private fun setShowMessageEvent(state: StateEvent) {
         viewStateNotifier.update {
             it.copy(
                 showSnackbarEvent = state
@@ -123,14 +97,6 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    private fun countOfForms():Int{
-        var sum = 0
-        if (viewStateNotifier.value.isInitialTested) sum += 1
-        if (viewStateNotifier.value.isMedialTested) sum += 1
-        if (viewStateNotifier.value.isFinalTested) sum += 1
-        if (viewStateNotifier.value.isIsolatedTested) sum += 1
-        return sum
-    }
     override fun setShowMessageConsumed() {
         setShowMessageEvent(consumed)
     }

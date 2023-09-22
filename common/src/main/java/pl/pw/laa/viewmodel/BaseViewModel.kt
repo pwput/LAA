@@ -1,9 +1,9 @@
 package pl.pw.laa.viewmodel
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 abstract class BaseViewModel : ViewModel() {
@@ -11,15 +11,27 @@ abstract class BaseViewModel : ViewModel() {
         Timber.d("BaseViewModel init")
     }
 
-    var isLoading by mutableStateOf(false)
+
+    private val isLoadingNotifier = MutableLiveData(false)
+
+    fun isLoading() = isLoadingNotifier.value ?: false
+
 
     fun startLoading() {
         Timber.d("BaseViewModel started loading")
-        isLoading = true
+        isLoadingNotifier.value = true
     }
 
     fun stopLoading() {
         Timber.d("BaseViewModel stopped loading")
-        isLoading = false
+        isLoadingNotifier.value = false
+    }
+
+    fun runInLoading(block: suspend () -> Unit) {
+        viewModelScope.launch {
+            startLoading()
+            block.invoke()
+            stopLoading()
+        }
     }
 }

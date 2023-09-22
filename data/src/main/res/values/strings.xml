@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="prefernece_are_answers_label">answers</string>
-    <string name="prefernece_are_cheats_label">cheats</string>
-    <string name="prefernece_are_tips_label">tips</string>
-    <string name="prefernece_is_initial_label">initial</string>
-    <string name="prefernece_is_medial_label">medial</string>
-    <string name="prefernece_is_final_label">final</string>
-    <string name="prefernece_is_isolated_label">isolated</string>
+    <string name="preference_answers_count_label">answers count:</string>
+    <string name="preference_are_cheats_enabled_label">cheats</string>
+    <string name="preference_are_tips_enabled_label">tips</string>
+    <string name="preference_is_initial_tested_label">initial</string>
+    <string name="preference_is_medial_tested_label">medial</string>
+    <string name="preference_is_final_tested_label">final</string>
+    <string name="preference_is_isolated_tested_label">isolated</string>
 </resources>

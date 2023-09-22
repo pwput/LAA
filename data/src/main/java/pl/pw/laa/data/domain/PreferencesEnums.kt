@@ -7,30 +7,30 @@ import pl.pw.laa.data.R
 
     enum class FormPreference : IPreferencesEnum {
         IsInitial {
-            override val labelId: Int = R.string.prefernece_is_initial_label
+            override val labelId: Int = R.string.preference_is_initial_tested_label
         },
         IsMedial {
-            override val labelId: Int = R.string.prefernece_is_medial_label
+            override val labelId: Int = R.string.preference_is_medial_tested_label
         },
         IsFinal {
-            override val labelId: Int = R.string.prefernece_is_final_label
+            override val labelId: Int = R.string.preference_is_final_tested_label
         },
         IsIsolated {
-            override val labelId: Int = R.string.prefernece_is_isolated_label
+            override val labelId: Int = R.string.preference_is_isolated_tested_label
         }
     }
 
     enum class BooleanPreference : IPreferencesEnum {
         AreCheatsEnabled {
-            override val labelId: Int = R.string.prefernece_are_cheats_label
+            override val labelId: Int = R.string.preference_are_cheats_enabled_label
         },
         AreTipsEnabled {
-            override val labelId: Int = R.string.prefernece_are_tips_label
+            override val labelId: Int = R.string.preference_are_tips_enabled_label
         }
     }
 
     enum class IntPreference : IPreferencesEnum {
         AnswersCount {
-            override val labelId: Int = R.string.prefernece_are_answers_label
+            override val labelId: Int = R.string.preference_answers_count_label
         }
     }

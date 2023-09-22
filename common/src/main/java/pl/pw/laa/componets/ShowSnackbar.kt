@@ -10,6 +10,6 @@ data class Message(
     val duration: SnackbarDuration = SnackbarDuration.Short
 )
 
-suspend fun SnackbarHostState.ShowSnackbar(message: Message){
+suspend fun SnackbarHostState.showSnackbar(message: Message){
     this.showSnackbar(message.text,message.actionLabel,message.withDismissAction, message.duration)
 }

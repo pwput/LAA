@@ -11,9 +11,9 @@ interface IUserPreferencesRepository {
     suspend fun updateAnswersCount(answersCount: Int)
     suspend fun updateAreCheatsEnabled(areCheatsEnabled: Boolean)
     suspend fun updateAreTipsEnabled(areTipsEnabled: Boolean)
-    suspend fun updateIsInitial(isInitial: Boolean)
-    suspend fun updateIsMedial(isMedial: Boolean)
-    suspend fun updateIsFinal(isFinal: Boolean)
-    suspend fun updateIsIsolated(isIsolated: Boolean)
+    suspend fun updateIsInitialTested(isInitial: Boolean)
+    suspend fun updateIsMedialTested(isMedial: Boolean)
+    suspend fun updateIsFinalTested(isFinal: Boolean)
+    suspend fun updateIsIsolatedTested(isIsolated: Boolean)
     suspend fun resetPreferences()
 }

@@ -3,6 +3,7 @@ package pl.pw.laa.presentation.settings.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -18,15 +19,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import pl.pw.laa.data.domain.IPreferencesEnum
+import androidx.compose.ui.unit.dp
 import pl.pw.laa.presentation.settings.SettingsEvent
+import pl.pw.laa.presentation.settings.SettingsNumberListData
 import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsNumberList(
-    preferenceEnum: IPreferencesEnum,
-    number: Int,
+fun SettingsScreenContentExpandedNumberList(
+    numberListData: SettingsNumberListData,
     expanded: Boolean,
     onEvent: (SettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
@@ -41,41 +42,36 @@ fun SettingsNumberList(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
-            text = stringResource(id = preferenceEnum.labelId),
-            modifier = modifier,
+            text = stringResource(id = numberListData.preference.labelId),
+            modifier = modifier.weight(1f).padding(start = 8.dp),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onBackground
         )
         ExposedDropdownMenuBox(
             expanded = expanded,
             onExpandedChange = { expanded = !expanded },
-            modifier = modifier,
+            modifier = modifier.weight(1f),
         ) {
             TextField(
-                value = number.toString(),
+                value = numberListData.value.toString(),
                 textStyle = MaterialTheme.typography.bodyMedium,
                 onValueChange = {
-                    Timber.d("Clicked at Settings Number List for prefernce: ${preferenceEnum}, current value:${number}, changing to: $it")
+                    Timber.d("Preference: '${numberListData.preference}', current value: '${numberListData.value}', changing to: '$it'")
                     onEvent(SettingsEvent.SetAnswersCount(it.toInt()))
                 },
                 readOnly = true,
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
                 modifier = Modifier.menuAnchor(),
             )
-
             ExposedDropdownMenu(
                 expanded = expanded,
                 onDismissRequest = { expanded = false },
             ) {
                 possibleAnswers.forEach { item ->
                     DropdownMenuItem(
-                        text = {
-                            Text(
-                                text = item.toString(),
-                            )
-                        },
+                        text = { Text(text = item.toString()) },
                         onClick = {
-                            Timber.d("Clicked at Settings Number List Item for prefernce: ${preferenceEnum}, clicked at: $item")
+                            Timber.d("Preference: '${numberListData.preference}', clicked at: '$item'")
                             onEvent(SettingsEvent.SetAnswersCount(item))
                             expanded = false
                         },
@@ -85,3 +81,5 @@ fun SettingsNumberList(
         }
     }
 }
+
+//TODO: LOGS
