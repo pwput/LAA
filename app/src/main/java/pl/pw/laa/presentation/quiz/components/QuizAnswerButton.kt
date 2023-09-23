@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.audioTest.components
+package pl.pw.laa.presentation.quiz.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.data.Alphabet
 import pl.pw.laa.data.domain.Form
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
@@ -26,11 +27,15 @@ fun AnswerButton(
     onClick: () -> Unit,
     cheats: Boolean = false
 ) {
-    val borderColor = if (cheats) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.secondary
+    val borderColor = if (cheats)
+        MaterialTheme.colorScheme.error
+    else
+        MaterialTheme.colorScheme.secondary
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
-            .border(2.dp, borderColor, shape = RoundedCornerShape(25))
+            .border(1.dp, borderColor, shape = RoundedCornerShape(25))
             .clip(RoundedCornerShape(25))
             .background(MaterialTheme.colorScheme.primaryContainer)
             .clickable { onClick() }
@@ -39,19 +44,38 @@ fun AnswerButton(
         Text(
             text = form.toString(),
             style = MaterialTheme.typography.displayLarge,
-            color = MaterialTheme.colorScheme.onSecondaryContainer,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
         )
     }
 }
 
-@Preview()
+
+//region Previews
 @Composable
+@Preview()
 fun AnswerButtonPreview() {
-    LearnArabicAlphabetTheme() {
+    LearnArabicAlphabetSurfacePreview {
         AnswerButton(
             form = Alphabet.letters[0].final,
-            modifier = Modifier.background(Color.Green).size(100.dp),
+            modifier = Modifier
+                .size(80.dp),
             onClick = {},
         )
     }
 }
+
+@Composable
+@Preview()
+fun AnswerButtonPreviewDark() {
+    LearnArabicAlphabetSurfacePreview (true) {
+        AnswerButton(
+            form = Alphabet.letters[0].final,
+            modifier = Modifier
+                .size(80.dp),
+            onClick = {},
+        )
+    }
+}
+
+
+//endregion

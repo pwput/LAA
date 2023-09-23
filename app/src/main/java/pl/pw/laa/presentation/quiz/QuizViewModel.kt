@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.audioTest
+package pl.pw.laa.presentation.quiz
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,10 +27,10 @@ import kotlin.random.Random
 import kotlin.random.nextInt
 
 @HiltViewModel
-class AudioTestViewModel @Inject constructor(private val userPreferencesRepository: IUserPreferencesRepository) :
+class QuizViewModel @Inject constructor(private val userPreferencesRepository: IUserPreferencesRepository) :
     BaseAudioViewModel(), IStateViewModel {
 
-    private val viewStateNotifier = MutableStateFlow(AudioTestStateWithContent())
+    private val viewStateNotifier = MutableStateFlow(QuizStateWithContent())
     override val viewState = viewStateNotifier.asStateFlow()
     override fun setShowMessageConsumed() {
         setShowMessageEvent(consumed())
@@ -100,13 +100,13 @@ class AudioTestViewModel @Inject constructor(private val userPreferencesReposito
         }
     }
 
-    fun onEvent(event: AudioTestEvent): MediaPlayerResponse? {
+    fun onEvent(event: QuizEvent): MediaPlayerResponse? {
         return when (event) {
-            is AudioTestEvent.ReplayAudio -> {
+            is QuizEvent.ReplayAudio -> {
                 startMediaPlayer(event.context, event.letter.vocalizationRaw)
             }
 
-            is AudioTestEvent.GotAnswer -> {
+            is QuizEvent.GotAnswer -> {
                 onAnswerEvent(event.form)
                 null
             }

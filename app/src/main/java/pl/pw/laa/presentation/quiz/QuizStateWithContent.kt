@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.audioTest
+package pl.pw.laa.presentation.quiz
 
 import de.palm.composestateevents.StateEventWithContent
 import de.palm.composestateevents.consumed
@@ -10,7 +10,7 @@ import pl.pw.laa.state.ISnackbarEventStateWithContent
 
 
 
-data class AudioTestStateWithContent(
+data class QuizStateWithContent(
     val formsList: List<Form>? = mutableListOf(),
     val score: Int = 0,
     val mistakes: Int = 0,

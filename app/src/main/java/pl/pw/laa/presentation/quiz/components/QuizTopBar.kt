@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.audioTest.components
+package pl.pw.laa.presentation.quiz.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -11,15 +11,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import pl.pw.laa.presentation.audioTest.AudioTestStateWithContent
+import androidx.compose.ui.tooling.preview.Preview
+import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
+import pl.pw.laa.presentation.quiz.QuizStateWithContent
 
 @Composable
-fun AudioTestTopBar(
-    state: AudioTestStateWithContent,
+fun QuizTopBar(
+    state: QuizStateWithContent,
     modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = modifier.fillMaxWidth(1f).background(MaterialTheme.colorScheme.background).wrapContentHeight(),
+        modifier = modifier
+            .fillMaxWidth(1f)
+            .background(MaterialTheme.colorScheme.background)
+            .wrapContentHeight(),
         contentAlignment = Alignment.CenterEnd,
     ) {
         Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = modifier.fillMaxWidth(1f)) {
@@ -28,3 +33,21 @@ fun AudioTestTopBar(
         }
     }
 }
+
+//region Previews
+@Composable
+@Preview
+fun QuizTopBarPreview() {
+    LearnArabicAlphabetSurfacePreview {
+        QuizTopBar(state = QuizStateWithContent())
+    }
+}
+
+@Composable
+@Preview
+fun QuizTopBarPreviewDark() {
+    LearnArabicAlphabetSurfacePreview(true) {
+        QuizTopBar(state = QuizStateWithContent())
+    }
+}
+//endregion
