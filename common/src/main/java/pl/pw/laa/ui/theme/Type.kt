@@ -51,9 +51,8 @@ val Typography = Typography(
     bodyLarge = TextStyle(
         fontFamily = Lateef,
         fontWeight = FontWeight.Light,
-        fontSize = 56.sp,
-        lineHeight = 72.sp,
-        letterSpacing = 0.5.sp,
+        fontSize = 48.sp,
+        lineHeight = 52.sp,
     ),
     /* Other default text styles to override
     titleLarge = TextStyle(

@@ -8,6 +8,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.data.domain.FormPreference
 import pl.pw.laa.presentation.settings.SettingsEvent
 import timber.log.Timber
@@ -23,7 +25,7 @@ fun SettingsScreenContentPreferenceChip(
     FilterChip(
         modifier = modifier,
         selected = value,
-        onClick = { settingsScreenContentPreferenceChipOnEvent(preferenceEnum, !value , onEvent) },
+        onClick = { settingsScreenContentPreferenceChipOnEvent(preferenceEnum, !value, onEvent) },
         label = { Text(text = stringResource(id = preferenceEnum.labelId)) },
         colors = FilterChipDefaults.filterChipColors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant,
@@ -34,7 +36,11 @@ fun SettingsScreenContentPreferenceChip(
     )
 }
 
-internal fun settingsScreenContentPreferenceChipOnEvent(preference: FormPreference, newValue: Boolean, onEvent: (SettingsEvent.SettingsEventForm) -> Unit) {
+internal fun settingsScreenContentPreferenceChipOnEvent(
+    preference: FormPreference,
+    newValue: Boolean,
+    onEvent: (SettingsEvent.SettingsEventForm) -> Unit
+) {
     Timber.d("Clicked at Settings Chip for key: '$preference', current value: '$newValue', changing to: '${!newValue}'")
     when (preference) {
         FormPreference.IsInitial -> onEvent(SettingsEvent.SetIsInitialTested(newValue))
@@ -43,3 +49,28 @@ internal fun settingsScreenContentPreferenceChipOnEvent(preference: FormPreferen
         FormPreference.IsIsolated -> onEvent(SettingsEvent.SetIsIsolatedTested(newValue))
     }
 }
+
+//region Previews
+@Preview
+@Composable
+fun SettingsScreenContentPreferenceChipPreview() {
+    LearnArabicAlphabetSurfacePreview {
+        SettingsScreenContentPreferenceChip(
+            preferenceEnum = FormPreference.IsInitial,
+            value = true,
+            onEvent = {},
+        )
+    }
+}
+@Preview
+@Composable
+fun SettingsScreenContentPreferenceChipPreviewDark() {
+    LearnArabicAlphabetSurfacePreview(true) {
+        SettingsScreenContentPreferenceChip(
+            preferenceEnum = FormPreference.IsInitial,
+            value = true,
+            onEvent = {},
+        )
+    }
+}
+//endregion

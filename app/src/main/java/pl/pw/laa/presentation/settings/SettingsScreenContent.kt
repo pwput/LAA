@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import pl.pw.laa.annotation.preview.PreviewsLandscape
 import pl.pw.laa.annotation.preview.PreviewsPortrait
+import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.componets.RowDivider
 import pl.pw.laa.data.domain.BooleanPreference
 import pl.pw.laa.data.domain.FormPreference
@@ -24,7 +25,6 @@ import pl.pw.laa.data.domain.IntPreference
 import pl.pw.laa.presentation.settings.components.SettingsScreenContentPreferencesSwitchColumn
 import pl.pw.laa.presentation.settings.components.SettingsScreenContentPreferencesChipGroup
 import pl.pw.laa.presentation.settings.components.SettingsScreenContentExpandedNumberList
-import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Composable
 fun SettingsScreenContent(
@@ -52,7 +52,7 @@ fun SettingsScreenContent(
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
                 .padding(8.dp),
-            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             SettingsScreenContentExpandedNumberList(
@@ -89,16 +89,30 @@ data class SettingsChipData(
     val value: Boolean,
 )
 
-@PreviewsLandscape
+
+//region Previews
 @PreviewsPortrait
+@PreviewsLandscape
 @Composable
-fun SettingsScreenPreview() {
-    LearnArabicAlphabetTheme {
-        Surface(modifier = Modifier.fillMaxSize()) {
-            SettingsScreenContent(
-                SettingsState(),
-                PaddingValues(),
-            ) {}
-        }
+fun SettingsScreenContentPreview() {
+    LearnArabicAlphabetSurfacePreview {
+        SettingsScreenContent(
+            SettingsState(),
+            PaddingValues(),
+        ) {}
     }
 }
+
+@PreviewsPortrait
+@PreviewsLandscape
+@Composable
+fun SettingsScreenContentPreviewDark() {
+    LearnArabicAlphabetSurfacePreview(true) {
+        SettingsScreenContent(
+            SettingsState(),
+            PaddingValues(),
+        ) {}
+    }
+}
+
+//endregion
