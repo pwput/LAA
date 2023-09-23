@@ -11,7 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.data.domain.BooleanPreference
 import pl.pw.laa.presentation.settings.SettingsCheckBoxData
 import pl.pw.laa.presentation.settings.SettingsEvent
@@ -57,3 +59,62 @@ internal fun settingsScreenContentPreferenceSwitchOnEvent(
         else -> {}
     }
 }
+
+//region Previews
+@Preview
+@Composable
+fun SettingsScreenContentPreferenceSwitchPreview() {
+    LearnArabicAlphabetSurfacePreview {
+        SettingsScreenContentPreferenceSwitch(
+            SettingsCheckBoxData(
+                BooleanPreference.AreCheatsEnabled,
+                false
+            ),
+            {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun SettingsScreenContentPreferenceSwitchEnabledPreview() {
+    LearnArabicAlphabetSurfacePreview {
+        SettingsScreenContentPreferenceSwitch(
+            SettingsCheckBoxData(
+                BooleanPreference.AreCheatsEnabled,
+                true
+            ),
+            {}
+        )
+    }
+}
+
+
+@Preview
+@Composable
+fun SettingsScreenContentPreferenceSwitchPreviewDark() {
+    LearnArabicAlphabetSurfacePreview(true) {
+        SettingsScreenContentPreferenceSwitch(
+            SettingsCheckBoxData(
+                BooleanPreference.AreTipsEnabled,
+                false,
+            ),
+            {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun SettingsScreenContentPreferenceSwitchPreviewEnabledDark() {
+    LearnArabicAlphabetSurfacePreview(true) {
+        SettingsScreenContentPreferenceSwitch(
+            SettingsCheckBoxData(
+                BooleanPreference.AreTipsEnabled,
+                true,
+            ),
+            {}
+        )
+    }
+}
+//endregion

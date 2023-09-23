@@ -19,7 +19,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
+import pl.pw.laa.data.domain.IntPreference
 import pl.pw.laa.presentation.settings.SettingsEvent
 import pl.pw.laa.presentation.settings.SettingsNumberListData
 import timber.log.Timber
@@ -43,7 +46,9 @@ fun SettingsScreenContentExpandedNumberList(
     ) {
         Text(
             text = stringResource(id = numberListData.preference.labelId),
-            modifier = modifier.weight(1f).padding(start = 8.dp),
+            modifier = modifier
+                .weight(1f)
+                .padding(start = 8.dp),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onBackground
         )
@@ -82,4 +87,33 @@ fun SettingsScreenContentExpandedNumberList(
     }
 }
 
-//TODO: LOGS
+//region Previews
+private val data = SettingsNumberListData(
+    IntPreference.AnswersCount,
+    4
+)
+
+@Preview
+@Composable
+fun SettingsScreenContentExpandedNumberListPreview() {
+    LearnArabicAlphabetSurfacePreview() {
+        SettingsScreenContentExpandedNumberList(
+            data,
+            true,
+            { },
+        )
+    }
+}
+
+@Preview
+@Composable
+fun SettingsScreenContentExpandedNumberListPreviewDark() {
+    LearnArabicAlphabetSurfacePreview(true) {
+        SettingsScreenContentExpandedNumberList(
+            data,
+            true,
+            { },
+        )
+    }
+}
+//endregion

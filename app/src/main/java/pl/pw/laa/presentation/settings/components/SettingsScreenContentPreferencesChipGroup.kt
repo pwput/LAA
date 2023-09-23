@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -12,8 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pl.pw.laa.R
+import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
+import pl.pw.laa.data.domain.FormPreference
 import pl.pw.laa.presentation.settings.SettingsChipData
 import pl.pw.laa.presentation.settings.SettingsEvent
 
@@ -24,7 +26,6 @@ fun SettingsScreenContentPreferencesChipGroup(
     onEvent: (SettingsEvent) -> Unit
 ) {
     Column(
-        Modifier.fillMaxSize(),
         horizontalAlignment = CenterHorizontally,
     ) {
         Text(
@@ -48,3 +49,32 @@ fun SettingsScreenContentPreferencesChipGroup(
         }
     }
 }
+
+
+//region Previews
+
+private val data = listOf(
+    SettingsChipData(FormPreference.IsInitial, true),
+    SettingsChipData(FormPreference.IsFinal, true),
+    SettingsChipData(FormPreference.IsIsolated, true),
+    SettingsChipData(FormPreference.IsMedial, true),
+)
+@Preview
+@Composable
+fun SettingsScreenContentPreferencesChipGroupPreview() {
+    LearnArabicAlphabetSurfacePreview {
+        SettingsScreenContentPreferencesChipGroup(
+            data,
+        ) {}
+    }
+}
+@Preview
+@Composable
+fun SettingsScreenContentPreferencesChipGroupPreviewDark() {
+    LearnArabicAlphabetSurfacePreview(true) {
+        SettingsScreenContentPreferencesChipGroup(
+            data,
+        ) {}
+    }
+}
+//endregion

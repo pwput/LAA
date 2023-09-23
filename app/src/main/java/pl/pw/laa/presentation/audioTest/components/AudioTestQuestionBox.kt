@@ -26,9 +26,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import pl.pw.laa.annotation.preview.PreviewsPortrait
 import pl.pw.laa.presentation.audioTest.AudioTestEvent
-import pl.pw.laa.annotation.preview.DevicePreviewsDarkPortrait
-import pl.pw.laa.annotation.preview.DevicePreviewsLightPortrait
 import pl.pw.laa.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.presentation.audioTest.AudioTestStateWithContent
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
@@ -100,8 +99,7 @@ fun QuestionBox(
     }
 }
 
-@DevicePreviewsDarkPortrait
-@DevicePreviewsLightPortrait
+@PreviewsPortrait
 @Composable
 fun QuestionBoxPreviewNoIcon() {
     LearnArabicAlphabetTheme() {
@@ -113,8 +111,7 @@ fun QuestionBoxPreviewNoIcon() {
     }
 }
 
-@DevicePreviewsDarkPortrait
-@DevicePreviewsLightPortrait
+@PreviewsPortrait
 @Composable
 fun QuestionBoxPreviewIcon() {
     LearnArabicAlphabetTheme() {
