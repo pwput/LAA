@@ -12,13 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.data.Alphabet
 import pl.pw.laa.data.domain.Form
-import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 @Composable
 fun AnswerButton(

@@ -25,21 +25,24 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import de.palm.composestateevents.consumed
 import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.data.Alphabet
 import pl.pw.laa.presentation.quiz.QuizEvent
 import pl.pw.laa.mediaplayer.MediaPlayerResponse
-import pl.pw.laa.presentation.quiz.QuizStateWithContent
+import pl.pw.laa.presentation.quiz.QuizState
+import pl.pw.laa.presentation.quiz.SingleQuestion
+import pl.pw.laa.state.UserPreferencesState
 
 @Composable
-fun QuizQuestionBox(
-    viewState: QuizStateWithContent,
+fun QuestionBox(
+    viewState: QuizState,
     showIcon: Boolean,
     onEvent: (QuizEvent) -> MediaPlayerResponse?,
     modifier: Modifier = Modifier,
 ) {
     var firstAudioPlay by remember { mutableStateOf(true) }
-    var previousAudioPlayLetter by remember { mutableStateOf(viewState.rightAnswer) }
+    var previousAudioPlayLetter by remember { mutableStateOf(viewState.currentQuestion().rightAnswer) }
 
     val context = LocalContext.current
 
@@ -47,12 +50,12 @@ fun QuizQuestionBox(
 
     if (!showIcon) visible = false
 
-    if (firstAudioPlay || previousAudioPlayLetter != viewState.rightAnswer) {
-        viewState.rightAnswer?.let {
-            onEvent(QuizEvent.ReplayAudio(context, viewState.rightAnswer!!))
+    if (firstAudioPlay || previousAudioPlayLetter != viewState.currentQuestion().rightAnswer) {
+        viewState.currentQuestion().rightAnswer?.let {
+            onEvent(QuizEvent.ReplayAudio(context, viewState.currentQuestion().rightAnswer!!))
         }
         firstAudioPlay = false
-        previousAudioPlayLetter = viewState.rightAnswer
+        previousAudioPlayLetter = viewState.currentQuestion().rightAnswer
     }
 
     Box(
@@ -60,7 +63,6 @@ fun QuizQuestionBox(
         modifier = Modifier
             .fillMaxWidth(1f)
             .aspectRatio(1.8f, false)
-            .background(MaterialTheme.colorScheme.secondaryContainer)
             .border(1.dp, MaterialTheme.colorScheme.secondary, shape = RoundedCornerShape(5))
             .clip(RoundedCornerShape(5))
             .background(MaterialTheme.colorScheme.secondaryContainer)
@@ -69,8 +71,8 @@ fun QuizQuestionBox(
                 interactionSource = MutableInteractionSource(),
                 indication = null,
             ) {
-                viewState.rightAnswer?.let {
-                    val resp = onEvent(QuizEvent.ReplayAudio(context, viewState.rightAnswer!!))
+                viewState.currentQuestion().rightAnswer?.let {
+                    val resp = onEvent(QuizEvent.ReplayAudio(context, viewState.currentQuestion().rightAnswer!!))
                     visible =
                         resp is MediaPlayerResponse.Success || resp is MediaPlayerResponse.AlreadyPlayingRequestedAudio
                 }
@@ -83,17 +85,19 @@ fun QuizQuestionBox(
         ) {
             Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.BottomCenter) {
                 Text(
-                    text = if (viewState.areCheatsEnabled)
-                        viewState.rightAnswer.toString()
+                    text = if (viewState.preferences.areCheatsEnabled)
+                        viewState.currentQuestion().rightAnswer.toString()
                     else
-                        viewState.rightAnswer?.name ?: "null",
+                        viewState.currentQuestion().rightAnswer?.name ?: "null",
                     style = MaterialTheme.typography.displayLarge,
                     color = MaterialTheme.colorScheme.onSecondaryContainer,
                 )
             }
             Box(modifier = Modifier
                 .weight(1f)
-                .fillMaxSize(), contentAlignment = Alignment.Center) {
+                .fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
                 pl.pw.laa.componets.AudioIcon(visible, Modifier.fillMaxSize())
             }
         }
@@ -101,14 +105,27 @@ fun QuizQuestionBox(
 }
 
 //region Previews
+private val mockedState = QuizState(
+    0,
+    0,
+    0,
+    listOf(
+        SingleQuestion(
+            Alphabet.letters[0],
+            listOf(Alphabet.letters[0].final, Alphabet.letters[1].final),
+        ),
+    ),
+    UserPreferencesState(),
+    false,
+    consumed(),
+)
+
 @Preview
 @Composable
 fun QuestionBoxPreview() {
     LearnArabicAlphabetSurfacePreview {
-        QuizQuestionBox(
-            QuizStateWithContent(
-                rightAnswer = Alphabet.letters[0],
-            ),
+        QuestionBox(
+            mockedState,
             true,
             { null },
         )
@@ -119,11 +136,8 @@ fun QuestionBoxPreview() {
 @Composable
 fun QuestionBoxCheatsPreview() {
     LearnArabicAlphabetSurfacePreview {
-        QuizQuestionBox(
-            QuizStateWithContent(
-                rightAnswer = Alphabet.letters[0],
-                areCheatsEnabled = true,
-            ),
+        QuestionBox(
+            mockedState,
             false,
             { null },
         )
@@ -134,10 +148,8 @@ fun QuestionBoxCheatsPreview() {
 @Composable
 fun QuestionBoxPreviewDark() {
     LearnArabicAlphabetSurfacePreview(true) {
-        QuizQuestionBox(
-            QuizStateWithContent(
-                rightAnswer = Alphabet.letters[0],
-            ),
+        QuestionBox(
+            mockedState,
             true,
             { null },
         )
@@ -148,11 +160,8 @@ fun QuestionBoxPreviewDark() {
 @Composable
 fun QuestionBoxCheatsPreviewDark() {
     LearnArabicAlphabetSurfacePreview(true) {
-        QuizQuestionBox(
-            QuizStateWithContent(
-                rightAnswer = Alphabet.letters[0],
-                areCheatsEnabled = true,
-                ),
+        QuestionBox(
+            mockedState,
             false,
             { null },
         )

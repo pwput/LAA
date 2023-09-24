@@ -16,7 +16,7 @@ import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreenContentPreferenceChip(
+fun PreferenceChip(
     preferenceEnum: FormPreference,
     value: Boolean,
     onEvent: (SettingsEvent.SettingsEventForm) -> Unit,
@@ -53,9 +53,9 @@ internal fun settingsScreenContentPreferenceChipOnEvent(
 //region Previews
 @Preview
 @Composable
-fun SettingsScreenContentPreferenceChipPreview() {
+fun PreferenceChipPreview() {
     LearnArabicAlphabetSurfacePreview {
-        SettingsScreenContentPreferenceChip(
+        PreferenceChip(
             preferenceEnum = FormPreference.IsInitial,
             value = true,
             onEvent = {},
@@ -64,9 +64,9 @@ fun SettingsScreenContentPreferenceChipPreview() {
 }
 @Preview
 @Composable
-fun SettingsScreenContentPreferenceChipPreviewDark() {
+fun PreferenceChipPreviewDark() {
     LearnArabicAlphabetSurfacePreview(true) {
-        SettingsScreenContentPreferenceChip(
+        PreferenceChip(
             preferenceEnum = FormPreference.IsInitial,
             value = true,
             onEvent = {},

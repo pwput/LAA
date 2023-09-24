@@ -15,7 +15,7 @@ import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.data.Alphabet
 
 @Composable
-fun AlphabetTableContentCellRowName(
+fun CellRowName(
     name: String,
     isAudioIconVisible: Boolean = false,
     modifier: Modifier = Modifier,
@@ -41,9 +41,9 @@ fun AlphabetTableContentCellRowName(
 //region Previews
 @Preview
 @Composable
-fun AlphabetTableContentCellRowNamePreview() {
+fun CellRowNamePreview() {
     LearnArabicAlphabetSurfacePreview {
-        AlphabetTableContentCellRowName(
+        CellRowName(
             Alphabet.letters[1].name,
             false,
         )
@@ -52,9 +52,9 @@ fun AlphabetTableContentCellRowNamePreview() {
 
 @Preview
 @Composable
-fun AlphabetTableContentCellRowNameIconPreview() {
+fun CellRowNameIconPreview() {
     LearnArabicAlphabetSurfacePreview {
-        AlphabetTableContentCellRowName(
+        CellRowName(
             Alphabet.letters[1].name,
             true,
         )
@@ -63,9 +63,9 @@ fun AlphabetTableContentCellRowNameIconPreview() {
 
 @Preview
 @Composable
-fun AlphabetTableContentCellRowNamePreviewDark() {
+fun CellRowNamePreviewDark() {
     LearnArabicAlphabetSurfacePreview(true) {
-        AlphabetTableContentCellRowName(
+        CellRowName(
             Alphabet.letters[1].name,
             false,
         )
@@ -73,9 +73,9 @@ fun AlphabetTableContentCellRowNamePreviewDark() {
 }
 @Preview
 @Composable
-fun AlphabetTableContentCellRowNameIconPreviewDark() {
+fun CellRowNameIconPreviewDark() {
     LearnArabicAlphabetSurfacePreview(true) {
-        AlphabetTableContentCellRowName(
+        CellRowName(
             Alphabet.letters[1].name,
             true,
         )

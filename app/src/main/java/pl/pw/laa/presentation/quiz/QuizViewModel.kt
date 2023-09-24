@@ -11,95 +11,53 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.pw.laa.data.Alphabet
-import pl.pw.laa.data.domain.Final
 import pl.pw.laa.data.domain.Form
-import pl.pw.laa.data.domain.Initial
-import pl.pw.laa.data.domain.Isolated
-import pl.pw.laa.data.domain.Letter
-import pl.pw.laa.data.domain.Medial
 import pl.pw.laa.data.repository.IUserPreferencesRepository
 import pl.pw.laa.mediaplayer.BaseAudioViewModel
 import pl.pw.laa.mediaplayer.MediaPlayerResponse
+import pl.pw.laa.state.UserPreferencesState
 import pl.pw.laa.viewmodel.IStateViewModel
 import timber.log.Timber
 import javax.inject.Inject
-import kotlin.random.Random
-import kotlin.random.nextInt
 
 @HiltViewModel
 class QuizViewModel @Inject constructor(private val userPreferencesRepository: IUserPreferencesRepository) :
     BaseAudioViewModel(), IStateViewModel {
 
-    private val viewStateNotifier = MutableStateFlow(QuizStateWithContent())
+    private val viewStateNotifier = MutableStateFlow(QuizState())
     override val viewState = viewStateNotifier.asStateFlow()
-    override fun setShowMessageConsumed() {
-        setShowMessageEvent(consumed())
-    }
 
-    private val availableForms = mutableListOf<Class<out Form>>()
+    private fun resetState() {
+        viewStateNotifier.value = viewStateNotifier.value.resetState()
+    }
 
     init {
         startLoading()
         fetchData()
     }
 
-
     private fun fetchData() {
         viewModelScope.launch {
-
             val preferences = userPreferencesRepository.userPreferencesFlow
-
             viewStateNotifier.update {
                 it.copy(
-                    answersCount = preferences.first().answersCount,
-                    areCheatsEnabled = preferences.first().areCheatsEnabled,
-                    areTipsEnabled = preferences.first().areTipsEnabled,
-                    isInitialTested = preferences.first().isInitial,
-                    isMedialTested = preferences.first().isMedial,
-                    isFinalTested = preferences.first().isFinal,
-                    isIsolatedTested = preferences.first().isIsolated,
+                    preferences = UserPreferencesState(
+                        answersCount = preferences.first().answersCount,
+                        areCheatsEnabled = preferences.first().areCheatsEnabled,
+                        areTipsEnabled = preferences.first().areTipsEnabled,
+                        isInitialTested = preferences.first().isInitial,
+                        isMedialTested = preferences.first().isMedial,
+                        isFinalTested = preferences.first().isFinal,
+                        isIsolatedTested = preferences.first().isIsolated,
+                    )
                 )
             }
-            getNewState()
+            resetState()
             stopLoading()
         }
     }
 
-
-    private fun setupAvailableForms() {
-        Timber.d("Settingup avaliable forms")
-        if (!availableForms.isNullOrEmpty())
-            availableForms.clear()
-        if (viewStateNotifier.value.isInitialTested) availableForms.add(Initial::class.java)
-        if (viewStateNotifier.value.isMedialTested) availableForms.add(Medial::class.java)
-        if (viewStateNotifier.value.isFinalTested) availableForms.add(Final::class.java)
-        if (viewStateNotifier.value.isIsolatedTested) availableForms.add(Isolated::class.java)
-
-        if (availableForms.size == 0) Timber.d("No avaliable forms, you have a big problem!!")
-    }
-
-    private fun getNewState() {
-        val tmpList = generateLetterList(
-            generateSequence(
-                0,
-                Alphabet.letters.size - 1,
-                viewStateNotifier.value.answersCount
-            )
-        )
-        val tmpForms = mutableListOf<Form>()
-        setupAvailableForms()
-        for (letter in tmpList) {
-            tmpForms.add(letter.getForm(availableForms.random()))
-        }
-        viewStateNotifier.update {
-            it.copy(
-                formsList = tmpForms,
-                score = it.score + 1,
-                rightAnswer = getRandomLetter(tmpList)
-            )
-        }
-    }
-
+    //region Events
     fun onEvent(event: QuizEvent): MediaPlayerResponse? {
         return when (event) {
             is QuizEvent.ReplayAudio -> {
@@ -110,42 +68,90 @@ class QuizViewModel @Inject constructor(private val userPreferencesRepository: I
                 onAnswerEvent(event.form)
                 null
             }
-        }
-    }
 
-    fun onAnswerEvent(form: Form) {
-        Timber.d("Answer: $form")
-        Timber.d("RightAnswer: ${viewStateNotifier.value.rightAnswer}")
-        if (viewStateNotifier.value.rightAnswer!!.hasForm(form)) {
-            Timber.d("Win!!!!")
-            getNewState()
-        } else {
-            if (viewStateNotifier.value.areTipsEnabled) setShowMessageEvent(
-                triggered(
-                    arrayOf(
-                        Alphabet.getLetterName(form),
-                        form.getName().lowercase()
-                    )
-                )
-            )
-            viewStateNotifier.update {
-                it.copy(
-                    mistakes = it.mistakes + 1
-                )
+            is QuizEvent.HideDialog -> {
+                hideDialog()
+                startLoading()
+                fetchData()
+                null
             }
         }
     }
 
-    private fun getRandomLetter(list: List<Letter>) = list[Random.nextInt(list.indices)]
-
-    private fun generateLetterList(set: Set<Int>): List<Letter> {
-        val tmp = mutableListOf<Letter>()
-        for (i in set) {
-            tmp.add(Alphabet.letters[i])
+    fun onAnswerEvent(form: Form) {
+        val rightAnswer = viewStateNotifier.value.currentQuestion().rightAnswer
+        if (viewStateNotifier.value.currentQuestion().rightAnswer!!.hasForm(form)) {
+            Timber.d("Correct answer")
+            onCorrect()
+        } else {
+            Timber.d("Wrong answer, right answer: ${rightAnswer.toString()}")
+            onMistake()
+            showWrongAnswerMessage(form)
         }
-        return tmp
     }
 
+    private fun onCorrect() {
+        if (!viewStateNotifier.value.isCurrentQuestionLast())
+            viewStateNotifier.update {
+                it.copy(
+                    score = it.score + 1,
+                    currentQuestionIndex = it.currentQuestionIndex + 1
+                )
+            }
+        else {
+            viewStateNotifier.update {
+                it.copy(
+                    currentQuestionIndex = it.currentQuestionIndex + 1
+                )
+            }
+            showDialog()
+
+        }
+    }
+
+    private fun onMistake() {
+        viewStateNotifier.update {
+            it.copy(
+                mistakes = it.mistakes + 1
+            )
+        }
+    }
+    //ednregion
+
+
+    //region Dialog
+    private fun showDialog() {
+        viewStateNotifier.update {
+            it.copy(
+                isDialogVisible = true
+            )
+        }
+    }
+
+    private fun hideDialog() {
+        viewStateNotifier.update {
+            it.copy(
+                isDialogVisible = false
+            )
+        }
+    }
+    // endregion
+
+    //region Snackbar
+    private fun showWrongAnswerMessage(form: Form) {
+        setShowMessageEvent(
+            triggered(
+                arrayOf(
+                    Alphabet.getLetterName(form),
+                    form.getName().lowercase()
+                )
+            )
+        )
+    }
+
+    override fun setShowMessageConsumed() {
+        setShowMessageEvent(consumed())
+    }
 
     private fun setShowMessageEvent(state: StateEventWithContent<Array<String>>) {
         viewStateNotifier.update {
@@ -154,14 +160,5 @@ class QuizViewModel @Inject constructor(private val userPreferencesRepository: I
             )
         }
     }
-
-    private fun generateSequence(startNumber: Int, endNumber: Int, size: Int): Set<Int> {
-        return generateSequence {
-            Random.nextInt(startNumber..endNumber)
-        }
-            .distinct()
-            .take(size)
-            .sorted()
-            .toSet()
-    }
+    //endregion
 }

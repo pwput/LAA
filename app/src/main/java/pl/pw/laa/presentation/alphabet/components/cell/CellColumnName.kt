@@ -14,7 +14,7 @@ import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 
 
 @Composable
-fun AlphabetTableContentCellColumnName(resourceId: Int, modifier: Modifier = Modifier) {
+fun CellColumnName(resourceId: Int, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier,
     ) {
@@ -30,10 +30,10 @@ fun AlphabetTableContentCellColumnName(resourceId: Int, modifier: Modifier = Mod
 //region Previews
 @Composable
 @Preview
-fun AlphabetTableContentCellColumnNamePreview() {
+fun CellColumnNamePreview() {
     LearnArabicAlphabetTheme {
         Surface(color = MaterialTheme.colorScheme.background) {
-            AlphabetTableContentCellColumnName(
+            CellColumnName(
                 resourceId = R.string.alphabet_table_top_row_final
             )
         }

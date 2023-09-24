@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import pl.pw.laa.data.repository.IUserPreferencesRepository
+import pl.pw.laa.state.UserPreferencesState
 import pl.pw.laa.viewmodel.BaseViewModel
 import pl.pw.laa.viewmodel.IStateViewModel
 import timber.log.Timber
@@ -36,13 +37,15 @@ class SettingsViewModel @Inject constructor(
         val preferences = userPreferencesRepository.userPreferencesFlow
         viewStateNotifier.update {
             it.copy(
-                answersCount = preferences.first().answersCount,
-                areCheatsEnabled = preferences.first().areCheatsEnabled,
-                areTipsEnabled = preferences.first().areTipsEnabled,
-                isInitialTested = preferences.first().isInitial,
-                isMedialTested = preferences.first().isMedial,
-                isFinalTested = preferences.first().isFinal,
-                isIsolatedTested = preferences.first().isIsolated,
+                preferences = UserPreferencesState(
+                    answersCount = preferences.first().answersCount,
+                    areCheatsEnabled = preferences.first().areCheatsEnabled,
+                    areTipsEnabled = preferences.first().areTipsEnabled,
+                    isInitialTested = preferences.first().isInitial,
+                    isMedialTested = preferences.first().isMedial,
+                    isFinalTested = preferences.first().isFinal,
+                    isIsolatedTested = preferences.first().isIsolated,
+                )
             )
         }
     }
@@ -53,12 +56,16 @@ class SettingsViewModel @Inject constructor(
             when (event) {
                 is SettingsEvent.SetAnswersCount ->
                     userPreferencesRepository.updateAnswersCount(event.value)
+
                 is SettingsEvent.SetAreCheatsOn ->
                     userPreferencesRepository.updateAreCheatsEnabled(event.value)
+
                 is SettingsEvent.SetAreTipsOn ->
                     userPreferencesRepository.updateAreTipsEnabled(event.value)
+
                 is SettingsEvent.SettingsEventForm ->
                     onFormEvent(event)
+
                 else ->
                     Timber.d("Unknown event: ${event::class.simpleName}")
             }
@@ -68,13 +75,16 @@ class SettingsViewModel @Inject constructor(
 
     private suspend fun onFormEvent(event: SettingsEvent.SettingsEventForm) {
         if (canFormBeChanged(event.value)) {
-            when(event){
+            when (event) {
                 is SettingsEvent.SetIsFinalTested ->
                     userPreferencesRepository.updateIsFinalTested(event.value)
+
                 is SettingsEvent.SetIsInitialTested ->
                     userPreferencesRepository.updateIsInitialTested(event.value)
+
                 is SettingsEvent.SetIsIsolatedTested ->
                     userPreferencesRepository.updateIsIsolatedTested(event.value)
+
                 is SettingsEvent.SetIsMedialTested ->
                     userPreferencesRepository.updateIsMedialTested(event.value)
             }
@@ -84,7 +94,7 @@ class SettingsViewModel @Inject constructor(
     private fun canFormBeChanged(newValue: Boolean): Boolean {
         if (newValue) return true
         if (viewStateNotifier.value.formCount() > 1) return true
-        if (viewStateNotifier.value.areTipsEnabled) setShowMessageEvent(triggered)
+        if (viewStateNotifier.value.preferences.areTipsEnabled) setShowMessageEvent(triggered)
         Timber.d("Can't change form")
         return false
     }
