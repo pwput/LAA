@@ -22,9 +22,9 @@ import pl.pw.laa.componets.RowDivider
 import pl.pw.laa.data.domain.BooleanPreference
 import pl.pw.laa.data.domain.FormPreference
 import pl.pw.laa.data.domain.IntPreference
-import pl.pw.laa.presentation.settings.components.SettingsScreenContentPreferencesSwitchColumn
-import pl.pw.laa.presentation.settings.components.SettingsScreenContentPreferencesChipGroup
-import pl.pw.laa.presentation.settings.components.SettingsScreenContentExpandedNumberList
+import pl.pw.laa.presentation.settings.components.PreferencesSwitchColumn
+import pl.pw.laa.presentation.settings.components.PreferencesChipGroup
+import pl.pw.laa.presentation.settings.components.ExpandedNumberList
 
 @Composable
 fun SettingsScreenContent(
@@ -35,16 +35,16 @@ fun SettingsScreenContent(
     val expanded by remember {
         mutableStateOf(false)
     }
-    val answers = SettingsNumberListData(IntPreference.AnswersCount, state.answersCount)
+    val answers = SettingsNumberListData(IntPreference.AnswersCount, state.preferences.answersCount)
     val checkBoxes = listOf(
-        SettingsCheckBoxData(BooleanPreference.AreCheatsEnabled, state.areCheatsEnabled),
-        SettingsCheckBoxData(BooleanPreference.AreTipsEnabled, state.areTipsEnabled)
+        SettingsCheckBoxData(BooleanPreference.AreCheatsEnabled, state.preferences.areCheatsEnabled),
+        SettingsCheckBoxData(BooleanPreference.AreTipsEnabled, state.preferences.areTipsEnabled)
     )
     val forms = listOf(
-        SettingsChipData(FormPreference.IsInitial, state.isInitialTested),
-        SettingsChipData(FormPreference.IsMedial, state.isMedialTested),
-        SettingsChipData(FormPreference.IsFinal, state.isFinalTested),
-        SettingsChipData(FormPreference.IsIsolated, state.isIsolatedTested)
+        SettingsChipData(FormPreference.IsInitial, state.preferences.isInitialTested),
+        SettingsChipData(FormPreference.IsMedial, state.preferences.isMedialTested),
+        SettingsChipData(FormPreference.IsFinal, state.preferences.isFinalTested),
+        SettingsChipData(FormPreference.IsIsolated, state.preferences.isIsolatedTested)
     )
     Surface(modifier = Modifier.padding(paddingValues)) {
         Column(
@@ -55,18 +55,18 @@ fun SettingsScreenContent(
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            SettingsScreenContentExpandedNumberList(
+            ExpandedNumberList(
                 answers,
                 expanded = expanded,
                 onEvent,
             )
             RowDivider()
-            SettingsScreenContentPreferencesSwitchColumn(
+            PreferencesSwitchColumn(
                 checkBoxes,
                 onEvent,
             )
             RowDivider()
-            SettingsScreenContentPreferencesChipGroup(
+            PreferencesChipGroup(
                 forms,
                 onEvent,
             )

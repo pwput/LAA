@@ -20,7 +20,7 @@ import pl.pw.laa.presentation.settings.SettingsEvent
 import timber.log.Timber
 
 @Composable
-fun SettingsScreenContentPreferenceSwitch(
+fun PreferenceSwitch(
     checkBoxData: SettingsCheckBoxData,
     onEvent: (SettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
@@ -63,9 +63,9 @@ internal fun settingsScreenContentPreferenceSwitchOnEvent(
 //region Previews
 @Preview
 @Composable
-fun SettingsScreenContentPreferenceSwitchPreview() {
+fun PreferenceSwitchPreview() {
     LearnArabicAlphabetSurfacePreview {
-        SettingsScreenContentPreferenceSwitch(
+        PreferenceSwitch(
             SettingsCheckBoxData(
                 BooleanPreference.AreCheatsEnabled,
                 false
@@ -77,9 +77,9 @@ fun SettingsScreenContentPreferenceSwitchPreview() {
 
 @Preview
 @Composable
-fun SettingsScreenContentPreferenceSwitchEnabledPreview() {
+fun PreferenceSwitchEnabledPreview() {
     LearnArabicAlphabetSurfacePreview {
-        SettingsScreenContentPreferenceSwitch(
+        PreferenceSwitch(
             SettingsCheckBoxData(
                 BooleanPreference.AreCheatsEnabled,
                 true
@@ -92,9 +92,9 @@ fun SettingsScreenContentPreferenceSwitchEnabledPreview() {
 
 @Preview
 @Composable
-fun SettingsScreenContentPreferenceSwitchPreviewDark() {
+fun PreferenceSwitchPreviewDark() {
     LearnArabicAlphabetSurfacePreview(true) {
-        SettingsScreenContentPreferenceSwitch(
+        PreferenceSwitch(
             SettingsCheckBoxData(
                 BooleanPreference.AreTipsEnabled,
                 false,
@@ -106,9 +106,9 @@ fun SettingsScreenContentPreferenceSwitchPreviewDark() {
 
 @Preview
 @Composable
-fun SettingsScreenContentPreferenceSwitchPreviewEnabledDark() {
+fun PreferenceSwitchPreviewEnabledDark() {
     LearnArabicAlphabetSurfacePreview(true) {
-        SettingsScreenContentPreferenceSwitch(
+        PreferenceSwitch(
             SettingsCheckBoxData(
                 BooleanPreference.AreTipsEnabled,
                 true,

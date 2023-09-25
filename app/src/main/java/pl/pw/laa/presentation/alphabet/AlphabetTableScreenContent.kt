@@ -19,8 +19,8 @@ import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.componets.RowDivider
 import pl.pw.laa.data.Alphabet
 import pl.pw.laa.mediaplayer.MediaPlayerResponse
-import pl.pw.laa.presentation.alphabet.components.row.AlphabetTableContentRowColumNames
-import pl.pw.laa.presentation.alphabet.components.row.AlphabetTableContentRowLetter
+import pl.pw.laa.presentation.alphabet.components.row.RowColumNames
+import pl.pw.laa.presentation.alphabet.components.row.RowLetter
 
 @Composable
 fun AlphabetTableScreenContent(
@@ -33,11 +33,11 @@ fun AlphabetTableScreenContent(
             .fillMaxSize()
             .padding(padding)
     ) {
-        AlphabetTableContentRowColumNames()
+        RowColumNames()
         RowDivider()
         LazyColumn(Modifier.fillMaxSize()) {
             itemsIndexed(items = Alphabet.letters) { index, letter ->
-                AlphabetTableContentRowLetter(
+                RowLetter(
                     letter = letter,
                     onEvent,
                     showIcon,

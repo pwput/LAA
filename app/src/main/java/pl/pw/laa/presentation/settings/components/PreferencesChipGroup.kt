@@ -21,7 +21,7 @@ import pl.pw.laa.presentation.settings.SettingsEvent
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun SettingsScreenContentPreferencesChipGroup(
+fun PreferencesChipGroup(
     chipDataList: List<SettingsChipData>,
     onEvent: (SettingsEvent) -> Unit
 ) {
@@ -39,7 +39,7 @@ fun SettingsScreenContentPreferencesChipGroup(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             chipDataList.forEach { chipData ->
-                SettingsScreenContentPreferenceChip(
+                PreferenceChip(
                     chipData.preference,
                     chipData.value,
                     onEvent,
@@ -61,18 +61,18 @@ private val data = listOf(
 )
 @Preview
 @Composable
-fun SettingsScreenContentPreferencesChipGroupPreview() {
+fun PreferencesChipGroupPreview() {
     LearnArabicAlphabetSurfacePreview {
-        SettingsScreenContentPreferencesChipGroup(
+        PreferencesChipGroup(
             data,
         ) {}
     }
 }
 @Preview
 @Composable
-fun SettingsScreenContentPreferencesChipGroupPreviewDark() {
+fun PreferencesChipGroupPreviewDark() {
     LearnArabicAlphabetSurfacePreview(true) {
-        SettingsScreenContentPreferencesChipGroup(
+        PreferencesChipGroup(
             data,
         ) {}
     }

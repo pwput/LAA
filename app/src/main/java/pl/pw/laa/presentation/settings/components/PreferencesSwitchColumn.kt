@@ -10,14 +10,14 @@ import pl.pw.laa.presentation.settings.SettingsCheckBoxData
 import pl.pw.laa.presentation.settings.SettingsEvent
 
 @Composable
-fun SettingsScreenContentPreferencesSwitchColumn(
+fun PreferencesSwitchColumn(
     checkBoxDataList: List<SettingsCheckBoxData>,
     onEvent: (SettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column{
         checkBoxDataList.forEach { checkBoxData ->
-            SettingsScreenContentPreferenceSwitch(
+            PreferenceSwitch(
                 checkBoxData,
                 onEvent,
                 modifier = modifier,
@@ -40,9 +40,9 @@ private val  data = listOf(
 
 @Preview
 @Composable
-fun SettingsScreenContentPreferencesSwitchColumnPreview() {
+fun PreferencesSwitchColumnPreview() {
     LearnArabicAlphabetSurfacePreview {
-        SettingsScreenContentPreferencesSwitchColumn(
+        PreferencesSwitchColumn(
             data,
             {}
         )
@@ -51,9 +51,9 @@ fun SettingsScreenContentPreferencesSwitchColumnPreview() {
 
 @Preview
 @Composable
-fun SettingsScreenContentPreferencesSwitchColumnPreviewDark() {
+fun PreferencesSwitchColumnPreviewDark() {
     LearnArabicAlphabetSurfacePreview(true) {
-        SettingsScreenContentPreferencesSwitchColumn(
+        PreferencesSwitchColumn(
             data,
             {}
         )

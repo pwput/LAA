@@ -12,7 +12,7 @@ import pl.pw.laa.data.Alphabet
 import pl.pw.laa.data.domain.Form
 
 @Composable
-fun AlphabetTableContentCellForm(form: Form, modifier: Modifier = Modifier) {
+fun CellForm(form: Form, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier,
     ) {
@@ -28,17 +28,17 @@ fun AlphabetTableContentCellForm(form: Form, modifier: Modifier = Modifier) {
 //region Previews
 @Preview
 @Composable
-fun AlphabetTableContentCellFormPreview() {
+fun CellFormPreview() {
     LearnArabicAlphabetSurfacePreview {
-            AlphabetTableContentCellForm(Alphabet.letters[1].final)
+            CellForm(Alphabet.letters[1].final)
         }
 }
 
 @Preview
 @Composable
-fun AlphabetTableContentCellFormPreviewDark() {
+fun CellFormPreviewDark() {
     LearnArabicAlphabetSurfacePreview(true) {
-        AlphabetTableContentCellForm(Alphabet.letters[1].final)
+        CellForm(Alphabet.letters[1].final)
     }
 }
 //endregion

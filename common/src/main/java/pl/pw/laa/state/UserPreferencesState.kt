@@ -1,11 +1,11 @@
 package pl.pw.laa.state
 
-interface UserPreferencesState {
-    var answersCount: Int
-    var areCheatsEnabled: Boolean
-    var areTipsEnabled: Boolean
-    var isInitialTested: Boolean
-    var isMedialTested: Boolean
-    var isFinalTested: Boolean
-    var isIsolatedTested: Boolean
-}
+data class UserPreferencesState(
+    var answersCount: Int = 0,
+    var areCheatsEnabled: Boolean = false,
+    var areTipsEnabled: Boolean = false,
+    var isInitialTested: Boolean = false,
+    var isMedialTested: Boolean = false,
+    var isFinalTested: Boolean = false,
+    var isIsolatedTested: Boolean = false
+)

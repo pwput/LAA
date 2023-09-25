@@ -13,9 +13,9 @@ abstract class BaseViewModel : ViewModel() {
 
 
     private val isLoadingNotifier = MutableLiveData(false)
+    private val showDialogNotifier = MutableLiveData(false)
 
     fun isLoading() = isLoadingNotifier.value ?: false
-
 
     fun startLoading() {
         Timber.d("BaseViewModel started loading")

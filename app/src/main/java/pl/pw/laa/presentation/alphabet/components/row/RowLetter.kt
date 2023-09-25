@@ -21,11 +21,11 @@ import pl.pw.laa.data.Alphabet
 import pl.pw.laa.data.domain.Letter
 import pl.pw.laa.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.presentation.alphabet.AlphabetTableEvent
-import pl.pw.laa.presentation.alphabet.components.cell.AlphabetTableContentCellForm
-import pl.pw.laa.presentation.alphabet.components.cell.AlphabetTableContentCellRowName
+import pl.pw.laa.presentation.alphabet.components.cell.CellForm
+import pl.pw.laa.presentation.alphabet.components.cell.CellRowName
 
 @Composable
-fun AlphabetTableContentRowLetter(
+fun RowLetter(
     letter: Letter,
     onRowClick: (AlphabetTableEvent) -> MediaPlayerResponse,
     showIncon: Boolean,
@@ -54,29 +54,29 @@ fun AlphabetTableContentRowLetter(
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
         val formModifier = formsModifier.weight(1f)
-        AlphabetTableContentCellRowName(name = letter.name, visible, modifier = formModifier)
-        AlphabetTableContentCellForm(form = letter.isolated, modifier = formModifier)
-        AlphabetTableContentCellForm(form = letter.final, modifier = formModifier)
-        AlphabetTableContentCellForm(form = letter.medial, modifier = formModifier)
-        AlphabetTableContentCellForm(form = letter.initial, modifier = formModifier)
+        CellRowName(name = letter.name, visible, modifier = formModifier)
+        CellForm(form = letter.isolated, modifier = formModifier)
+        CellForm(form = letter.final, modifier = formModifier)
+        CellForm(form = letter.medial, modifier = formModifier)
+        CellForm(form = letter.initial, modifier = formModifier)
     }
 }
 
 //region Previews
 @Preview
 @Composable
-fun AlphabetTableContentRowLetterPreview() {
+fun RowLetterPreview() {
     LearnArabicAlphabetSurfacePreview {
-        AlphabetTableContentRowLetter(Alphabet.letters[1], { MediaPlayerResponse.Error }, true)
+        RowLetter(Alphabet.letters[1], { MediaPlayerResponse.Error }, true)
 
     }
 }
 
 @Preview
 @Composable
-fun AlphabetTableContentRowLetterPreviewDark() {
+fun RowLetterPreviewDark() {
     LearnArabicAlphabetSurfacePreview(true) {
-        AlphabetTableContentRowLetter(Alphabet.letters[1], { MediaPlayerResponse.Error }, false)
+        RowLetter(Alphabet.letters[1], { MediaPlayerResponse.Error }, false)
 
     }
 }

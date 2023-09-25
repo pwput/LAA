@@ -29,7 +29,7 @@ import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreenContentExpandedNumberList(
+fun ExpandedNumberList(
     numberListData: SettingsNumberListData,
     expanded: Boolean,
     onEvent: (SettingsEvent) -> Unit,
@@ -95,9 +95,9 @@ private val data = SettingsNumberListData(
 
 @Preview
 @Composable
-fun SettingsScreenContentExpandedNumberListPreview() {
+fun ExpandedNumberListPreview() {
     LearnArabicAlphabetSurfacePreview() {
-        SettingsScreenContentExpandedNumberList(
+        ExpandedNumberList(
             data,
             true,
             { },
@@ -107,9 +107,9 @@ fun SettingsScreenContentExpandedNumberListPreview() {
 
 @Preview
 @Composable
-fun SettingsScreenContentExpandedNumberListPreviewDark() {
+fun ExpandedNumberListPreviewDark() {
     LearnArabicAlphabetSurfacePreview(true) {
-        SettingsScreenContentExpandedNumberList(
+        ExpandedNumberList(
             data,
             true,
             { },
