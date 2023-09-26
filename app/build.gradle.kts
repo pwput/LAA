@@ -61,10 +61,17 @@ android {
         }
     }
 }
+
+ksp {
+    arg("compose-destinations.mode", "destinations")
+    arg("compose-destinations.moduleName", "app")
+}
+
 dependencies {
     // project
     implementation(project(Dependencies.Project.data))
     implementation(project(Dependencies.Project.common))
+    implementation(project(":quiz"))
     // material
     implementation(Androidx.Compose.material3)
     // compose
@@ -86,7 +93,7 @@ dependencies {
     implementation(Androidx.lifecycleRuntimeCompose)
     implementation(Androidx.splashscreen)
     // Preferences DataStore
-    implementation(Dependencies.Androidx.datastorePreferences)
+    implementation(Androidx.datastorePreferences)
     // Room
     implementation(Androidx.Room.runtime)
     annotationProcessor(Androidx.Room.compiler)

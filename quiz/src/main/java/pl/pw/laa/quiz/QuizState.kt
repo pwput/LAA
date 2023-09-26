@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.quiz
+package pl.pw.laa.quiz
 
 import de.palm.composestateevents.StateEventWithContent
 import de.palm.composestateevents.consumed

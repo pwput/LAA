@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.quiz.components
+package pl.pw.laa.quiz.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

@@ -10,12 +10,13 @@ import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.navigation.ActivityNavigator
+import androidx.navigation.NavDestination
 import com.ramcosta.composedestinations.spec.Direction
 import pl.pw.laa.R
 import pl.pw.laa.presentation.destinations.AlphabetTableScreenDestination
-import pl.pw.laa.presentation.destinations.Destination
-import pl.pw.laa.presentation.destinations.QuestionScreenDestination
 import pl.pw.laa.presentation.destinations.SettingsScreenDestination
+import pl.pw.laa.quiz.destinations.QuestionScreenDestination
 
 enum class NavigationItem(
     val direction: Direction,
@@ -49,7 +50,7 @@ enum class NavigationItem(
             else Icon(imageVector = this.unselectedIcon, contentDescription = "unselectedIcon")
 }
 
-fun Destination.getTopBarTitle() =
+fun NavDestination.getTopBarTitle() =
     when (this) {
         NavigationItem.Quiz.direction -> R.string.navigation_item_quiz_top_bar_text
         NavigationItem.Alphabet.direction -> R.string.navigation_item_alphabet_top_bar_text

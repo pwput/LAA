@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.quiz.components
+package pl.pw.laa.quiz.components
 
 
 import androidx.compose.foundation.background
@@ -28,10 +28,10 @@ import androidx.compose.ui.unit.dp
 import de.palm.composestateevents.consumed
 import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.data.Alphabet
-import pl.pw.laa.presentation.quiz.QuizEvent
+import pl.pw.laa.quiz.QuizEvent
 import pl.pw.laa.mediaplayer.MediaPlayerResponse
-import pl.pw.laa.presentation.quiz.QuizState
-import pl.pw.laa.presentation.quiz.SingleQuestion
+import pl.pw.laa.quiz.QuizState
+import pl.pw.laa.quiz.SingleQuestion
 import pl.pw.laa.state.UserPreferencesState
 
 @Composable

@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.quiz
+package pl.pw.laa.quiz
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.PaddingValues
@@ -16,7 +16,6 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import de.palm.composestateevents.EventEffect
 import de.palm.composestateevents.consumed
 import pl.pw.laa.Orientation
-import pl.pw.laa.R
 import pl.pw.laa.componets.AlertDialog
 import pl.pw.laa.componets.IfNotLoading
 import pl.pw.laa.componets.Message

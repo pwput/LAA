@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.quiz
+package pl.pw.laa.quiz
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,9 +14,9 @@ import pl.pw.laa.annotation.preview.PreviewsLandscape
 import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.data.domain.Form
 import pl.pw.laa.mediaplayer.MediaPlayerResponse
-import pl.pw.laa.presentation.quiz.components.AnswersButtonGroup
-import pl.pw.laa.presentation.quiz.components.QuestionBox
-import pl.pw.laa.presentation.quiz.components.QuizTopBar
+import pl.pw.laa.quiz.components.AnswersButtonGroup
+import pl.pw.laa.quiz.components.QuestionBox
+import pl.pw.laa.quiz.components.QuizTopBar
 
 @Composable
 fun QuestionScreenContentLandscape(

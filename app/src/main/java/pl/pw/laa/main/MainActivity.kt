@@ -32,13 +32,15 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.ramcosta.composedestinations.DestinationsNavHost
+import com.ramcosta.composedestinations.dynamic.within
 import com.ramcosta.composedestinations.navigation.dependency
+import com.ramcosta.composedestinations.navigation.navigate
 import dagger.hilt.android.AndroidEntryPoint
+import pl.pw.laa.R
+import pl.pw.laa.navigation.NavGraphs
 import pl.pw.laa.navigation.NavigationItem
 import pl.pw.laa.navigation.getCurrentDestination
 import pl.pw.laa.navigation.getTopBarTitle
-import pl.pw.laa.navigation.navigateAndPopUp
-import pl.pw.laa.presentation.NavGraphs
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 import timber.log.Timber
 import javax.inject.Inject
@@ -113,7 +115,7 @@ class MainActivity @Inject constructor() : ComponentActivity() {
                     selected = item.direction == navController.getCurrentDestination(),
                     onClick = {
                         if (item.direction != currentDestination)
-                            navController.navigateAndPopUp(item.direction)
+                            navController.navigate(item.direction within NavGraphs.root)
                     },
                     icon = {
                         item.GetIcon(isSelected = item.direction == navController.getCurrentDestination())
@@ -140,7 +142,7 @@ class MainActivity @Inject constructor() : ComponentActivity() {
         TopAppBar(
             title = {
                 Text(
-                    text = stringResource(id = currentDestination.getTopBarTitle()),
+                    text = stringResource(id = currentDestination?.getTopBarTitle() ?: R.string.navigation_item_quiz_top_bar_text),
                     style = MaterialTheme.typography.titleMedium
                 )
             },
@@ -148,7 +150,7 @@ class MainActivity @Inject constructor() : ComponentActivity() {
                 topBarActions.forEach { item ->
                     IconButton(onClick = {
                         if (item.direction != currentDestination)
-                            navController.navigateAndPopUp(item.direction)
+                            navController.navigate(item.direction within NavGraphs.root)
                     }) {
                         item.GetIcon(isSelected = item.direction == navController.getCurrentDestination())
                     }

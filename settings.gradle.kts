@@ -27,3 +27,4 @@ rootProject.name = "learnArabicAlphabet"
 include (":app")
 include(":data")
 include(":common")
+include(":quiz")

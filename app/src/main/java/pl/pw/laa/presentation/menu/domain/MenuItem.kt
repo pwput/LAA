@@ -2,9 +2,9 @@ package pl.pw.laa.presentation.menu.domain
 
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import pl.pw.laa.presentation.destinations.AlphabetTableScreenDestination
-import pl.pw.laa.presentation.destinations.QuestionScreenDestination
 import pl.pw.laa.presentation.destinations.SettingsScreenDestination
 import pl.pw.laa.presentation.destinations.VocalizationScreenDestination
+import pl.pw.laa.quiz.destinations.QuestionScreenDestination
 
 sealed class MenuItem(val name: String) {
     abstract fun navigateToDestination(navigator: DestinationsNavigator)

@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.quiz.components
+package pl.pw.laa.quiz.components
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -16,9 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import pl.pw.laa.R
 import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
-import pl.pw.laa.presentation.quiz.QuizState
+import pl.pw.laa.quiz.QuizState
+import pl.pw.laa.quiz.R
 
 @Composable
 fun QuizTopBar(

@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.quiz
+package pl.pw.laa.quiz
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel

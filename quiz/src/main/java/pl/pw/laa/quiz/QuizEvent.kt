@@ -1,4 +1,4 @@
-package pl.pw.laa.presentation.quiz
+package pl.pw.laa.quiz
 
 import android.content.Context
 import pl.pw.laa.data.domain.Form
