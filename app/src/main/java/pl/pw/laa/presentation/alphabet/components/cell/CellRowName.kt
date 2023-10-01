@@ -2,7 +2,6 @@ package pl.pw.laa.presentation.alphabet.components.cell
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -10,14 +9,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import pl.pw.laa.componets.AudioIcon
 import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.data.Alphabet
 
 @Composable
 fun CellRowName(
     name: String,
-    isAudioIconVisible: Boolean = false,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -29,12 +26,6 @@ fun CellRowName(
             modifier = Modifier.align(Alignment.Center),
             color = MaterialTheme.colorScheme.onBackground,
         )
-        AudioIcon(
-            visible = isAudioIconVisible,
-            modifier = Modifier
-                .fillMaxHeight()
-                .align(Alignment.BottomStart)
-        )
     }
 }
 
@@ -45,7 +36,6 @@ fun CellRowNamePreview() {
     LearnArabicAlphabetSurfacePreview {
         CellRowName(
             Alphabet.letters[1].name,
-            false,
         )
     }
 }
@@ -56,7 +46,6 @@ fun CellRowNameIconPreview() {
     LearnArabicAlphabetSurfacePreview {
         CellRowName(
             Alphabet.letters[1].name,
-            true,
         )
     }
 }
@@ -67,7 +56,6 @@ fun CellRowNamePreviewDark() {
     LearnArabicAlphabetSurfacePreview(true) {
         CellRowName(
             Alphabet.letters[1].name,
-            false,
         )
     }
 }
@@ -77,7 +65,6 @@ fun CellRowNameIconPreviewDark() {
     LearnArabicAlphabetSurfacePreview(true) {
         CellRowName(
             Alphabet.letters[1].name,
-            true,
         )
     }
 }

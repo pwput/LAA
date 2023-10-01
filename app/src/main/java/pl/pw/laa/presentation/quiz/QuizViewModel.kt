@@ -61,7 +61,7 @@ class QuizViewModel @Inject constructor(private val userPreferencesRepository: I
     fun onEvent(event: QuizEvent): MediaPlayerResponse? {
         return when (event) {
             is QuizEvent.ReplayAudio -> {
-                startMediaPlayer(event.context, event.letter.vocalizationRaw)
+                play(event.context, event.letter.vocalizationRaw)
             }
 
             is QuizEvent.GotAnswer -> {
