@@ -25,7 +25,6 @@ import pl.pw.laa.presentation.alphabet.components.row.RowLetter
 @Composable
 fun AlphabetTableScreenContent(
     onEvent: (AlphabetTableEvent) -> MediaPlayerResponse,
-    showIcon: Boolean,
     padding: PaddingValues
 ) {
     Column(
@@ -40,7 +39,6 @@ fun AlphabetTableScreenContent(
                 RowLetter(
                     letter = letter,
                     onEvent,
-                    showIcon,
                     Modifier.background(
                         if (index % 2 == 0)
                             Color.Transparent
@@ -57,7 +55,7 @@ fun AlphabetTableScreenContent(
 @Composable
 fun AlphabetTableScreenContentPreview() {
     LearnArabicAlphabetSurfacePreview {
-        AlphabetTableScreenContent({ MediaPlayerResponse.Error }, false, PaddingValues(0.dp))
+        AlphabetTableScreenContent({ MediaPlayerResponse.Error }, PaddingValues(0.dp))
     }
 }
 
@@ -66,6 +64,6 @@ fun AlphabetTableScreenContentPreview() {
 @Composable
 fun AlphabetTableScreenContentPreviewDark() {
     LearnArabicAlphabetSurfacePreview(true) {
-        AlphabetTableScreenContent({ MediaPlayerResponse.Error }, false, PaddingValues(0.dp))
+        AlphabetTableScreenContent({ MediaPlayerResponse.Error }, PaddingValues(0.dp))
     }
 }

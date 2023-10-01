@@ -8,10 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -28,16 +24,10 @@ import pl.pw.laa.presentation.alphabet.components.cell.CellRowName
 fun RowLetter(
     letter: Letter,
     onRowClick: (AlphabetTableEvent) -> MediaPlayerResponse,
-    showIncon: Boolean,
     modifier: Modifier = Modifier,
     formsModifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
-
-    var visible by remember { mutableStateOf(false) }
-
-    if (!showIncon) visible = false
-
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -46,15 +36,13 @@ fun RowLetter(
                 interactionSource = MutableInteractionSource(),
                 indication = null,
             ) {
-                val resp = onRowClick(AlphabetTableEvent.PlayLetterAudio(context, letter))
-                visible =
-                    resp is MediaPlayerResponse.Success || resp is MediaPlayerResponse.AlreadyPlayingRequestedAudio
+                onRowClick(AlphabetTableEvent.PlayLetterAudio(context, letter))
             },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
         val formModifier = formsModifier.weight(1f)
-        CellRowName(name = letter.name, visible, modifier = formModifier)
+        CellRowName(name = letter.name, modifier = formModifier)
         CellForm(form = letter.isolated, modifier = formModifier)
         CellForm(form = letter.final, modifier = formModifier)
         CellForm(form = letter.medial, modifier = formModifier)
@@ -67,7 +55,7 @@ fun RowLetter(
 @Composable
 fun RowLetterPreview() {
     LearnArabicAlphabetSurfacePreview {
-        RowLetter(Alphabet.letters[1], { MediaPlayerResponse.Error }, true)
+        RowLetter(Alphabet.letters[1], { MediaPlayerResponse.Error })
 
     }
 }
@@ -76,7 +64,7 @@ fun RowLetterPreview() {
 @Composable
 fun RowLetterPreviewDark() {
     LearnArabicAlphabetSurfacePreview(true) {
-        RowLetter(Alphabet.letters[1], { MediaPlayerResponse.Error }, false)
+        RowLetter(Alphabet.letters[1], { MediaPlayerResponse.Error })
 
     }
 }

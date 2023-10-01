@@ -19,6 +19,6 @@ fun SetupSnackbarHostState(
         event = event,
         onConsumed = onConsumed
     ) {
-        snackbarHostState.showSnackbar(Message(context.getString(textId)))
+        snackbarHostState.showSnackbar(CustomSnackbarData(context.getString(textId)))
     }
 }

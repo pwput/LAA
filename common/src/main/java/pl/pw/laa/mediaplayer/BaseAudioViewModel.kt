@@ -20,40 +20,39 @@ open class BaseAudioViewModel @Inject constructor() :
     var showIcon by mutableStateOf(false)
         private set
 
-    fun startMediaPlayer(context: Context, raw: Int): MediaPlayerResponse {
-        try {
-            if (!mediaPlayer.isPlaying) {
-                Timber.d("Crating MediaPlayer for raw:$raw.")
-                mediaPlayer = MediaPlayer.create(context, raw)
-                this.raw = raw
-                Timber.d("Starting MediaPlayer for raw: $raw")
-                mediaPlayer.start()
-                showIcon = true
-                mediaPlayer.setOnCompletionListener {
-                    showIcon = false
-                    stopMediaPlayer()
-                }
-                return MediaPlayerResponse.Success
-            } else {
-                return if (this.raw == raw) {
-                    Timber.d("Cannot create MediaPlayer for raw:$raw, MediaPlayer is currently playing this raw!")
-                    MediaPlayerResponse.AlreadyPlayingRequestedAudio
-                } else {
-                    Timber.d("Cannot create MediaPlayer for raw:$raw, MediaPlayer is currently playing different raw, currently playing: ${this.raw}!")
-                    MediaPlayerResponse.PlayingDifferentAudio
-                }
-            }
+    fun play(context: Context, newRaw: Int): MediaPlayerResponse {
+        return try {
+            stopMediaPlayer()
+            createMediaPlayer(context, newRaw)
+            startMediaPlayer()
+            MediaPlayerResponse.Success
         } catch (
             e: Exception,
         ) {
             Timber.w(e, "Error occurred while setting Creating MediaPlayer.")
-            return MediaPlayerResponse.Error
+            MediaPlayerResponse.Error
+        }
+    }
+
+    private fun createMediaPlayer(context: Context, raw: Int) {
+            Timber.d("Crating MediaPlayer for raw:$raw.")
+            mediaPlayer = MediaPlayer.create(context, raw)
+            this.raw = raw
+    }
+
+    private fun startMediaPlayer(){
+        Timber.d("Starting MediaPlayer for raw: $raw")
+        mediaPlayer.start()
+        showIcon = true
+        mediaPlayer.setOnCompletionListener {
+            stopMediaPlayer()
         }
     }
 
     private fun stopMediaPlayer() {
         try {
-            mediaPlayer.stop()
+            mediaPlayer.release()
+            showIcon = false
             Timber.d("MediaPlayer has stopped.")
         } catch (
             e: Exception,

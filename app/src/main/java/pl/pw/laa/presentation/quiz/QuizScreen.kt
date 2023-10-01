@@ -19,7 +19,7 @@ import pl.pw.laa.Orientation
 import pl.pw.laa.R
 import pl.pw.laa.componets.AlertDialog
 import pl.pw.laa.componets.IfNotLoading
-import pl.pw.laa.componets.Message
+import pl.pw.laa.componets.CustomSnackbarData
 import pl.pw.laa.componets.ShowDialog
 import pl.pw.laa.componets.showSnackbar
 import pl.pw.laa.data.Alphabet
@@ -72,7 +72,7 @@ fun QuestionScreen(
         onConsumed = viewModel::setShowMessageConsumed
     ) {
         snackbarHostState.showSnackbar(
-            Message(context.resources.getString(R.string.quiz_screen_snackbar_text, it[0], it[1]))
+            CustomSnackbarData(context.resources.getString(R.string.quiz_screen_snackbar_text, it[0], it[1]))
         )
     }
 }

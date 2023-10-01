@@ -4,14 +4,21 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarData
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
@@ -23,9 +30,12 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -34,6 +44,7 @@ import androidx.navigation.compose.rememberNavController
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.navigation.dependency
 import dagger.hilt.android.AndroidEntryPoint
+import pl.pw.laa.R
 import pl.pw.laa.navigation.NavigationItem
 import pl.pw.laa.navigation.getCurrentDestination
 import pl.pw.laa.navigation.getTopBarTitle
@@ -42,7 +53,6 @@ import pl.pw.laa.presentation.NavGraphs
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 import timber.log.Timber
 import javax.inject.Inject
-
 
 
 @AndroidEntryPoint
@@ -77,7 +87,14 @@ class MainActivity @Inject constructor() : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Scaffold(
-                        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
+                        snackbarHost = {
+                            SnackbarHost(hostState = snackbarHostState) { snackbarData: SnackbarData ->
+                                CustomSnackBar(
+                                    snackbarData.visuals.withDismissAction,
+                                    snackbarData.visuals.message,
+                                )
+                            }
+                        },
                         modifier = Modifier
                             .nestedScroll(scrollBehavior.nestedScrollConnection),
                         topBar = {
@@ -99,6 +116,51 @@ class MainActivity @Inject constructor() : ComponentActivity() {
             }
         }
     }
+
+    @Composable
+    fun CustomSnackBar(
+        showIcon: Boolean,
+        message: String,
+    ) {
+        Snackbar(
+            modifier = Modifier
+                .padding(16.dp),
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.wrapContentWidth(),
+
+                ) {
+                if (showIcon) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.round_volume_up_24),
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSecondaryContainer,
+                        modifier = Modifier
+                            .height(24.dp)
+                            .padding(end = 8.dp)
+                    )
+                }
+                Text(
+                    message,
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.labelMedium
+                )
+            }
+        }
+    }
+
+    @Preview
+    @Composable
+    fun CustomSnackBarPreview() {
+        LearnArabicAlphabetTheme {
+            CustomSnackBar(true, "Test")
+        }
+    }
+
 
     @Composable
     fun BotNavBar(

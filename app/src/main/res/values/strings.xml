@@ -22,4 +22,5 @@
     <string name="quiz_screen_dialog_title">Dialog title</string>
     <string name="quiz_screen_dialog_text">dialog text</string>
     <string name="quiz_screen_dialog_confirmation_text">OK</string>
+    <string name="alphabet_table_screen_snackbar_text">Playing \'%1$s\'</string>
 </resources>
