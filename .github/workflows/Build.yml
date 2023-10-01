@@ -1,4 +1,4 @@
-name: Generated APK
+name: Build
 
 env:
   # The name of the main module repository
