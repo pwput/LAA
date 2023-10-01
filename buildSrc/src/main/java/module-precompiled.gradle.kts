@@ -11,7 +11,7 @@ allprojects{
             mavenCentral()
         }
         dependencies {
-            classpath("com.android.tools.build:gradle:8.0.2")
+            classpath("com.android.tools.build:gradle:8.1.1")
             classpath ("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
             classpath("com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}")
         }
@@ -23,7 +23,6 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
-  //  id("com.google.devtools.ksp") version "1.8.0-1.0.9"
 }
     android {
         namespace ="pl.pw.laa.${name}"
