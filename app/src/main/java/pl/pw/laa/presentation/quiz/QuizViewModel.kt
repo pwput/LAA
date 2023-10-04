@@ -143,7 +143,7 @@ class QuizViewModel @Inject constructor(private val userPreferencesRepository: I
             triggered(
                 arrayOf(
                     Alphabet.getLetterName(form),
-                    form.getName().lowercase()
+                    form.nameResId.toString()
                 )
             )
         )
