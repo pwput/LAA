@@ -27,7 +27,7 @@ fun LoadingScreen() {
 @Preview(showSystemUi = true)
 @Composable
 fun LoadingScreenPreview() {
-    LearnArabicAlphabetTheme() {
+    LearnArabicAlphabetTheme {
         LoadingScreen()
     }
 }

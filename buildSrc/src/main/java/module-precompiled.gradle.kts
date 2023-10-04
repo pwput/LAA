@@ -3,6 +3,8 @@ import org.gradle.kotlin.dsl.buildscript
 import org.gradle.kotlin.dsl.repositories
 import org.gradle.kotlin.dsl.version
 import pl.pw.buildsrc.Dependencies
+import pl.pw.buildsrc.extensions.*
+
 
 allprojects{
     buildscript {
@@ -65,25 +67,9 @@ plugins {
 
 
 dependencies {
-    // material
-    implementation(Dependencies.Androidx.Compose.material3)
-    // compose
-    implementation(Dependencies.Androidx.Compose.ui)
-    implementation(Dependencies.Androidx.Compose.materialIconsExtended)
-    implementation(Dependencies.Androidx.Compose.foundation)
-    implementation(Dependencies.Androidx.Compose.foundationLayout)
-    implementation(Dependencies.Androidx.Compose.animation)
-    implementation(Dependencies.Androidx.Compose.runtime)
-    implementation(Dependencies.Androidx.Compose.runtimeLivedata)
-    implementation(Dependencies.Androidx.Compose.uiTooling)
-    // androidx
-    implementation(Dependencies.Androidx.startup)
-    implementation(Dependencies.Androidx.navigationCompose)
-    implementation(Dependencies.Androidx.constraintlayoutCompose)
-    implementation(Dependencies.Androidx.activityCompose)
-    implementation(Dependencies.Androidx.hiltNavigationCompose)
-    // Preferences DataStore
-    implementation(Dependencies.Androidx.datastorePreferences)
+    implementation(Dependencies.Androidx.Compose.librares)
+    implementation(Dependencies.Androidx.librares)
+
     // hilt
     implementation(Dependencies.Dagger.hilt)
     kapt(Dependencies.Dagger.hiltCompiler)

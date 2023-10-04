@@ -10,12 +10,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarData
@@ -168,10 +168,10 @@ class MainActivity @Inject constructor() : ComponentActivity() {
     ) {
         val currentDestination = navController.getCurrentDestination()
         NavigationBar(
-            modifier = Modifier.height(64.dp)
+            modifier = Modifier.height(64.dp),
         ) {
             bottomNavigationItems.forEach { item ->
-                BottomNavigationItem(
+                NavigationBarItem(
                     selected = item.direction == navController.getCurrentDestination(),
                     onClick = {
                         if (item.direction != currentDestination)

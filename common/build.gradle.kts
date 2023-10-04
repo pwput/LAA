@@ -8,5 +8,4 @@ plugins {
 dependencies {
     // project
     implementation(project(Dependencies.Project.data))
-    implementation("androidx.compose.animation:animation-graphics:1.4.3")
 }

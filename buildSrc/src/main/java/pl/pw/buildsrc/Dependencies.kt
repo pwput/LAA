@@ -45,15 +45,14 @@ object Dependencies {
         const val datastorePreferences = "androidx.datastore:datastore-preferences:1.0.0"
         const val splashscreen = "androidx.core:core-splashscreen:1.0.0"
 
+        val librares = listOf(startup, activityCompose, navigationCompose, lifecycleRuntimeCompose, constraintlayoutCompose, hiltNavigationCompose, junit, espresso, datastorePreferences, splashscreen)
+
         object Compose {
             const val material3 = "androidx.compose.material3:material3:${Versions.material3}"
             const val ui = "androidx.compose.ui:ui:${Versions.compose}"
             const val uiTooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
             const val uiTestJunit4 = "androidx.compose.ui:ui-test-junit4:${Versions.compose}"
             const val uiTestManifest = "androidx.compose.ui:ui-test-manifest:${Versions.compose}"
-            const val material = "androidx.compose.material:material:${Versions.compose}"
-            const val materialIconsExtended =
-                "androidx.compose.material:material:${Versions.compose}"
             const val foundation = "androidx.compose.foundation:foundation:${Versions.compose}"
             const val foundationLayout =
                 "androidx.compose.foundation:foundation-layout:${Versions.compose}"
@@ -61,6 +60,8 @@ object Dependencies {
             const val runtime = "androidx.compose.runtime:runtime:${Versions.compose}"
             const val runtimeLivedata =
                 "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
+
+            val librares = listOf(material3, ui, uiTooling, uiTestJunit4, uiTestManifest, foundation, foundationLayout, animation, runtime, runtimeLivedata)
         }
 
         object Room {
@@ -74,6 +75,5 @@ object Dependencies {
         const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
         const val hiltCompiler = "com.google.dagger:hilt-compiler:${Versions.hilt}"
         const val hiltAndroidTesting = "com.google.dagger:hilt-android-testing:${Versions.hilt}"
-
     }
 }
