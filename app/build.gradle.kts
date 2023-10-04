@@ -4,6 +4,7 @@ import pl.pw.buildsrc.Dependencies.Kotlinx
 import pl.pw.buildsrc.Dependencies.Androidx
 import pl.pw.buildsrc.Dependencies.ComposeDestinations
 import pl.pw.buildsrc.Dependencies.Dagger
+import pl.pw.buildsrc.extensions.*
 
 plugins {
     id ("com.android.application")
@@ -65,33 +66,10 @@ dependencies {
     // project
     implementation(project(Dependencies.Project.data))
     implementation(project(Dependencies.Project.common))
-    // material
-    implementation(Androidx.Compose.material3)
-    // compose
-    implementation(Androidx.Compose.ui)
-    implementation(Androidx.Compose.materialIconsExtended)
-    implementation(Androidx.Compose.foundation)
-    implementation(Androidx.Compose.foundationLayout)
-    implementation(Androidx.Compose.animation)
-    implementation(Androidx.Compose.runtime)
-    implementation(Androidx.Compose.runtimeLivedata)
-    implementation(Androidx.Compose.uiTooling)
 
-    // androidx
-    implementation(Androidx.startup)
-    implementation(Androidx.navigationCompose)
-    implementation(Androidx.constraintlayoutCompose)
-    implementation(Androidx.activityCompose)
-    implementation(Androidx.hiltNavigationCompose)
-    implementation(Androidx.lifecycleRuntimeCompose)
-    implementation(Androidx.splashscreen)
-    // Preferences DataStore
-    implementation(Dependencies.Androidx.datastorePreferences)
-    // Room
-    implementation(Androidx.Room.runtime)
-    annotationProcessor(Androidx.Room.compiler)
-    kapt(Androidx.Room.compiler)
-    implementation(Androidx.Room.ktx)
+    implementation(Androidx.Compose.librares)
+    implementation(Androidx.librares)
+    implementRoom()
     // hilt
     implementation(Dagger.hilt)
     kapt(Dagger.hiltCompiler)

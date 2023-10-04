@@ -13,10 +13,3 @@ fun LearnArabicAlphabetSurfacePreview(darkTheme: Boolean = false, content: @Comp
         }
     }
 }
-
-@Composable
-fun LearnArabicAlphabetPreview(darkTheme: Boolean = false, content: @Composable () -> Unit) {
-    LearnArabicAlphabetTheme(darkTheme = darkTheme) {
-            content()
-    }
-}

@@ -26,6 +26,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.palm.composestateevents.consumed
+import pl.pw.laa.componets.AudioIcon
 import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.data.Alphabet
 import pl.pw.laa.presentation.quiz.QuizEvent
@@ -98,7 +99,7 @@ fun QuestionBox(
                 .fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                pl.pw.laa.componets.AudioIcon(visible, Modifier.fillMaxSize())
+                AudioIcon(visible)
             }
         }
     }
