@@ -1,10 +1,10 @@
 package pl.pw.laa.data.domain
 
 data class Letter(
-    val isolated: Isolated,
-    val final: Final,
-    val medial: Medial,
-    val initial: Initial,
+    val isolated: Form.Isolated,
+    val final: Form.Final,
+    val medial: Form.Medial,
+    val initial: Form.Initial,
     val name: String,
     val vocalizationRaw: Int,
 ) {
@@ -18,12 +18,13 @@ data class Letter(
     }
 
     fun getForm(form: Class<out Form>) = when (form) {
-        Initial::class.java -> this.initial
-        Medial::class.java -> this.medial
-        Final::class.java -> this.final
-        Isolated::class.java -> this.isolated
+        Form.Initial::class.java -> this.initial
+        Form.Medial::class.java -> this.medial
+        Form.Final::class.java -> this.final
+        Form.Isolated::class.java -> this.isolated
         else -> this.initial
     }
+
 
     override fun toString(): String {
         return "${this.name},${this.isolated},${this.final},${this.medial},${this.initial}"

@@ -59,7 +59,7 @@ fun QuestionScreen(
 
     val context = LocalContext.current
 
-    ShowDialog(isVisible =viewState.isDialogVisible) {
+    ShowDialog(isVisible = viewState.isDialogVisible) {
         AlertDialog(
             dialogTitle = stringResource(id = R.string.quiz_screen_dialog_title),
             dialogText = stringResource(id = R.string.quiz_screen_dialog_text),
@@ -72,7 +72,13 @@ fun QuestionScreen(
         onConsumed = viewModel::setShowMessageConsumed
     ) {
         snackbarHostState.showSnackbar(
-            CustomSnackbarData(context.resources.getString(R.string.quiz_screen_snackbar_text, it[0], it[1]))
+            CustomSnackbarData(
+                context.resources.getString(
+                    R.string.quiz_screen_snackbar_text,
+                    it[0],
+                    context.resources.getString(it[1].toInt())
+                )
+            )
         )
     }
 }

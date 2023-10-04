@@ -3,12 +3,9 @@ package pl.pw.laa.presentation.quiz
 import de.palm.composestateevents.StateEventWithContent
 import de.palm.composestateevents.consumed
 import pl.pw.laa.data.Alphabet
-import pl.pw.laa.data.domain.Final
 import pl.pw.laa.data.domain.Form
-import pl.pw.laa.data.domain.Initial
-import pl.pw.laa.data.domain.Isolated
+import pl.pw.laa.data.domain.Form.*
 import pl.pw.laa.data.domain.Letter
-import pl.pw.laa.data.domain.Medial
 import pl.pw.laa.state.BaseState
 import pl.pw.laa.state.UserPreferencesState
 import pl.pw.laa.state.ISnackbarEventStateWithContent
