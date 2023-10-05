@@ -18,6 +18,7 @@ class UserPreferencesRepository @Inject constructor(private val dataStore: DataS
     IUserPreferencesRepository {
 
     private companion object {
+        const val QUESTIONS_COUNT_KEY_NAME = "pl.pw.laa.questions_count"
         const val ANSWERS_COUNT_KEY_NAME = "pl.pw.laa.answers_count"
         const val ARE_CHEATS_ENABLED_KEY_NAME = "pl.pw.laa.are_cheats_enabled"
         const val ARE_TIPS_ENABLED_KEY_NAME = "pl.pw.laa.are_tips_enabled"
@@ -28,6 +29,7 @@ class UserPreferencesRepository @Inject constructor(private val dataStore: DataS
     }
 
     private object PreferencesKeys {
+        val QUESTIONS_COUNT = intPreferencesKey(QUESTIONS_COUNT_KEY_NAME)
         val ANSWERS_COUNT = intPreferencesKey(ANSWERS_COUNT_KEY_NAME)
         val ARE_CHEATS_ENABLED = booleanPreferencesKey(ARE_CHEATS_ENABLED_KEY_NAME)
         val ARE_TIPS_ENABLES = booleanPreferencesKey(ARE_TIPS_ENABLED_KEY_NAME)
@@ -48,6 +50,13 @@ class UserPreferencesRepository @Inject constructor(private val dataStore: DataS
 
     override suspend fun fetchInitialPreferences() =
         mapUserPreferences(dataStore.data.first().toPreferences())
+
+    override suspend fun updateQuestionsCount(questionsCount: Int) {
+        dataStore.edit { preferences ->
+            Timber.d("Updating questions count to $questionsCount")
+            preferences[PreferencesKeys.ANSWERS_COUNT] = questionsCount
+        }
+    }
 
     override suspend fun updateAnswersCount(answersCount: Int) {
         dataStore.edit { preferences ->
@@ -105,6 +114,7 @@ class UserPreferencesRepository @Inject constructor(private val dataStore: DataS
     }
 
     private fun mapUserPreferences(preferences: Preferences): UserPreferences {
+        val questionsCount = preferences[PreferencesKeys.QUESTIONS_COUNT] ?: 4
         val answersCount = preferences[PreferencesKeys.ANSWERS_COUNT] ?: 4
         val areCheatsEnabled = preferences[PreferencesKeys.ARE_CHEATS_ENABLED] ?: false
         val areTipsEnabled = preferences[PreferencesKeys.ARE_TIPS_ENABLES] ?: false
@@ -113,6 +123,7 @@ class UserPreferencesRepository @Inject constructor(private val dataStore: DataS
         val isFinalTested = preferences[PreferencesKeys.IS_FINAL] ?: false
         val isIsolatedTested = preferences[PreferencesKeys.IS_ISOLATED] ?: false
         return UserPreferences(
+            questionsCount,
             answersCount,
             areCheatsEnabled,
             areTipsEnabled,

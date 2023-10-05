@@ -24,7 +24,7 @@ import pl.pw.laa.data.domain.FormPreference
 import pl.pw.laa.data.domain.IntPreference
 import pl.pw.laa.presentation.settings.components.PreferencesSwitchColumn
 import pl.pw.laa.presentation.settings.components.PreferencesChipGroup
-import pl.pw.laa.presentation.settings.components.ExpandedNumberList
+import pl.pw.laa.presentation.settings.components.PreferencesExpandedNumberList
 
 @Composable
 fun SettingsScreenContent(
@@ -32,12 +32,31 @@ fun SettingsScreenContent(
     paddingValues: PaddingValues,
     onEvent: (SettingsEvent) -> Unit,
 ) {
-    val expanded by remember {
+    val isAnswersCountExpanded by remember {
         mutableStateOf(false)
     }
-    val answers = SettingsNumberListData(IntPreference.AnswersCount, state.preferences.answersCount)
+    val isQuestionsCountExpanded by remember {
+        mutableStateOf(false)
+    }
+    val numberList = listOf(
+        SettingsNumberListData(
+            IntPreference.QuestionsCount,
+            state.preferences.questionsCount,
+            listOf(5, 10, 15, 20),
+            isQuestionsCountExpanded
+        ),
+        SettingsNumberListData(
+            IntPreference.AnswersCount,
+            state.preferences.answersCount,
+            listOf(2, 4, 6, 8),
+            isAnswersCountExpanded
+        )
+    )
     val checkBoxes = listOf(
-        SettingsCheckBoxData(BooleanPreference.AreCheatsEnabled, state.preferences.areCheatsEnabled),
+        SettingsCheckBoxData(
+            BooleanPreference.AreCheatsEnabled,
+            state.preferences.areCheatsEnabled
+        ),
         SettingsCheckBoxData(BooleanPreference.AreTipsEnabled, state.preferences.areTipsEnabled)
     )
     val forms = listOf(
@@ -55,9 +74,8 @@ fun SettingsScreenContent(
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            ExpandedNumberList(
-                answers,
-                expanded = expanded,
+            PreferencesExpandedNumberList(
+                numberList,
                 onEvent,
             )
             RowDivider()
@@ -77,6 +95,8 @@ fun SettingsScreenContent(
 data class SettingsNumberListData(
     val preference: IntPreference,
     val value: Int,
+    val possibleNumbers: List<Int>,
+    val isExpanded: Boolean
 )
 
 data class SettingsCheckBoxData(

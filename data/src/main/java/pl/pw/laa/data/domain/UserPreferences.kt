@@ -1,6 +1,7 @@
 package pl.pw.laa.data.domain
 
 data class UserPreferences(
+    val questionsCount: Int,
     val answersCount: Int,
     val areCheatsEnabled: Boolean,
     val areTipsEnabled: Boolean,
