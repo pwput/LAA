@@ -1,6 +1,5 @@
 package pl.pw.laa.presentation.settings.components
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowColumn
@@ -11,9 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
-import pl.pw.laa.data.domain.FormPreference
 import pl.pw.laa.data.domain.IntPreference
-import pl.pw.laa.presentation.settings.SettingsChipData
 import pl.pw.laa.presentation.settings.SettingsEvent
 import pl.pw.laa.presentation.settings.SettingsNumberListData
 
@@ -27,7 +24,7 @@ fun PreferencesExpandedNumberList(
         horizontalAlignment = CenterHorizontally,
     ) {
         FlowColumn(
-            //modifier = Modifier.align(CenterHorizontally),
+            modifier = Modifier.align(CenterHorizontally),
         ) {
             expandedNumberDataList.forEach { data ->
                 ExpandedNumberList(
@@ -43,7 +40,7 @@ fun PreferencesExpandedNumberList(
 
 //region Previews
 
-val dataForPreview = listOf(
+private val dataForPreview = listOf(
     SettingsNumberListData(
         IntPreference.QuestionsCount,
         5,

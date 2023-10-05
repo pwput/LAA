@@ -36,7 +36,7 @@ fun PreferenceChip(
     )
 }
 
-internal fun settingsScreenContentPreferenceChipOnEvent(
+private fun settingsScreenContentPreferenceChipOnEvent(
     preference: FormPreference,
     newValue: Boolean,
     onEvent: (SettingsEvent.SettingsEventForm) -> Unit

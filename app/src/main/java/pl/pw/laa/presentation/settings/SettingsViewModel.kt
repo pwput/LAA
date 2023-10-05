@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 import pl.pw.laa.data.repository.IUserPreferencesRepository
 import pl.pw.laa.state.UserPreferencesState
 import pl.pw.laa.viewmodel.BaseViewModel
+import pl.pw.laa.viewmodel.ISnackbarViewModel
 import pl.pw.laa.viewmodel.IStateViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -22,7 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val userPreferencesRepository: IUserPreferencesRepository
-) : BaseViewModel(), IStateViewModel {
+) : BaseViewModel(), IStateViewModel, ISnackbarViewModel {
 
     private val viewStateNotifier = MutableStateFlow(SettingsState())
     override val viewState = viewStateNotifier.asStateFlow()

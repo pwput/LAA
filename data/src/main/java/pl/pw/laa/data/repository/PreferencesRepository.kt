@@ -54,7 +54,7 @@ class UserPreferencesRepository @Inject constructor(private val dataStore: DataS
     override suspend fun updateQuestionsCount(questionsCount: Int) {
         dataStore.edit { preferences ->
             Timber.d("Updating questions count to $questionsCount")
-            preferences[PreferencesKeys.ANSWERS_COUNT] = questionsCount
+            preferences[PreferencesKeys.QUESTIONS_COUNT] = questionsCount
         }
     }
 
@@ -114,7 +114,7 @@ class UserPreferencesRepository @Inject constructor(private val dataStore: DataS
     }
 
     private fun mapUserPreferences(preferences: Preferences): UserPreferences {
-        val questionsCount = preferences[PreferencesKeys.QUESTIONS_COUNT] ?: 4
+        val questionsCount = preferences[PreferencesKeys.QUESTIONS_COUNT] ?: 5
         val answersCount = preferences[PreferencesKeys.ANSWERS_COUNT] ?: 4
         val areCheatsEnabled = preferences[PreferencesKeys.ARE_CHEATS_ENABLED] ?: false
         val areTipsEnabled = preferences[PreferencesKeys.ARE_TIPS_ENABLES] ?: false

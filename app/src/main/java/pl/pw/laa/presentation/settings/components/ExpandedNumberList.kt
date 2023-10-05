@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.data.domain.IntPreference
 import pl.pw.laa.presentation.settings.SettingsEvent
@@ -53,7 +54,7 @@ fun ExpandedNumberList(
         ExposedDropdownMenuBox(
             expanded = expanded,
             onExpandedChange = { expanded = !expanded },
-            modifier = modifier.weight(1f),
+            modifier = modifier.weight(1f)
         ) {
             TextField(
                 value = numberListData.value.toString(),
@@ -86,7 +87,7 @@ fun ExpandedNumberList(
 }
 
 
-internal fun expandedNumberListonEvent(
+private fun expandedNumberListonEvent(
     preference: IntPreference,
     newValue: Int,
     onEvent: (SettingsEvent.SettingsEventInt) -> Unit
