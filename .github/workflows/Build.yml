@@ -12,6 +12,7 @@ on:
   push:
     branches:
       - 'feature/**'
+      - 'issue/**'
       - 'develop'
 
   # Allows you to run this workflow manually from the Actions tab
