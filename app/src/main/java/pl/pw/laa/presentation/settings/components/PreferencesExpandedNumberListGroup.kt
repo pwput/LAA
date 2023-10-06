@@ -9,8 +9,8 @@ import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.data.domain.IntPreference
+import pl.pw.laa.presentation.preview.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.presentation.settings.SettingsEvent
 import pl.pw.laa.presentation.settings.SettingsNumberListData
 

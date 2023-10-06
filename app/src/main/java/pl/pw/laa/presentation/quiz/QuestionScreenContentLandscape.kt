@@ -1,6 +1,7 @@
 package pl.pw.laa.presentation.quiz
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -11,8 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import pl.pw.laa.annotation.preview.PreviewsLandscape
-import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
+import pl.pw.laa.componets.AdmobBanner
 import pl.pw.laa.data.domain.Form
+import pl.pw.laa.presentation.preview.LearnArabicAlphabetScreenContentPreview
 import pl.pw.laa.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.presentation.quiz.components.AnswersButtonGroup
 import pl.pw.laa.presentation.quiz.components.QuestionBox
@@ -25,6 +27,7 @@ fun QuestionScreenContentLandscape(
     onAnswer: (Form) -> Unit,
     showIcon: Boolean,
 ) {
+    Box (modifier = Modifier.fillMaxSize()){
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -53,13 +56,15 @@ fun QuestionScreenContentLandscape(
                     .fillMaxSize(1f))
         }
     }
+    AdmobBanner(modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 8.dp))
+    }
 }
 
 //region Previews
 @PreviewsLandscape
 @Composable
 fun QuestionScreenLandscape8Preview() {
-    LearnArabicAlphabetSurfacePreview {
+    LearnArabicAlphabetScreenContentPreview {
         QuestionScreenContentLandscape(
             mockedState8,
             { null },
@@ -72,7 +77,7 @@ fun QuestionScreenLandscape8Preview() {
 @PreviewsLandscape
 @Composable
 fun QuestionScreenLandscape4Preview() {
-    LearnArabicAlphabetSurfacePreview {
+    LearnArabicAlphabetScreenContentPreview {
         QuestionScreenContentLandscape(
             mockedState4,
             { null },

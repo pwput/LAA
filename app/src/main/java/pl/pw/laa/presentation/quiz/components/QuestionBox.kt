@@ -27,8 +27,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.palm.composestateevents.consumed
 import pl.pw.laa.componets.AudioIcon
-import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.data.Alphabet
+import pl.pw.laa.presentation.preview.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.presentation.quiz.QuizEvent
 import pl.pw.laa.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.presentation.quiz.QuizState
@@ -63,7 +63,7 @@ fun QuestionBox(
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .fillMaxWidth(1f)
-            .aspectRatio(1.8f, false)
+            .aspectRatio(2f, false)
             .border(1.dp, MaterialTheme.colorScheme.secondary, shape = RoundedCornerShape(5))
             .clip(RoundedCornerShape(5))
             .background(MaterialTheme.colorScheme.secondaryContainer)

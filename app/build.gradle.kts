@@ -82,6 +82,8 @@ dependencies {
     ksp(ComposeDestinations.ksp)
     //compose state events
     implementation(Dependencies.Others.composeStateEvents)
+    //admob
+    implementation(Dependencies.Others.playServicesAds)
 
 
     //Test

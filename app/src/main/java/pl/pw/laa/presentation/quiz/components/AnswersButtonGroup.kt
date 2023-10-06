@@ -12,14 +12,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.palm.composestateevents.consumed
-import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.data.Alphabet
 import pl.pw.laa.data.domain.Form
+import pl.pw.laa.presentation.preview.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.presentation.quiz.QuizState
 import pl.pw.laa.presentation.quiz.SingleQuestion
 import pl.pw.laa.state.UserPreferencesState
 
-private val buttonsSpacing = 12.dp
+private val buttonsSpacing = 8.dp
 
 @Composable
 fun AnswersButtonGroup(

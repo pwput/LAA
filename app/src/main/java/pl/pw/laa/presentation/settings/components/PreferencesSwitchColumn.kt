@@ -4,8 +4,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.data.domain.BooleanPreference
+import pl.pw.laa.presentation.preview.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.presentation.settings.SettingsCheckBoxData
 import pl.pw.laa.presentation.settings.SettingsEvent
 

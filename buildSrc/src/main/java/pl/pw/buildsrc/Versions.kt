@@ -1,5 +1,3 @@
-
-
 object Versions{
     const val accompanist = "0.30.1"
     const val navigationCompose = "2.5.0"
@@ -19,4 +17,5 @@ object Versions{
     const val startup = "1.1.1"
     const val composeStateEvents = "1.2.3"
     const val lifecycleRuntimeCompose = "2.6.0-beta01"
+    const val playServicesAds = "22.4.0"
 }
