@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.data.domain.IntPreference
 import pl.pw.laa.presentation.settings.SettingsEvent
@@ -31,13 +32,11 @@ import timber.log.Timber
 @Composable
 fun ExpandedNumberList(
     numberListData: SettingsNumberListData,
-    expanded: Boolean,
     onEvent: (SettingsEvent) -> Unit,
     modifier: Modifier = Modifier,
-    possibleAnswers: List<Int> = listOf(2, 4, 6, 8),
 ) {
     var expanded by remember {
-        mutableStateOf(expanded)
+        mutableStateOf(numberListData.isExpanded)
     }
     Row(
         Modifier.fillMaxWidth(),
@@ -55,14 +54,14 @@ fun ExpandedNumberList(
         ExposedDropdownMenuBox(
             expanded = expanded,
             onExpandedChange = { expanded = !expanded },
-            modifier = modifier.weight(1f),
+            modifier = modifier.weight(1f)
         ) {
             TextField(
                 value = numberListData.value.toString(),
                 textStyle = MaterialTheme.typography.bodyMedium,
                 onValueChange = {
                     Timber.d("Preference: '${numberListData.preference}', current value: '${numberListData.value}', changing to: '$it'")
-                    onEvent(SettingsEvent.SetAnswersCount(it.toInt()))
+                    expandedNumberListonEvent(numberListData.preference,it.toInt(),onEvent)
                 },
                 readOnly = true,
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
@@ -72,12 +71,12 @@ fun ExpandedNumberList(
                 expanded = expanded,
                 onDismissRequest = { expanded = false },
             ) {
-                possibleAnswers.forEach { item ->
+                numberListData.possibleNumbers.forEach { item ->
                     DropdownMenuItem(
                         text = { Text(text = item.toString()) },
                         onClick = {
                             Timber.d("Preference: '${numberListData.preference}', clicked at: '$item'")
-                            onEvent(SettingsEvent.SetAnswersCount(item))
+                            expandedNumberListonEvent(numberListData.preference,item,onEvent)
                             expanded = false
                         },
                     )
@@ -87,10 +86,26 @@ fun ExpandedNumberList(
     }
 }
 
+
+private fun expandedNumberListonEvent(
+    preference: IntPreference,
+    newValue: Int,
+    onEvent: (SettingsEvent.SettingsEventInt) -> Unit
+) {
+    Timber.d("Clicked at Settings Chip for key: '$preference', current value: '$newValue', changing to: '${newValue}'")
+    when (preference) {
+        IntPreference.AnswersCount -> onEvent(SettingsEvent.SetAnswersCount(newValue))
+        IntPreference.QuestionsCount -> onEvent(SettingsEvent.SetQuestionsCount(newValue))
+
+    }
+}
+
 //region Previews
-private val data = SettingsNumberListData(
+private val previewData = SettingsNumberListData(
     IntPreference.AnswersCount,
-    4
+    4,
+    listOf(2,4,6,8),
+    false
 )
 
 @Preview
@@ -98,8 +113,7 @@ private val data = SettingsNumberListData(
 fun ExpandedNumberListPreview() {
     LearnArabicAlphabetSurfacePreview() {
         ExpandedNumberList(
-            data,
-            true,
+            previewData,
             { },
         )
     }
@@ -110,8 +124,7 @@ fun ExpandedNumberListPreview() {
 fun ExpandedNumberListPreviewDark() {
     LearnArabicAlphabetSurfacePreview(true) {
         ExpandedNumberList(
-            data,
-            true,
+            previewData,
             { },
         )
     }

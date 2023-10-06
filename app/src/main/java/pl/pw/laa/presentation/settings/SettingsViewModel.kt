@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 import pl.pw.laa.data.repository.IUserPreferencesRepository
 import pl.pw.laa.state.UserPreferencesState
 import pl.pw.laa.viewmodel.BaseViewModel
+import pl.pw.laa.viewmodel.ISnackbarViewModel
 import pl.pw.laa.viewmodel.IStateViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -22,7 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val userPreferencesRepository: IUserPreferencesRepository
-) : BaseViewModel(), IStateViewModel {
+) : BaseViewModel(), IStateViewModel, ISnackbarViewModel {
 
     private val viewStateNotifier = MutableStateFlow(SettingsState())
     override val viewState = viewStateNotifier.asStateFlow()
@@ -38,6 +39,7 @@ class SettingsViewModel @Inject constructor(
         viewStateNotifier.update {
             it.copy(
                 preferences = UserPreferencesState(
+                    questionsCount = preferences.first().questionsCount,
                     answersCount = preferences.first().answersCount,
                     areCheatsEnabled = preferences.first().areCheatsEnabled,
                     areTipsEnabled = preferences.first().areTipsEnabled,
@@ -54,8 +56,7 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch(context = Dispatchers.IO) {
             Timber.d("SettingsEvent: ${event::class.simpleName}, value: '${event.value}'.")
             when (event) {
-                is SettingsEvent.SetAnswersCount ->
-                    userPreferencesRepository.updateAnswersCount(event.value)
+                is SettingsEvent.SettingsEventInt -> onIntEvent(event)
 
                 is SettingsEvent.SetAreCheatsOn ->
                     userPreferencesRepository.updateAreCheatsEnabled(event.value)
@@ -70,6 +71,16 @@ class SettingsViewModel @Inject constructor(
                     Timber.d("Unknown event: ${event::class.simpleName}")
             }
             loadUserPreferences()
+        }
+    }
+
+    private suspend fun onIntEvent(event: SettingsEvent.SettingsEventInt) {
+        when (event) {
+            is SettingsEvent.SetQuestionsCount ->
+                userPreferencesRepository.updateQuestionsCount(event.value)
+
+            is SettingsEvent.SetAnswersCount ->
+                userPreferencesRepository.updateAnswersCount(event.value)
         }
     }
 

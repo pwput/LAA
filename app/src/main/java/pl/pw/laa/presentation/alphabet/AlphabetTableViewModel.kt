@@ -13,12 +13,13 @@ import pl.pw.laa.data.domain.Letter
 import pl.pw.laa.mediaplayer.BaseAudioViewModel
 import pl.pw.laa.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.presentation.quiz.QuizState
+import pl.pw.laa.viewmodel.ISnackbarViewModel
 import pl.pw.laa.viewmodel.IStateViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class AlphabetTableViewModel @Inject constructor() :
-    BaseAudioViewModel(), IStateViewModel {
+    BaseAudioViewModel(), IStateViewModel, ISnackbarViewModel {
 
     private val viewStateNotifier = MutableStateFlow(AlphabetTableState())
     override val viewState = viewStateNotifier.asStateFlow()

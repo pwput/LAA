@@ -32,5 +32,8 @@ import pl.pw.laa.data.R
     enum class IntPreference : IPreferencesEnum {
         AnswersCount {
             override val labelId: Int = R.string.preference_answers_count_label
+        },
+        QuestionsCount{
+            override val labelId: Int = R.string.preference_qestions_count_label
         }
     }

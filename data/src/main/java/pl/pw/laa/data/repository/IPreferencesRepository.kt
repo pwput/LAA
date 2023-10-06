@@ -8,6 +8,7 @@ interface IUserPreferencesRepository {
     val userPreferencesFlow: Flow<UserPreferences>
 
     suspend fun fetchInitialPreferences(): UserPreferences
+    suspend fun updateQuestionsCount(questionsCount: Int)
     suspend fun updateAnswersCount(answersCount: Int)
     suspend fun updateAreCheatsEnabled(areCheatsEnabled: Boolean)
     suspend fun updateAreTipsEnabled(areTipsEnabled: Boolean)

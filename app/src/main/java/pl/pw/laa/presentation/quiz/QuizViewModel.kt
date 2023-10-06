@@ -16,13 +16,14 @@ import pl.pw.laa.data.repository.IUserPreferencesRepository
 import pl.pw.laa.mediaplayer.BaseAudioViewModel
 import pl.pw.laa.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.state.UserPreferencesState
+import pl.pw.laa.viewmodel.ISnackbarViewModel
 import pl.pw.laa.viewmodel.IStateViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class QuizViewModel @Inject constructor(private val userPreferencesRepository: IUserPreferencesRepository) :
-    BaseAudioViewModel(), IStateViewModel {
+    BaseAudioViewModel(), IStateViewModel, ISnackbarViewModel {
 
     private val viewStateNotifier = MutableStateFlow(QuizState())
     override val viewState = viewStateNotifier.asStateFlow()
@@ -42,6 +43,7 @@ class QuizViewModel @Inject constructor(private val userPreferencesRepository: I
             viewStateNotifier.update {
                 it.copy(
                     preferences = UserPreferencesState(
+                        questionsCount = preferences.first().questionsCount,
                         answersCount = preferences.first().answersCount,
                         areCheatsEnabled = preferences.first().areCheatsEnabled,
                         areTipsEnabled = preferences.first().areTipsEnabled,

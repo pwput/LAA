@@ -1,6 +1,7 @@
 package pl.pw.laa.state
 
 data class UserPreferencesState(
+    var questionsCount: Int = 0,
     var answersCount: Int = 0,
     var areCheatsEnabled: Boolean = false,
     var areTipsEnabled: Boolean = false,

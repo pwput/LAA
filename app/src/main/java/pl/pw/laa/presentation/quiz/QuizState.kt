@@ -13,8 +13,6 @@ import timber.log.Timber
 import kotlin.random.Random
 import kotlin.random.nextInt
 
-private const val NumnerOfQuestions = 2
-
 data class QuizState(
     var score: Int = 0,
     val mistakes: Int = 0,
@@ -49,7 +47,7 @@ data class QuizState(
 
     private fun getNewQuestions(): List<SingleQuestion> {
         val newQuestions = mutableListOf<SingleQuestion>()
-        for (i in 0 until NumnerOfQuestions) {
+        for (i in 0 until preferences.questionsCount) {
             val letters = getRandomLetters()
             val forms = letters.map {
                 it.getForm(availableForms.random())

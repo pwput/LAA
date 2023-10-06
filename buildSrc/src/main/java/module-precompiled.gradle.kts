@@ -69,7 +69,8 @@ plugins {
 dependencies {
     implementation(Dependencies.Androidx.Compose.librares)
     implementation(Dependencies.Androidx.librares)
-
+    // Preferences DataStore
+    implementation(Dependencies.Androidx.datastorePreferences)
     // hilt
     implementation(Dependencies.Dagger.hilt)
     kapt(Dependencies.Dagger.hiltCompiler)

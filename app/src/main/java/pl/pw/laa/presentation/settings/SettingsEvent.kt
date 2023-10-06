@@ -11,6 +11,7 @@ sealed interface  SettingsEvent {
     }
     interface SettingsEventForm : SettingsEventBoolean
 
+    data class SetQuestionsCount(override val value: Int) : SettingsEventInt
     data class SetAnswersCount(override val value: Int) : SettingsEventInt
     data class SetAreCheatsOn(override val value: Boolean) : SettingsEventBoolean
     data class SetAreTipsOn(override val value: Boolean) : SettingsEventBoolean

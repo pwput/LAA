@@ -7,4 +7,5 @@
     <string name="preference_is_medial_tested_label">medial</string>
     <string name="preference_is_final_tested_label">final</string>
     <string name="preference_is_isolated_tested_label">isolated</string>
+    <string name="preference_qestions_count_label">questions count</string>
 </resources>

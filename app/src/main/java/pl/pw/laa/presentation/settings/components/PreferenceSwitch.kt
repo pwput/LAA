@@ -46,7 +46,7 @@ fun PreferenceSwitch(
     }
 }
 
-internal fun settingsScreenContentPreferenceSwitchOnEvent(
+private fun settingsScreenContentPreferenceSwitchOnEvent(
     preference: BooleanPreference,
     oldValue: Boolean,
     newValue: Boolean,

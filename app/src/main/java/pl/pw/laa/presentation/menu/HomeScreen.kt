@@ -12,6 +12,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -25,18 +26,22 @@ import pl.pw.laa.data.domain.Letter
 @RootNavGraph(start = true)
 @Destination
 @Composable
-fun MainScreen(
+fun HomeScreen(
     navigator: DestinationsNavigator,
     padding: PaddingValues,
-    viewModel: MenuViewModel = hiltViewModel(),
+    viewModel: HomeViewModel = hiltViewModel(),
 ) {
+    val viewState = viewModel.viewState.collectAsStateWithLifecycle().value
+
     Surface(modifier = Modifier.padding(padding)) {
-        MainScreenContent()
+        HomeScreenContent(viewState)
     }
 }
 
 @Composable
-fun MainScreenContent() {
+fun HomeScreenContent(
+    homeState: HomeState
+) {
     Column(
         modifier = Modifier
             .padding(16.dp)
@@ -44,15 +49,15 @@ fun MainScreenContent() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        MainScreenContentText(R.string.main_screen_content_right_to_left)
-        MainScreenContentText(R.string.main_screen_content_basic_letters)
-        MainScreenContentText(R.string.main_screen_content_example)
-        MainScreenContentLetterExample(letter = Alphabet.letters[4])
+        HomeScreenContentText(R.string.home_screen_content_right_to_left)
+        HomeScreenContentText(R.string.home_screen_content_basic_letters)
+        HomeScreenContentText(R.string.home_screen_content_example)
+        HomeScreenContentLetterExample(letter = Alphabet.letters[homeState.letterId])
     }
 }
 
 @Composable
-private fun MainScreenContentText(textId: Int) {
+private fun HomeScreenContentText(textId: Int) {
     Text(
         text = stringResource(id = textId),
         style = MaterialTheme.typography.bodyMedium,
@@ -69,18 +74,18 @@ private val forms = listOf(
 )
 
 @Composable
-fun MainScreenContentLetterExample(letter: Letter) {
+fun HomeScreenContentLetterExample(letter: Letter) {
     Text(text = letter.name, style = MaterialTheme.typography.bodyMedium)
 
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
         forms.forEach { form ->
-            MainScreenContentFormWithName(form = letter.getForm(form))
+            HomeScreenContentFormWithName(form = letter.getForm(form))
         }
     }
 }
 
 @Composable
-private fun MainScreenContentFormWithName(form: Form) {
+private fun HomeScreenContentFormWithName(form: Form) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = form.toString(),
@@ -98,9 +103,9 @@ private fun MainScreenContentFormWithName(form: Form) {
 
 @Preview(showSystemUi = true)
 @Composable
-fun MainScreenContentPreview() {
+fun HomeScreenContentPreview() {
     LearnArabicAlphabetSurfacePreview {
-        MainScreenContent()
+        HomeScreenContent(HomeState(4))
     }
 }
 
