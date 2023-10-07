@@ -8,4 +8,6 @@ plugins {
 dependencies {
     // project
     implementation(project(Dependencies.Project.data))
+    implementation(Dependencies.Others.playServicesAds)
+
 }

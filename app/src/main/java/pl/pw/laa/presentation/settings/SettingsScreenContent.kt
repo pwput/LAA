@@ -17,11 +17,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import pl.pw.laa.annotation.preview.PreviewsLandscape
 import pl.pw.laa.annotation.preview.PreviewsPortrait
-import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.componets.RowDivider
 import pl.pw.laa.data.domain.BooleanPreference
 import pl.pw.laa.data.domain.FormPreference
 import pl.pw.laa.data.domain.IntPreference
+import pl.pw.laa.presentation.preview.LearnArabicAlphabetScreenContentPreview
 import pl.pw.laa.presentation.settings.components.PreferencesSwitchColumn
 import pl.pw.laa.presentation.settings.components.PreferencesChipGroup
 import pl.pw.laa.presentation.settings.components.PreferencesExpandedNumberList
@@ -115,7 +115,7 @@ data class SettingsChipData(
 @PreviewsLandscape
 @Composable
 fun SettingsScreenContentPreview() {
-    LearnArabicAlphabetSurfacePreview {
+    LearnArabicAlphabetScreenContentPreview {
         SettingsScreenContent(
             SettingsState(),
             PaddingValues(),
@@ -127,7 +127,7 @@ fun SettingsScreenContentPreview() {
 @PreviewsLandscape
 @Composable
 fun SettingsScreenContentPreviewDark() {
-    LearnArabicAlphabetSurfacePreview(true) {
+    LearnArabicAlphabetScreenContentPreview(true) {
         SettingsScreenContent(
             SettingsState(),
             PaddingValues(),

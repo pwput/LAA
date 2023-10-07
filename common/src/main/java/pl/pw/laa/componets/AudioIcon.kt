@@ -32,10 +32,10 @@ fun AudioIcon(visible: Boolean) {
 }
 
 //region Previews
-@Preview
-@Composable
-fun AudioIconPreview() {
-    LearnArabicAlphabetSurfacePreview {
-        AudioIcon(true)
-    }
-}
+//@Preview
+//@Composable
+//fun AudioIconPreview() {
+//    LearnArabicAlphabetSurfacePreview {
+//        AudioIcon(true)
+//    }
+//}

@@ -12,9 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import pl.pw.laa.componets.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.data.Alphabet
 import pl.pw.laa.data.domain.Letter
+import pl.pw.laa.presentation.preview.LearnArabicAlphabetSurfacePreview
 import pl.pw.laa.mediaplayer.MediaPlayerResponse
 import pl.pw.laa.presentation.alphabet.AlphabetTableEvent
 import pl.pw.laa.presentation.alphabet.components.cell.CellForm

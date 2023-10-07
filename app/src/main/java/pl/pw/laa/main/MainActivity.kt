@@ -4,51 +4,29 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarData
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
-import androidx.compose.material3.TopAppBarScrollBehavior
-import androidx.compose.material3.surfaceColorAtElevation
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.navigation.dependency
 import dagger.hilt.android.AndroidEntryPoint
-import pl.pw.laa.R
+import pl.pw.laa.main.components.BotNavBar
+import pl.pw.laa.main.components.CustomSnackBar
+import pl.pw.laa.main.components.TopAppBar
 import pl.pw.laa.navigation.NavigationItem
-import pl.pw.laa.navigation.getCurrentDestination
-import pl.pw.laa.navigation.getTopBarTitle
-import pl.pw.laa.navigation.navigateAndPopUp
 import pl.pw.laa.presentation.NavGraphs
 import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 import timber.log.Timber
@@ -81,6 +59,10 @@ class MainActivity @Inject constructor() : ComponentActivity() {
                 SnackbarHostState()
             }
 
+            MobileAds.initialize(this) {}
+            RequestConfiguration.Builder()
+                .setTestDeviceIds(listOf("703C5E35AA5BE999A86E0601C90C9194"))
+
             LearnArabicAlphabetTheme(darkTheme = isSystemInDarkTheme()) {
                 Surface(
                     Modifier.fillMaxSize(),
@@ -98,10 +80,10 @@ class MainActivity @Inject constructor() : ComponentActivity() {
                         modifier = Modifier
                             .nestedScroll(scrollBehavior.nestedScrollConnection),
                         topBar = {
-                            TopBar(navController, scrollBehavior)
+                            TopAppBar(navController, scrollBehavior,topBarActions)
                         },
                         bottomBar = {
-                            BotNavBar(navController)
+                            BotNavBar(navController, bottomNavigationItems)
                         }
                     ) { paddingValues ->
                         DestinationsNavHost(
@@ -114,138 +96,6 @@ class MainActivity @Inject constructor() : ComponentActivity() {
                     }
                 }
             }
-        }
-    }
-
-    @Composable
-    fun CustomSnackBar(
-        showIcon: Boolean,
-        message: String,
-    ) {
-        Snackbar(
-            modifier = Modifier
-                .padding(16.dp),
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-            contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-        ) {
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.wrapContentWidth(),
-
-                ) {
-                if (showIcon) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.round_volume_up_24),
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSecondaryContainer,
-                        modifier = Modifier
-                            .height(24.dp)
-                            .padding(end = 8.dp)
-                    )
-                }
-                Text(
-                    message,
-                    textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.labelMedium
-                )
-            }
-        }
-    }
-
-    @Preview
-    @Composable
-    fun CustomSnackBarPreview() {
-        LearnArabicAlphabetTheme {
-            CustomSnackBar(true, "Test")
-        }
-    }
-
-
-    @Composable
-    fun BotNavBar(
-        navController: NavHostController
-    ) {
-        val currentDestination = navController.getCurrentDestination()
-        NavigationBar(
-            modifier = Modifier.height(64.dp),
-        ) {
-            bottomNavigationItems.forEach { item ->
-                NavigationBarItem(
-                    selected = item.direction == navController.getCurrentDestination(),
-                    onClick = {
-                        if (item.direction != currentDestination)
-                            navController.navigateAndPopUp(item.direction)
-                    },
-                    icon = {
-                        item.GetIcon(isSelected = item.direction == navController.getCurrentDestination())
-                    },
-                    label = {
-                        if (item.textId != null) Text(
-                            text = stringResource(id = item.textId),
-                            style = MaterialTheme.typography.labelSmall
-                        )
-                    },
-                )
-            }
-        }
-    }
-
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    fun TopBar(
-        navController: NavHostController,
-        scrollBehavior: TopAppBarScrollBehavior
-    ) {
-        val currentDestination = navController.getCurrentDestination()
-
-        TopAppBar(
-            title = {
-                Text(
-                    text = stringResource(id = currentDestination.getTopBarTitle()),
-                    style = MaterialTheme.typography.titleMedium
-                )
-            },
-            actions = {
-                topBarActions.forEach { item ->
-                    IconButton(onClick = {
-                        if (item.direction != currentDestination)
-                            navController.navigateAndPopUp(item.direction)
-                    }) {
-                        item.GetIcon(isSelected = item.direction == navController.getCurrentDestination())
-                    }
-                }
-            },
-            scrollBehavior = scrollBehavior,
-            colors = topAppBarColors(
-                containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp),
-                scrolledContainerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp),
-                navigationIconContentColor = MaterialTheme.colorScheme.onBackground,
-                titleContentColor = MaterialTheme.colorScheme.onBackground,
-                actionIconContentColor = MaterialTheme.colorScheme.onBackground
-            )
-        )
-    }
-
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    @Preview(showBackground = true)
-    fun LAATopNavBarPreview() {
-        LearnArabicAlphabetTheme {
-            val navController = rememberNavController()
-            val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-
-            TopBar(navController, scrollBehavior)
-        }
-    }
-
-    @Composable
-    @Preview(showBackground = true)
-    fun LAABotNavBarPreview() {
-        LearnArabicAlphabetTheme {
-            val navController = rememberNavController()
-
-            BotNavBar(navController)
         }
     }
 }
