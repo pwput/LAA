@@ -1,4 +1,5 @@
 object Versions{
+    const val ballon = "1.6.1"
     const val accompanist = "0.30.1"
     const val navigationCompose = "2.5.0"
     const val activityCompose = "1.4.0"

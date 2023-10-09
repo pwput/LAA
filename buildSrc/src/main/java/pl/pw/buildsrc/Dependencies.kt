@@ -13,7 +13,7 @@ object Dependencies {
         const val junit = "junit:junit:4.13.2"
         const val composeStateEvents = "com.github.leonard-palm:compose-state-events:${
             Versions.composeStateEvents}"
-        const val playServicesAds = "com.google.android.gms:play-services-ads:${Versions.playServicesAds}"
+        const val ballon = "com.github.skydoves:balloon-compose:${Versions.ballon}"
     }
 
     object Kotlinx {

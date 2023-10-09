@@ -13,7 +13,7 @@ object Alphabet {
             Final('\uFE8E'),
             Medial('\uFE8E'),
             Initial('\uFE8D'),
-            "alif",
+            "ʾalif",
             R.raw.r01alif,
         ),
         Letter(
@@ -21,7 +21,7 @@ object Alphabet {
             Final('\uFE90'),
             Medial('\uFE92'),
             Initial('\uFE91'),
-            "ba'",
+            "bāʾ",
             R.raw.r02ba,
         ),
         Letter(
@@ -29,7 +29,7 @@ object Alphabet {
             Final('\uFE96'),
             Medial('\uFE98'),
             Initial('\uFE97'),
-            "ta",
+            "tāʾ",
             R.raw.r03taa,
         ),
         Letter(
@@ -37,7 +37,7 @@ object Alphabet {
             Final('\uFE9A'),
             Medial('\uFE9C'),
             Initial('\uFE9B'),
-            "tha",
+            "thāʾ",
             R.raw.r04tha,
         ),
         Letter(
@@ -45,7 +45,7 @@ object Alphabet {
             Final('\uFE9E'),
             Medial('\uFEA0'),
             Initial('\uFE9F'),
-            "jiim",
+            "jīm",
             R.raw.r05jeem,
         ),
         Letter(
@@ -53,7 +53,7 @@ object Alphabet {
             Final('\uFEA2'),
             Medial('\uFEA4'),
             Initial('\uFEA3'),
-            "hha",
+            "ḥāʾ",
             R.raw.r06haa,
         ),
         Letter(
@@ -61,7 +61,7 @@ object Alphabet {
             Final('\uFEA6'),
             Medial('\uFEA8'),
             Initial('\uFEA7'),
-            "kha",
+            "khāʾ",
             R.raw.r07khaa,
         ),
         Letter(
@@ -69,7 +69,7 @@ object Alphabet {
             Final('\uFEAA'),
             Medial('\uFEAA'),
             Initial('\uFEA9'),
-            "daal",
+            "dāl",
             R.raw.r08dal,
         ),
         Letter(
@@ -77,7 +77,7 @@ object Alphabet {
             Final('\uFEAC'),
             Medial('\uFEAC'),
             Initial('\uFEAB'),
-            "dhaal",
+            "dhāl",
             R.raw.r09dhal,
         ),
         Letter(
@@ -85,7 +85,7 @@ object Alphabet {
             Final('\uFEAE'),
             Medial('\uFEAE'),
             Initial('\uFEAD'),
-            "ra",
+            "rāʾ",
             R.raw.r10raa,
         ),
         Letter(
@@ -93,7 +93,7 @@ object Alphabet {
             Final('\uFEB0'),
             Medial('\uFEB0'),
             Initial('\uFEAF'),
-            "zay",
+            "zāy",
             R.raw.r11jaa,
         ),
         Letter(
@@ -101,7 +101,7 @@ object Alphabet {
             Final('\uFEB2'),
             Medial('\uFEB4'),
             Initial('\uFEB3'),
-            "siin",
+            "sīn",
             R.raw.r12seen,
         ),
         Letter(
@@ -109,7 +109,7 @@ object Alphabet {
             Final('\uFEB6'),
             Medial('\uFEB8'),
             Initial('\uFEB7'),
-            "shiin",
+            "shīn",
             R.raw.r13sheen,
         ),
         Letter(
@@ -117,7 +117,7 @@ object Alphabet {
             Final('\uFEBA'),
             Medial('\uFEBC'),
             Initial('\uFEBB'),
-            "saad",
+            "ṣād",
             R.raw.r14saad,
         ),
         Letter(
@@ -125,7 +125,7 @@ object Alphabet {
             Final('\uFEBE'),
             Medial('\uFEC0'),
             Initial('\uFEBF'),
-            "daad",
+            "ḍād",
             R.raw.r15dhaad,
         ),
         Letter(
@@ -133,7 +133,7 @@ object Alphabet {
             Final('\uFEC2'),
             Medial('\uFEC4'),
             Initial('\uFEC3'),
-            "taa",
+            "ṭāʾ",
             R.raw.r16toa,
         ),
         Letter(
@@ -141,7 +141,7 @@ object Alphabet {
             Final('\uFEC6'),
             Medial('\uFEC8'),
             Initial('\uFEC7'),
-            "za",
+            "ẓāʾ",
             R.raw.r17dhaa,
         ),
         Letter(
@@ -149,7 +149,7 @@ object Alphabet {
             Final('\uFECA'),
             Medial('\uFECC'),
             Initial('\uFECB'),
-            "ayn",
+            "ʿayn",
             R.raw.r18ain,
         ),
         Letter(
@@ -165,7 +165,7 @@ object Alphabet {
             Final('\uFED2'),
             Medial('\uFED4'),
             Initial('\uFED3'),
-            "fa",
+            "fāʾ",
             R.raw.r20faa,
         ),
         Letter(
@@ -173,7 +173,7 @@ object Alphabet {
             Final('\uFED6'),
             Medial('\uFED8'),
             Initial('\uFED7'),
-            "qaf",
+            "qāf",
             R.raw.r21qaaf,
         ),
         Letter(
@@ -181,7 +181,7 @@ object Alphabet {
             Final('\uFEDA'),
             Medial('\uFEDC'),
             Initial('\uFEDB'),
-            "kaf",
+            "kāf",
             R.raw.r22kaaf,
         ),
         Letter(
@@ -189,7 +189,7 @@ object Alphabet {
             Final('\uFEDE'),
             Medial('\uFEE0'),
             Initial('\uFEDF'),
-            "lam",
+            "lām",
             R.raw.r23laam,
         ),
         Letter(
@@ -197,7 +197,7 @@ object Alphabet {
             Final('\uFEE2'),
             Medial('\uFEE4'),
             Initial('\uFEE3'),
-            "miim",
+            "mīm",
             R.raw.r24meem,
         ),
         Letter(
@@ -205,7 +205,7 @@ object Alphabet {
             Final('\uFEE6'),
             Medial('\uFEE8'),
             Initial('\uFEE7'),
-            "nuun",
+            "nūn",
             R.raw.r25noon,
         ),
         Letter(
@@ -213,7 +213,7 @@ object Alphabet {
             Final('\uFEEA'),
             Medial('\uFEEC'),
             Initial('\uFEEB'),
-            "ha",
+            "hāʾ",
             R.raw.r27ha,
         ),
         Letter(
@@ -221,7 +221,7 @@ object Alphabet {
             Final('\uFEEE'),
             Medial('\uFEEE'),
             Initial('\uFEED'),
-            "waw",
+            "wāw",
             R.raw.r26waw,
         ),
         Letter(
@@ -229,7 +229,7 @@ object Alphabet {
             Final('\uFEF2'),
             Medial('\uFEF4'),
             Initial('\uFEF3'),
-            "ya",
+            "yāʾ",
             R.raw.r29yaa,
         ),
 
