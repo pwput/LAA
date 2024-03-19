@@ -1,0 +1,4 @@
+<resources>
+    <string name="settings_screen_snackbar_text">Leave at least one form chosen.</string>
+    <string name="settings_screen_content_preferences_chip_group_title">Select forms</string>
+</resources>

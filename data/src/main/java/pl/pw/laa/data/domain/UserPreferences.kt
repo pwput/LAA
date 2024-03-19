@@ -1,12 +1,12 @@
 package pl.pw.laa.data.domain
 
 data class UserPreferences(
-    val questionsCount: Int,
-    val answersCount: Int,
-    val areCheatsEnabled: Boolean,
-    val areTipsEnabled: Boolean,
-    val isInitial: Boolean,
-    val isMedial: Boolean,
-    val isFinal: Boolean,
-    val isIsolated: Boolean
+		val questionsCount: Int,
+		val answersCount: Int,
+		val areCheatsEnabled: Boolean,
+		val areTipsEnabled: Boolean,
+		val isInitial: Boolean,
+		val isMedial: Boolean,
+		val isFinal: Boolean,
+		val isIsolated: Boolean
 )

@@ -1,12 +1,5 @@
 <resources>
     <string name="app_name">Learn Arabic Alphabet</string>
-    <string name="alphabet_table_top_row_name">name</string>
-    <string name="alphabet_table_top_row_isolated">isolated</string>
-    <string name="alphabet_table_top_row_initial">initial</string>
-    <string name="alphabet_table_top_row_medial">medial</string>
-    <string name="alphabet_table_top_row_final">final</string>
-    <string name="alphabet_table_screen_snackbar_text">Playing \'%1$s\'</string>
-
 
     <string name="navigation_item_quiz_top_bar_text">Test</string>
     <string name="navigation_item_quiz_button_label">Test</string>
@@ -14,16 +7,6 @@
     <string name="navigation_item_alphabet_button_label">Alphabet</string>
     <string name="navigation_item_settings_top_bar_text">Settings</string>
     <string name="navigation_item_settings_button_label">Settings</string>
-
-    <string name="settings_screen_snackbar_text">Leave at least one form chosen.</string>
-    <string name="settings_screen_content_preferences_chip_group_title">Select forms</string>
-
-    <string name="quiz_screen_top_bar_mistakes">Mistakes: %1$d</string>
-    <string name="quiz_screen_top_bar_score">Score: %1$d</string>
-    <string name="quiz_screen_snackbar_text">Wrong Answer! You have clicked letter \"%1$s\", in form \"%2$s\".</string>
-    <string name="quiz_screen_dialog_title">Dialog title</string>
-    <string name="quiz_screen_dialog_text">dialog text</string>
-    <string name="quiz_screen_dialog_confirmation_text">OK</string>
 
     <string name="home_screen_content_right_to_left">Arabic is written from right to left, which is the opposite of many other writing systems.</string>
     <string name="home_screen_content_basic_letters">The Arabic alphabet consists of 28 basic letters, each representing a distinct consonant sound.</string>

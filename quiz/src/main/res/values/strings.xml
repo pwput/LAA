@@ -1,0 +1,8 @@
+<resources>
+    <string name="quiz_screen_top_bar_mistakes">Mistakes: %1$d</string>
+    <string name="quiz_screen_top_bar_score">Score: %1$d</string>
+    <string name="quiz_screen_snackbar_text">Wrong Answer! You have clicked letter \"%1$s\", in form \"%2$s\".</string>
+    <string name="quiz_screen_dialog_title">Dialog title</string>
+    <string name="quiz_screen_dialog_text">dialog text</string>
+    <string name="quiz_screen_dialog_confirmation_text">OK</string>
+</resources>
