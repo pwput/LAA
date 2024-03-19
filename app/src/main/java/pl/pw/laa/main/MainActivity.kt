@@ -21,81 +21,80 @@ import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
 import com.ramcosta.composedestinations.DestinationsNavHost
+import com.ramcosta.composedestinations.generated.NavGraphs
 import com.ramcosta.composedestinations.navigation.dependency
 import dagger.hilt.android.AndroidEntryPoint
+import pl.pw.laa.common.ui.theme.LearnArabicAlphabetTheme
 import pl.pw.laa.main.components.BotNavBar
 import pl.pw.laa.main.components.CustomSnackBar
 import pl.pw.laa.main.components.TopAppBar
 import pl.pw.laa.navigation.NavigationItem
-import pl.pw.laa.presentation.NavGraphs
-import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
 import timber.log.Timber
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class MainActivity @Inject constructor() : ComponentActivity() {
 
-    private val bottomNavigationItems = listOf(
-        NavigationItem.Quiz,
-        NavigationItem.Alphabet,
-    )
+	private val bottomNavigationItems = listOf(
+			NavigationItem.Quiz,
+			NavigationItem.Alphabet,
+	)
 
-    private val topBarActions = listOf(
-        NavigationItem.Settings,
-    )
+	private val topBarActions = listOf(
+			NavigationItem.Settings,
+	)
 
-    @OptIn(ExperimentalMaterial3Api::class)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        installSplashScreen()
-        Timber.plant(Timber.DebugTree())
-        setContent {
-            val navController = rememberNavController()
-            navController.enableOnBackPressed(false)
-            val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+	@OptIn(ExperimentalMaterial3Api::class)
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		installSplashScreen()
+		Timber.plant(Timber.DebugTree())
+		setContent {
+			val navController = rememberNavController()
+			navController.enableOnBackPressed(false)
+			val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
-            val snackbarHostState = remember {
-                SnackbarHostState()
-            }
+			val snackbarHostState = remember {
+				SnackbarHostState()
+			}
 
-            MobileAds.initialize(this) {}
-            RequestConfiguration.Builder()
-                .setTestDeviceIds(listOf("703C5E35AA5BE999A86E0601C90C9194"))
+			MobileAds.initialize(this) {}
+			RequestConfiguration.Builder()
+					.setTestDeviceIds(listOf("703C5E35AA5BE999A86E0601C90C9194"))
 
-            LearnArabicAlphabetTheme(darkTheme = isSystemInDarkTheme()) {
-                Surface(
-                    Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Scaffold(
-                        snackbarHost = {
-                            SnackbarHost(hostState = snackbarHostState) { snackbarData: SnackbarData ->
-                                CustomSnackBar(
-                                    snackbarData.visuals.withDismissAction,
-                                    snackbarData.visuals.message,
-                                )
-                            }
-                        },
-                        modifier = Modifier
-                            .nestedScroll(scrollBehavior.nestedScrollConnection),
-                        topBar = {
-                            TopAppBar(navController, scrollBehavior,topBarActions)
-                        },
-                        bottomBar = {
-                            BotNavBar(navController, bottomNavigationItems)
-                        }
-                    ) { paddingValues ->
-                        DestinationsNavHost(
-                            navGraph = NavGraphs.root,
-                            navController = navController,
-                            dependenciesContainerBuilder = {
-                                dependency(paddingValues)
-                                dependency(snackbarHostState)
-                            })
-                    }
-                }
-            }
-        }
-    }
+			LearnArabicAlphabetTheme(darkTheme = isSystemInDarkTheme()) {
+				Surface(
+						Modifier.fillMaxSize(),
+						color = MaterialTheme.colorScheme.background
+				) {
+					Scaffold(
+							snackbarHost = {
+								SnackbarHost(hostState = snackbarHostState) { snackbarData: SnackbarData ->
+									CustomSnackBar(
+											snackbarData.visuals.withDismissAction,
+											snackbarData.visuals.message,
+									)
+								}
+							},
+							modifier = Modifier
+									.nestedScroll(scrollBehavior.nestedScrollConnection),
+							topBar = {
+								TopAppBar(navController, scrollBehavior, topBarActions)
+							},
+							bottomBar = {
+								BotNavBar(navController, bottomNavigationItems)
+							}
+					) { paddingValues ->
+						DestinationsNavHost(
+								navGraph = NavGraphs.my,
+								navController = navController,
+								dependenciesContainerBuilder = {
+									dependency(paddingValues)
+									dependency(snackbarHostState)
+								})
+					}
+				}
+			}
+		}
+	}
 }

@@ -17,48 +17,49 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pl.pw.laa.R
-import pl.pw.laa.ui.theme.LearnArabicAlphabetTheme
+import pl.pw.laa.common.ui.theme.Dimensions
+import pl.pw.laa.common.ui.theme.LearnArabicAlphabetTheme
 
 @Composable
 fun CustomSnackBar(
-    showIcon: Boolean,
-    message: String,
+		showIcon: Boolean,
+		message: String,
 ) {
-    Snackbar(
-        modifier = Modifier
-            .padding(16.dp),
-        containerColor = MaterialTheme.colorScheme.secondaryContainer,
-        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-    ) {
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.wrapContentWidth(),
+	Snackbar(
+			modifier = Modifier
+					.padding(Dimensions.Padding.medium),
+			containerColor = MaterialTheme.colorScheme.secondaryContainer,
+			contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+	) {
+		Row(
+				horizontalArrangement = Arrangement.Center,
+				verticalAlignment = Alignment.CenterVertically,
+				modifier = Modifier.wrapContentWidth(),
 
-            ) {
-            if (showIcon) {
-                Icon(
-                    painter = painterResource(id = R.drawable.round_volume_up_24),
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSecondaryContainer,
-                    modifier = Modifier
-                        .height(24.dp)
-                        .padding(end = 8.dp)
-                )
-            }
-            Text(
-                message,
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.labelMedium
-            )
-        }
-    }
+				) {
+			if (showIcon) {
+				Icon(
+						painter = painterResource(id = R.drawable.round_volume_up_24),
+						contentDescription = null,
+						tint = MaterialTheme.colorScheme.onSecondaryContainer,
+						modifier = Modifier
+                                .height(24.dp)
+                                .padding(end = Dimensions.Padding.small)
+				)
+			}
+			Text(
+					message,
+					textAlign = TextAlign.Center,
+					style = MaterialTheme.typography.labelMedium
+			)
+		}
+	}
 }
 
 @Preview
 @Composable
 fun CustomSnackBarPreview() {
-    LearnArabicAlphabetTheme {
-        CustomSnackBar(true, "Test")
-    }
+	LearnArabicAlphabetTheme {
+		CustomSnackBar(true, "Test")
+	}
 }

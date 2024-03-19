@@ -1,10 +1,10 @@
 import pl.pw.buildsrc.extensions.implementRoom
 
 plugins {
-    id("org.jetbrains.kotlin.android")
-    `module-precompiled`
+	id("org.jetbrains.kotlin.android")
+	`module-precompiled`
 }
 
-dependencies{
-    implementRoom()
+dependencies {
+	implementRoom()
 }
